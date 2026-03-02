@@ -123,7 +123,10 @@ export function Navigation() {
               onMouseEnter={() => setWorkOpen(true)}
               onMouseLeave={() => setWorkOpen(false)}
             >
-              <span className="relative flex cursor-default items-center gap-1 text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group">
+              <a
+                href={isProjectPage ? "/#work" : "#work"}
+                className="relative flex items-center gap-1 text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
+              >
                 Work
                 <svg
                   className={`h-3 w-3 transition-transform duration-200 ${workOpen ? "rotate-180" : ""}`}
@@ -135,7 +138,7 @@ export function Navigation() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
                 <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
-              </span>
+              </a>
 
               <AnimatePresence>
                 {workOpen && (
