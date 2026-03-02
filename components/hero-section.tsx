@@ -28,7 +28,7 @@ export function HeroSection() {
             >
               I solve business challenges with{" "}
               <span
-                className="italic"
+                className="inline-block pr-[0.1em] italic"
                 style={{
                   backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                   WebkitBackgroundClip: "text",
@@ -40,7 +40,7 @@ export function HeroSection() {
               </span>
               {" "}and{" "}
               <span
-                className="italic"
+                className="inline-block pr-[0.1em] italic"
                 style={{
                   backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                   WebkitBackgroundClip: "text",
@@ -61,7 +61,7 @@ export function HeroSection() {
             className="max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg"
           >
             Marrying analytical rigor and bold innovation to shake up the
-            status quo, crafting strategies that resonate, inspire, and drive
+            status quo and craft strategies that resonate, inspire, and drive
             growth.
           </motion.p>
 
