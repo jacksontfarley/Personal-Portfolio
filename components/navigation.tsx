@@ -54,7 +54,17 @@ export function Navigation() {
             href="#"
             className="text-lg font-medium tracking-tight text-foreground"
           >
-            JF<span className="rainbow-text">.</span>
+            JF
+            <span
+              style={{
+                backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              .
+            </span>
           </a>
 
           <div className="hidden items-center gap-10 md:flex">
@@ -65,7 +75,7 @@ export function Navigation() {
                 className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 rainbow-gradient transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
               </a>
             ))}
           </div>

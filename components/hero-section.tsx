@@ -28,7 +28,17 @@ export function HeroSection() {
             >
               I craft stories that
               <br />
-              <span className="italic rainbow-text">move markets</span>
+              <span
+                className="italic"
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                move markets
+              </span>
             </motion.h1>
           </div>
 
@@ -57,7 +67,7 @@ export function HeroSection() {
               View selected work
               <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />
             </a>
-            <div className="h-px w-12 rainbow-gradient" />
+            <div className="h-px w-12" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
           </motion.div>
         </div>
       </div>

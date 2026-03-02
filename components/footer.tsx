@@ -22,13 +22,22 @@ export function Footer() {
         transition={{ duration: 0.8 }}
         className="mx-auto max-w-6xl"
       >
-        {/* Rainbow divider */}
-        <div className="h-[1px] w-full rainbow-gradient mb-10" />
+        <div className="h-[1px] w-full mb-10" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
 
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-col gap-3">
             <p className="font-serif text-lg text-foreground">
-              Jackson Farley<span className="rainbow-text">.</span>
+              Jackson Farley
+              <span
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                .
+              </span>
             </p>
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
               Marketing strategist crafting compelling brand narratives and

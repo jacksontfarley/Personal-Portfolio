@@ -76,7 +76,14 @@ function ProjectCard({
           />
           <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/5" />
           {/* Rainbow line accent on hover */}
-          <div className="absolute bottom-0 left-0 right-0 h-[2px] rainbow-gradient-animated opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <div
+            className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            style={{
+              backgroundImage: "linear-gradient(270deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF, #FF3366)",
+              backgroundSize: "300% 300%",
+              animation: "rainbow-shift 4s ease infinite",
+            }}
+          />
         </div>
 
         <div className="flex flex-col gap-3">
@@ -135,7 +142,7 @@ export function ProjectsSection() {
               <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
                 Selected Work
               </p>
-              <div className="mt-3 h-[2px] w-8 rainbow-gradient rounded-full" />
+              <div className="mt-3 h-[2px] w-8 rounded-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 30 }}

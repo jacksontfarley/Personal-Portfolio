@@ -28,7 +28,7 @@ export function ContactSection() {
             <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
               Contact
             </p>
-            <div className="mt-3 h-[2px] w-8 rainbow-gradient rounded-full" />
+            <div className="mt-3 h-[2px] w-8 rounded-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
           </motion.div>
 
           <div className="flex flex-col gap-10 md:col-span-8">
@@ -43,7 +43,16 @@ export function ContactSection() {
               className="text-pretty font-serif text-3xl leading-snug text-foreground md:text-4xl"
             >
               Have a project in mind?{" "}
-              <span className="rainbow-text">Let&apos;s talk.</span>
+              <span
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Let&apos;s talk.
+              </span>
             </motion.h2>
 
             <motion.div
@@ -62,8 +71,7 @@ export function ContactSection() {
                   href={social.href}
                   className="group relative flex items-center justify-between border-b border-border py-4 transition-colors duration-300 hover:border-transparent"
                 >
-                  {/* Rainbow bottom border on hover */}
-                  <span className="absolute bottom-0 left-0 right-0 h-[1px] rainbow-gradient opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[1px] opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
                   <span className="text-base text-foreground transition-colors duration-300">
                     {social.label}
                   </span>
