@@ -13,9 +13,9 @@ export default function Home() {
       <Navigation />
       <IntroScreen />
       <HeroSection />
-      <ProjectsSection />
       <AboutSection />
       <SkillsSection />
+      <ProjectsSection />
       <ContactSection />
       <Footer />
     </main>
