@@ -37,12 +37,26 @@ const skills = [
   },
 ]
 
-const companies = [
+interface Company {
+  name: string
+  logo: string
+  role: string
+  period: string
+  description: string
+  brandLogos?: string[]
+}
+
+const companies: Company[] = [
   {
     name: "Kenvue",
     logo: "/images/logos/Kenvue_logo.png",
     role: "Associate Brand Manager",
     period: "2024 -- Present",
+    brandLogos: [
+      "/images/logos/tylenol.png",
+      "/images/logos/Motrin.svg",
+      "/images/logos/aveeno.svg.png",
+    ],
     description:
       "Leading brand strategy for a portfolio of iconic consumer health brands, driving NPI commercialization and omnichannel campaign execution.",
   },
@@ -64,7 +78,7 @@ const companies = [
   },
   {
     name: "Worldwide Express",
-    logo: "/images/logos/worldwide-express.jpg",
+    logo: "/images/logos/yoast_logo_wwex_square.png",
     role: "B2B Client Success",
     period: "2020 -- 2021",
     description:
@@ -72,7 +86,7 @@ const companies = [
   },
   {
     name: "Liberty Public Schools",
-    logo: "/images/logos/liberty.jpg",
+    logo: "/images/logos/bbHighResolutionLPSLogoBluewTransparentBackground.png",
     role: "Elementary Educator",
     period: "2018 -- 2020",
     description:
@@ -80,7 +94,7 @@ const companies = [
   },
   {
     name: "CycleBar",
-    logo: "/images/logos/cyclebar.jpg",
+    logo: "/images/logos/389-3893967_cyclebar-logo-cycle-bar.png",
     role: "Studio Manager & Marketing",
     period: "2017 -- 2018",
     description:
@@ -88,7 +102,7 @@ const companies = [
   },
   {
     name: "Mizzou",
-    logo: "/images/logos/mizzou.jpg",
+    logo: "/images/logos/missouri-tigers-logo-png-transparent.png",
     role: "B.A. Communications",
     period: "2014 -- 2018",
     description:
@@ -101,7 +115,7 @@ function ExperienceCard({
   index,
   isInView,
 }: {
-  company: (typeof companies)[0]
+  company: Company
   index: number
   isInView: boolean
 }) {
@@ -203,6 +217,20 @@ function ExperienceCard({
             <p className="mt-1 text-xs text-muted-foreground">
               {company.period}
             </p>
+            {company.brandLogos && (
+              <div className="mt-3 flex items-center gap-3">
+                {company.brandLogos.map((logo, i) => (
+                  <Image
+                    key={i}
+                    src={logo}
+                    alt="Brand logo"
+                    width={60}
+                    height={30}
+                    className="h-6 w-auto object-contain grayscale"
+                  />
+                ))}
+              </div>
+            )}
             <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
               {company.description}
             </p>
