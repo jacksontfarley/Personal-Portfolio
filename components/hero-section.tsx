@@ -18,18 +18,19 @@ export function HeroSection() {
             Brand Marketer + Strategist
           </motion.p>
 
-          <div className="overflow-hidden">
+          <div>
             <motion.h1
-              initial={{ y: 100 }}
-              whileInView={{ y: 0 }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-balance font-serif text-5xl font-normal leading-[1.1] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
+              className="text-balance font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
             >
               I solve business challenges with{" "}
               <span
-                className="inline-block pr-[0.1em] italic"
+                className="italic"
                 style={{
+                  padding: "0 0.15em 0.05em 0",
                   backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -40,8 +41,9 @@ export function HeroSection() {
               </span>
               {" "}and{" "}
               <span
-                className="inline-block pr-[0.1em] italic"
+                className="italic"
                 style={{
+                  padding: "0 0.15em 0.05em 0",
                   backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -76,7 +78,7 @@ export function HeroSection() {
               href="#work"
               className="group flex items-center gap-3 text-sm font-medium tracking-wide text-foreground transition-colors hover:text-muted-foreground"
             >
-              View selected work
+              Go deeper
               <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />
             </a>
             <div className="h-px w-12" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
