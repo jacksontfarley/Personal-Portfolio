@@ -49,7 +49,7 @@ interface Company {
 const companies: Company[] = [
   {
     name: "Kenvue",
-    logo: "/images/logos/Kenvue_logo.png",
+    logo: "/images/logos/Kenvue-scaled.webp",
     role: "Associate Brand Manager",
     period: "2024 -- Present",
     brandLogos: [
@@ -78,7 +78,7 @@ const companies: Company[] = [
   },
   {
     name: "Worldwide Express",
-    logo: "/images/logos/yoast_logo_wwex_square.png",
+    logo: "/images/logos/images.jpeg",
     role: "B2B Client Success",
     period: "2020 -- 2021",
     description:

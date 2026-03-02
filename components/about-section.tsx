@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import Image from "next/image"
 
 export function AboutSection() {
   const ref = useRef(null)
@@ -10,20 +11,52 @@ export function AboutSection() {
   return (
     <section id="about" className="px-6 py-32 md:py-40" ref={ref}>
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-16 md:grid-cols-12">
+        {/* Section label */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-16"
+        >
+          <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+            About
+          </p>
+          <div
+            className="mt-3 h-[2px] w-8 rounded-full"
+            style={{
+              background:
+                "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+            }}
+          />
+        </motion.div>
+
+        {/* Headshot + text layout */}
+        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
+          {/* Headshot */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{
+              duration: 1,
+              delay: 0.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="flex justify-center md:col-span-5 md:justify-start"
           >
-            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              About
-            </p>
-            <div className="mt-3 h-[2px] w-8 rounded-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+            <div className="relative w-full max-w-sm md:max-w-none">
+              <Image
+                src="/JF_headshot.png"
+                alt="Jackson Farley headshot"
+                width={500}
+                height={500}
+                className="h-auto w-full"
+                priority
+              />
+            </div>
           </motion.div>
 
-          <div className="flex flex-col gap-8 md:col-span-8">
+          {/* Text content */}
+          <div className="flex flex-col gap-6 md:col-span-7">
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -48,7 +81,7 @@ export function AboutSection() {
                 delay: 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="max-w-xl text-base leading-relaxed text-muted-foreground"
+              className="text-base leading-relaxed text-muted-foreground"
             >
               My non-traditional path from elementary education, to B2B client
               success, to CPG brand management gives me 8+ years of unique
@@ -63,7 +96,7 @@ export function AboutSection() {
                 delay: 0.35,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="max-w-xl text-base leading-relaxed text-muted-foreground"
+              className="text-base leading-relaxed text-muted-foreground"
             >
               Through all my experiences, I&apos;ve learned how to connect the
               10,000-foot strategy with the 1-inch execution. I bring a
@@ -79,7 +112,7 @@ export function AboutSection() {
                 delay: 0.45,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="max-w-xl text-base leading-relaxed text-muted-foreground"
+              className="text-base leading-relaxed text-muted-foreground"
             >
               And most importantly, I believe in bringing more voices to the
               table, because the most impactful ideas are built on genuine human
