@@ -346,36 +346,22 @@ export function SkillsSection() {
                 href="/resume-1-pager.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-full px-6 py-2.5 text-sm font-medium text-foreground transition-shadow duration-300 hover:shadow-lg"
+                className="rounded-full px-6 py-2.5 text-sm font-medium text-white transition-opacity duration-300 hover:opacity-90 hover:shadow-lg"
+                style={{
+                  background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                }}
               >
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-full"
-                  style={{
-                    padding: "2px",
-                    background: "linear-gradient(180deg, #FF3366 0%, #FF6B35 15%, #FFCC00 30%, #00D4AA 50%, #0099FF 70%, #CC33FF 85%, transparent 100%)",
-                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
-                  }}
-                />
                 1-Pager
               </a>
               <a
                 href="/resume-long-form.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-full px-6 py-2.5 text-sm font-medium text-foreground transition-shadow duration-300 hover:shadow-lg"
+                className="rounded-full px-6 py-2.5 text-sm font-medium text-white transition-opacity duration-300 hover:opacity-90 hover:shadow-lg"
+                style={{
+                  background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                }}
               >
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-full"
-                  style={{
-                    padding: "2px",
-                    background: "linear-gradient(180deg, #FF3366 0%, #FF6B35 15%, #FFCC00 30%, #00D4AA 50%, #0099FF 70%, #CC33FF 85%, transparent 100%)",
-                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
-                  }}
-                />
                 Long-Form
               </a>
             </div>
