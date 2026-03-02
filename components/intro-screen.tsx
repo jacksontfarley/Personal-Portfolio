@@ -44,7 +44,7 @@ export function IntroScreen() {
           </motion.div>
         </div>
 
-        {/* Scroll indicator pinned near bottom */}
+        {/* Scroll indicator pinned near bottom — wave-bouncing letters */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -52,14 +52,22 @@ export function IntroScreen() {
           style={{ opacity }}
           className="flex justify-center pb-12"
         >
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Scroll
-            </span>
-          </motion.div>
+          <span className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            {"KEEP SWIMMING".split("").map((char, i) => (
+              <motion.span
+                key={i}
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  duration: 1.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.08,
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </span>
         </motion.div>
 
         {/* Decorative rainbow gradient orbs */}
