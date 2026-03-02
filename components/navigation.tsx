@@ -107,6 +107,15 @@ export function Navigation() {
               <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
             </a>
 
+            {/* Experience */}
+            <a
+              href={isProjectPage ? "/#experience" : "#experience"}
+              className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
+            >
+              Experience
+              <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+            </a>
+
             {/* Work dropdown — opens on hover */}
             <div
               ref={workRef}
@@ -245,6 +254,17 @@ export function Navigation() {
               >
                 Skills
               </motion.a>
+              <motion.a
+                href={isProjectPage ? "/#experience" : "#experience"}
+                onClick={() => setMobileOpen(false)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.12, duration: 0.4 }}
+                className="text-2xl font-light tracking-wide text-foreground"
+              >
+                Experience
+              </motion.a>
 
               <div className="my-2 h-px w-12 bg-border" />
 
@@ -257,7 +277,7 @@ export function Navigation() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: (i + 2) * 0.06, duration: 0.4 }}
+                  transition={{ delay: (i + 3) * 0.06, duration: 0.4 }}
                 >
                   <Link
                     href={`/work/${project.slug}`}
@@ -277,7 +297,7 @@ export function Navigation() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: (projects.length + 2) * 0.06, duration: 0.4 }}
+                transition={{ delay: (projects.length + 3) * 0.06, duration: 0.4 }}
                 className="text-2xl font-light tracking-wide text-foreground"
               >
                 Contact

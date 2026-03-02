@@ -307,7 +307,7 @@ export function SkillsSection() {
       </div>
 
       {/* Experience */}
-      <div className="mx-auto mt-32 max-w-6xl md:mt-40" ref={expRef}>
+      <div id="experience" className="mx-auto mt-32 max-w-6xl md:mt-40" ref={expRef}>
         <div className="flex flex-col gap-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
