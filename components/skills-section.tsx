@@ -40,7 +40,7 @@ const skills = [
 const companies = [
   {
     name: "Kenvue",
-    logo: "/images/logos/kenvue.jpg",
+    logo: "/images/logos/kenvue_logo.jpg",
     role: "Associate Brand Manager",
     period: "2024 -- Present",
     description:
