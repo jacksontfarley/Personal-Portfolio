@@ -48,7 +48,7 @@ const companies = [
   },
   {
     name: "SMU",
-    logo: "/images/logos/smu.jpg",
+    logo: "/images/logos/large_blob.png",
     role: "MBA Candidate",
     period: "2022 -- 2024",
     description:
@@ -56,7 +56,7 @@ const companies = [
   },
   {
     name: "Uber",
-    logo: "/images/logos/uber.jpg",
+    logo: "/images/logos/Uber_logo_2018.png",
     role: "Operations & Strategy",
     period: "2021 -- 2022",
     description:
