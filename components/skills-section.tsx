@@ -98,10 +98,9 @@ export function SkillsSection() {
                 className="flex flex-col gap-4"
               >
                 <h3
-                  className="text-sm font-medium tracking-wide"
+                  className="inline-block text-sm font-medium tracking-wide"
                   style={{
-                    backgroundImage: "linear-gradient(90deg, #FF3366 0%, #FF6B35 20%, #FFCC00 40%, #00D4AA 60%, #0099FF 80%, #CC33FF 100%)",
-                    backgroundSize: "200% 100%",
+                    background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -163,10 +162,9 @@ export function SkillsSection() {
                     </span>
                   </div>
                   <p
-                    className="text-sm font-medium"
+                    className="inline-block text-sm font-medium"
                     style={{
-                      backgroundImage: "linear-gradient(90deg, #FF3366 0%, #FF6B35 20%, #FFCC00 40%, #00D4AA 60%, #0099FF 80%, #CC33FF 100%)",
-                      backgroundSize: "200% 100%",
+                      background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
