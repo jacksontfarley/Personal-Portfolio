@@ -100,7 +100,8 @@ export function SkillsSection() {
                 <h3
                   className="text-sm font-medium tracking-wide"
                   style={{
-                    backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                    backgroundImage: "linear-gradient(90deg, #FF3366 0%, #FF6B35 20%, #FFCC00 40%, #00D4AA 60%, #0099FF 80%, #CC33FF 100%)",
+                    backgroundSize: "200% 100%",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -164,7 +165,8 @@ export function SkillsSection() {
                   <p
                     className="text-sm font-medium"
                     style={{
-                      backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                      backgroundImage: "linear-gradient(90deg, #FF3366 0%, #FF6B35 20%, #FFCC00 40%, #00D4AA 60%, #0099FF 80%, #CC33FF 100%)",
+                      backgroundSize: "200% 100%",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
