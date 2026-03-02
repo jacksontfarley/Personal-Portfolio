@@ -51,8 +51,8 @@ export function AboutSection() {
               className="max-w-xl text-base leading-relaxed text-muted-foreground"
             >
               I believe in the power of authenticity. Throughout my experiences
-              in classroom teaching, B2B growth, and brand management, my north
-              star remains the same: bringing more voices to the table and a
+              in classroom teaching, B2B client partnership, and brand management, my north
+              star remains the same: bringing more voices to the table with a
               relentless obsession for the consumer.
             </motion.p>
 
