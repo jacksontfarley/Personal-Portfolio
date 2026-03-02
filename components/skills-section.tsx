@@ -58,7 +58,7 @@ const companies: Company[] = [
       "/images/logos/aveeno.svg.png",
     ],
     description:
-      "Leading brand strategy for a portfolio of iconic consumer health brands, driving NPI commercialization and omnichannel campaign execution.",
+      "Leading brand work for iconic consumer health brands, including paid media strategy, asset development, NPI launch plans, and omnichannel campaign execution. Forecasted for $350MM P&L and experience running $50MM+ media plans.",
   },
   {
     name: "SMU",
@@ -66,29 +66,29 @@ const companies: Company[] = [
     role: "MBA Candidate",
     period: "2022 -- 2024",
     description:
-      "Pursued graduate studies in brand management and marketing strategy, blending academic rigor with real-world consulting projects.",
+      "Earned MBA in marketing with several honors, including Class Marshal (Top 2); held numerous leadership roles and TA positions.",
   },
   {
     name: "Uber",
     logo: "/images/logos/Uber_logo_2018.png",
-    role: "Operations & Strategy",
+    role: "Client Partner",
     period: "2021 -- 2022",
     description:
-      "Drove operational strategy and growth initiatives, leveraging data to optimize market performance and stakeholder engagement.",
+      "Managed $41M portfolio of Dallas restaurant owners, building custom growth plans and expanding local footprint on Uber Eats.",
   },
   {
     name: "Worldwide Express",
     logo: "/images/logos/images.jpeg",
-    role: "B2B Client Success",
-    period: "2020 -- 2021",
+    role: "Account Management, Marketing, Operations",
+    period: "2017 -- 2021",
     description:
-      "Managed enterprise client relationships and B2B sales strategy, building operational infrastructure that scaled revenue growth.",
+      "Held several roles, most notably serving on lean marketing team during high-growth, early stage of company; developed range of sales enablement materials and built brand voice through social media.",
   },
   {
     name: "Liberty Public Schools",
     logo: "/images/logos/bbHighResolutionLPSLogoBluewTransparentBackground.png",
     role: "Elementary Educator",
-    period: "2018 -- 2020",
+    period: "2016 -- 2017",
     description:
       "Developed curriculum and led a classroom of 25+ students, honing communication, empathy, and the art of making complex ideas accessible.",
   },
@@ -96,17 +96,17 @@ const companies: Company[] = [
     name: "CycleBar",
     logo: "/images/logos/389-3893967_cyclebar-logo-cycle-bar.png",
     role: "Studio Manager & Marketing",
-    period: "2017 -- 2018",
+    period: "2018 -- 2023",
     description:
-      "Ran studio operations, community marketing, and experiential activations that grew membership and deepened brand loyalty.",
+      "Taught indoor spin classes for 5 years; served as Lead Instructor for 2 years, managing end-to-end operations for instructor team, including creative work (photoshoots, social media, etc).",
   },
   {
     name: "Mizzou",
     logo: "/images/logos/missouri-tigers-logo-png-transparent.png",
-    role: "B.A. Communications",
-    period: "2014 -- 2018",
+    role: "B.S. Education",
+    period: "2012 -- 2016",
     description:
-      "Studied strategic communication and journalism at the University of Missouri, building a foundation in storytelling and media.",
+      "Studied elementary education, graduating cum laude; earned Undergraduate Student Leader of the Year award through the College of Education; involved in Greek Life and other campus organizations.",
   },
 ]
 

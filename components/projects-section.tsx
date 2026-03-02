@@ -4,45 +4,8 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
-
-const projects = [
-  {
-    title: "Solara Brand Launch",
-    category: "Brand Strategy",
-    description:
-      "Led the full brand identity and go-to-market strategy for a DTC wellness startup, driving 200% growth in the first quarter.",
-    tags: ["Brand Identity", "GTM Strategy", "Content"],
-    image: "/images/project-1.jpg",
-    year: "2025",
-  },
-  {
-    title: "Meridian Growth Campaign",
-    category: "Performance Marketing",
-    description:
-      "Designed and executed a multi-channel acquisition campaign that reduced CAC by 45% while scaling monthly revenue to $2M.",
-    tags: ["Paid Media", "Analytics", "CRO"],
-    image: "/images/project-2.jpg",
-    year: "2024",
-  },
-  {
-    title: "Atelier Content System",
-    category: "Content Strategy",
-    description:
-      "Built a scalable content engine for a luxury fashion house, growing organic traffic 5x and establishing thought leadership.",
-    tags: ["SEO", "Storytelling", "Editorial"],
-    image: "/images/project-3.jpg",
-    year: "2024",
-  },
-  {
-    title: "Nova Product Rebrand",
-    category: "Rebranding",
-    description:
-      "Orchestrated a complete brand overhaul for a fintech company, resulting in 80% improvement in brand recall and customer trust scores.",
-    tags: ["Positioning", "Visual Identity", "Research"],
-    image: "/images/project-4.jpg",
-    year: "2023",
-  },
-]
+import Link from "next/link"
+import { projects } from "@/lib/projects"
 
 function ProjectCard({
   project,
@@ -66,7 +29,7 @@ function ProjectCard({
       }}
       className="group"
     >
-      <div className="flex flex-col gap-6">
+      <Link href={`/work/${project.slug}`} className="flex flex-col gap-6">
         <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-secondary">
           <Image
             src={project.image}
@@ -119,7 +82,7 @@ function ProjectCard({
             ))}
           </div>
         </div>
-      </div>
+      </Link>
     </motion.article>
   )
 }
