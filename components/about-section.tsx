@@ -34,21 +34,21 @@ export function AboutSection() {
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
           {/* Headshot */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{
-              duration: 1,
-              delay: 0.1,
+              duration: 1.2,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="flex justify-center md:col-span-5 md:justify-start"
+            className="flex justify-center md:col-span-3 md:justify-start"
           >
-            <div className="relative w-full max-w-sm md:max-w-none">
+            <div className="relative w-full max-w-[220px] md:max-w-none">
               <Image
                 src="/JF_headshot.png"
                 alt="Jackson Farley headshot"
-                width={500}
-                height={500}
+                width={400}
+                height={400}
                 className="h-auto w-full"
                 priority
               />
@@ -56,7 +56,7 @@ export function AboutSection() {
           </motion.div>
 
           {/* Text content */}
-          <div className="flex flex-col gap-6 md:col-span-7">
+          <div className="flex flex-col gap-6 md:col-span-9">
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
