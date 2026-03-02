@@ -28,6 +28,7 @@ export function ContactSection() {
             <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
               Contact
             </p>
+            <div className="mt-3 h-[2px] w-8 rainbow-gradient rounded-full" />
           </motion.div>
 
           <div className="flex flex-col gap-10 md:col-span-8">
@@ -41,8 +42,8 @@ export function ContactSection() {
               }}
               className="text-pretty font-serif text-3xl leading-snug text-foreground md:text-4xl"
             >
-              Have a project in mind or just want to chat? I&apos;m always open
-              to new conversations.
+              Have a project in mind?{" "}
+              <span className="rainbow-text">Let&apos;s talk.</span>
             </motion.h2>
 
             <motion.div
@@ -59,9 +60,11 @@ export function ContactSection() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="group flex items-center justify-between border-b border-border py-4 transition-colors duration-300 hover:border-foreground"
+                  className="group relative flex items-center justify-between border-b border-border py-4 transition-colors duration-300 hover:border-transparent"
                 >
-                  <span className="text-base text-foreground transition-colors duration-300 group-hover:text-accent">
+                  {/* Rainbow bottom border on hover */}
+                  <span className="absolute bottom-0 left-0 right-0 h-[1px] rainbow-gradient opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="text-base text-foreground transition-colors duration-300">
                     {social.label}
                   </span>
                   <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />

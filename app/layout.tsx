@@ -14,13 +14,13 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Portfolio - Marketing Strategist",
+  title: "Jackson Farley - Marketing Strategist",
   description:
-    "Marketing strategist crafting compelling brand narratives and driving growth through data-driven campaigns.",
+    "Jackson Farley is a marketing strategist crafting compelling brand narratives and driving growth through data-driven campaigns.",
 }
 
 export const viewport: Viewport = {
-  themeColor: "#f2f0ec",
+  themeColor: "#ffffff",
 }
 
 export default function RootLayout({

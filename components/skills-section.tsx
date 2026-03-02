@@ -81,6 +81,7 @@ export function SkillsSection() {
             <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
               Expertise
             </p>
+            <div className="mt-3 h-[2px] w-8 rainbow-gradient rounded-full" />
           </motion.div>
 
           <div className="grid gap-12 sm:grid-cols-3 md:col-span-8">
@@ -96,7 +97,7 @@ export function SkillsSection() {
                 }}
                 className="flex flex-col gap-4"
               >
-                <h3 className="text-sm font-medium tracking-wide text-foreground">
+                <h3 className="text-sm font-medium tracking-wide rainbow-text">
                   {skill.category}
                 </h3>
                 <ul className="flex flex-col gap-2.5">
@@ -127,6 +128,7 @@ export function SkillsSection() {
             <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
               Experience
             </p>
+            <div className="mt-3 h-[2px] w-8 rainbow-gradient rounded-full" />
           </motion.div>
 
           <div className="flex flex-col md:col-span-8">
@@ -151,7 +153,7 @@ export function SkillsSection() {
                       {exp.period}
                     </span>
                   </div>
-                  <p className="text-sm font-medium text-accent">
+                  <p className="text-sm font-medium rainbow-text">
                     {exp.company}
                   </p>
                   <p className="text-sm leading-relaxed text-muted-foreground">

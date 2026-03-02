@@ -20,6 +20,7 @@ export function AboutSection() {
             <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
               About
             </p>
+            <div className="mt-3 h-[2px] w-8 rainbow-gradient rounded-full" />
           </motion.div>
 
           <div className="flex flex-col gap-8 md:col-span-8">
@@ -72,7 +73,7 @@ export function AboutSection() {
                 { number: "3x", label: "Avg. ROI Increase" },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-2">
-                  <span className="font-serif text-3xl text-foreground md:text-4xl">
+                  <span className="font-serif text-3xl rainbow-text md:text-4xl">
                     {stat.number}
                   </span>
                   <span className="text-sm text-muted-foreground">

@@ -20,12 +20,15 @@ export function Footer() {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.8 }}
-        className="mx-auto max-w-6xl border-t border-border pt-10"
+        className="mx-auto max-w-6xl"
       >
+        {/* Rainbow divider */}
+        <div className="h-[1px] w-full rainbow-gradient mb-10" />
+
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-col gap-3">
             <p className="font-serif text-lg text-foreground">
-              Portfolio<span className="text-accent">.</span>
+              Jackson Farley<span className="rainbow-text">.</span>
             </p>
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
               Marketing strategist crafting compelling brand narratives and
@@ -49,7 +52,7 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} All rights reserved.
+            &copy; {new Date().getFullYear()} Jackson Farley. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground">
             Crafted with intention.

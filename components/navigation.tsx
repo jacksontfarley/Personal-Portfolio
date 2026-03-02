@@ -13,9 +13,14 @@ const navLinks = [
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+      // Show nav after scrolling past the intro screen
+      setVisible(window.scrollY > window.innerHeight * 0.8)
+    }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -35,20 +40,21 @@ export function Navigation() {
     <>
       <motion.header
         initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        animate={{ y: visible ? 0 : -20, opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? "bg-background/80 backdrop-blur-xl border-b border-border"
             : "bg-transparent"
         }`}
+        style={{ pointerEvents: visible ? "auto" : "none" }}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <a
             href="#"
             className="text-lg font-medium tracking-tight text-foreground"
           >
-            Portfolio<span className="text-accent">.</span>
+            JF<span className="rainbow-text">.</span>
           </a>
 
           <div className="hidden items-center gap-10 md:flex">
@@ -56,9 +62,10 @@ export function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground"
+                className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 rainbow-gradient transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </div>
