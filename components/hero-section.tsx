@@ -15,7 +15,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="text-sm uppercase tracking-[0.3em] text-muted-foreground"
           >
-            Marketing Strategist
+            Brand Marketer + Strategist
           </motion.p>
 
           <div className="overflow-hidden">
