@@ -1,0 +1,163 @@
+"use client"
+
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+import { ArrowUpRight } from "lucide-react"
+import Image from "next/image"
+
+const projects = [
+  {
+    title: "Solara Brand Launch",
+    category: "Brand Strategy",
+    description:
+      "Led the full brand identity and go-to-market strategy for a DTC wellness startup, driving 200% growth in the first quarter.",
+    tags: ["Brand Identity", "GTM Strategy", "Content"],
+    image: "/images/project-1.jpg",
+    year: "2025",
+  },
+  {
+    title: "Meridian Growth Campaign",
+    category: "Performance Marketing",
+    description:
+      "Designed and executed a multi-channel acquisition campaign that reduced CAC by 45% while scaling monthly revenue to $2M.",
+    tags: ["Paid Media", "Analytics", "CRO"],
+    image: "/images/project-2.jpg",
+    year: "2024",
+  },
+  {
+    title: "Atelier Content System",
+    category: "Content Strategy",
+    description:
+      "Built a scalable content engine for a luxury fashion house, growing organic traffic 5x and establishing thought leadership.",
+    tags: ["SEO", "Storytelling", "Editorial"],
+    image: "/images/project-3.jpg",
+    year: "2024",
+  },
+  {
+    title: "Nova Product Rebrand",
+    category: "Rebranding",
+    description:
+      "Orchestrated a complete brand overhaul for a fintech company, resulting in 80% improvement in brand recall and customer trust scores.",
+    tags: ["Positioning", "Visual Identity", "Research"],
+    image: "/images/project-4.jpg",
+    year: "2023",
+  },
+]
+
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: (typeof projects)[0]
+  index: number
+}) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-80px" })
+
+  return (
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.9,
+        delay: index * 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="group"
+    >
+      <div className="flex flex-col gap-6">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-secondary">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/5" />
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                {project.category}
+              </span>
+              <span className="text-xs text-border">{"/"}</span>
+              <span className="text-xs text-muted-foreground">
+                {project.year}
+              </span>
+            </div>
+            <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
+          </div>
+
+          <h3 className="text-xl font-medium tracking-tight text-foreground transition-colors duration-300 group-hover:text-accent">
+            {project.title}
+          </h3>
+
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-2 pt-1">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full bg-secondary px-3 py-1 text-xs text-muted-foreground"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.article>
+  )
+}
+
+export function ProjectsSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  return (
+    <section id="work" className="px-6 py-32 md:py-40" ref={ref}>
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col gap-16">
+          <div className="grid gap-6 md:grid-cols-12">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="md:col-span-4"
+            >
+              <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+                Selected Work
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.8,
+                delay: 0.15,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="md:col-span-8"
+            >
+              <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
+                A curated selection of campaigns and brand projects that
+                delivered measurable impact.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="grid gap-12 md:grid-cols-2">
+            {projects.map((project, i) => (
+              <ProjectCard key={project.title} project={project} index={i} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

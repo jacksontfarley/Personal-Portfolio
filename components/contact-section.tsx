@@ -1,0 +1,76 @@
+"use client"
+
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+import { ArrowUpRight } from "lucide-react"
+
+const socials = [
+  { label: "LinkedIn", href: "#" },
+  { label: "X / Twitter", href: "#" },
+  { label: "Instagram", href: "#" },
+  { label: "Email", href: "mailto:hello@example.com" },
+]
+
+export function ContactSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  return (
+    <section id="contact" className="px-6 py-32 md:py-40" ref={ref}>
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-16 md:grid-cols-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-4"
+          >
+            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+              Contact
+            </p>
+          </motion.div>
+
+          <div className="flex flex-col gap-10 md:col-span-8">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.8,
+                delay: 0.15,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="text-pretty font-serif text-3xl leading-snug text-foreground md:text-4xl"
+            >
+              Have a project in mind or just want to chat? I&apos;m always open
+              to new conversations.
+            </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.8,
+                delay: 0.3,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="flex flex-col gap-4"
+            >
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  className="group flex items-center justify-between border-b border-border py-4 transition-colors duration-300 hover:border-foreground"
+                >
+                  <span className="text-base text-foreground transition-colors duration-300 group-hover:text-accent">
+                    {social.label}
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
+                </a>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
