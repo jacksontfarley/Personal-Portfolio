@@ -26,8 +26,7 @@ export function HeroSection() {
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="text-balance font-serif text-5xl font-normal leading-[1.1] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
             >
-              I craft stories that
-              <br />
+              I solve business challenges with{" "}
               <span
                 className="italic"
                 style={{
@@ -37,7 +36,19 @@ export function HeroSection() {
                   backgroundClip: "text",
                 }}
               >
-                move markets
+                curiosity
+              </span>
+              {" "}and{" "}
+              <span
+                className="italic"
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                creativity
               </span>
             </motion.h1>
           </div>
@@ -49,8 +60,9 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg"
           >
-            Blending creativity with data to build brand narratives that
-            resonate, campaigns that convert, and strategies that scale.
+            Marrying analytical rigor and bold innovation to shake up the
+            status quo, crafting strategies that resonate, inspire, and drive
+            growth.
           </motion.p>
 
           <motion.div
