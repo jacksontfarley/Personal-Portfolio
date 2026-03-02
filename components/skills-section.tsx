@@ -330,6 +330,56 @@ export function SkillsSection() {
               />
             ))}
           </div>
+
+          {/* Resume CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={expInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center gap-6 pt-8 sm:flex-row sm:justify-center"
+          >
+            <p className="text-pretty text-center font-serif text-2xl leading-relaxed text-foreground md:text-3xl">
+              Grab a copy of my resume as a souvenir!
+            </p>
+            <div className="flex items-center gap-4">
+              <a
+                href="/resume-1-pager.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative rounded-full px-6 py-2.5 text-sm font-medium text-foreground transition-shadow duration-300 hover:shadow-lg"
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full"
+                  style={{
+                    padding: "2px",
+                    background: "linear-gradient(180deg, #FF3366 0%, #FF6B35 15%, #FFCC00 30%, #00D4AA 50%, #0099FF 70%, #CC33FF 85%, transparent 100%)",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                />
+                1-Pager
+              </a>
+              <a
+                href="/resume-long-form.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative rounded-full px-6 py-2.5 text-sm font-medium text-foreground transition-shadow duration-300 hover:shadow-lg"
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full"
+                  style={{
+                    padding: "2px",
+                    background: "linear-gradient(180deg, #FF3366 0%, #FF6B35 15%, #FFCC00 30%, #00D4AA 50%, #0099FF 70%, #CC33FF 85%, transparent 100%)",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                />
+                Long-Form
+              </a>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
