@@ -34,10 +34,10 @@ export function AboutSection() {
               }}
               className="text-pretty font-serif text-2xl leading-relaxed text-foreground md:text-3xl"
             >
-              I&apos;m a marketing strategist with a passion for building brands
-              that stand out. With years of experience across digital, content,
-              and growth marketing, I help businesses find their voice and reach
-              the right audience.
+              I&apos;m a brand marketer driven by a passion for making
+              people&apos;s lives better. My approach pairs a highly analytical
+              foundation with a consumer-first lens, translating complex market
+              signals into compelling brand experiences that resonate.
             </motion.p>
 
             <motion.p
@@ -50,11 +50,10 @@ export function AboutSection() {
               }}
               className="max-w-xl text-base leading-relaxed text-muted-foreground"
             >
-              I believe great marketing is invisible -- it feels natural,
-              authentic, and inevitable. My approach combines deep audience
-              research with creative storytelling, backed by metrics that
-              matter. Whether it&apos;s a product launch, a rebrand, or a
-              full-funnel campaign, I bring clarity to complexity.
+              I believe in the power of authenticity. Throughout my experiences
+              in classroom teaching, B2B growth, and brand management, my north
+              star remains the same: bringing more voices to the table and a
+              relentless obsession for the consumer.
             </motion.p>
 
             <motion.div
