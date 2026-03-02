@@ -260,7 +260,7 @@ export function SkillsSection() {
             className="md:col-span-4"
           >
             <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              Expertise
+              Skills
             </p>
             <div className="mt-3 h-[2px] w-8 rounded-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
           </motion.div>

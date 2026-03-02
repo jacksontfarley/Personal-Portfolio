@@ -89,12 +89,32 @@ export function Navigation() {
           </Link>
 
           <div className="hidden items-center gap-10 md:flex">
-            {/* Work dropdown */}
-            <div ref={workRef} className="relative">
-              <button
-                onClick={() => setWorkOpen(!workOpen)}
-                className="relative flex items-center gap-1 text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
-              >
+            {/* About */}
+            <a
+              href={isProjectPage ? "/#about" : "#about"}
+              className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
+            >
+              About
+              <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+            </a>
+
+            {/* Skills */}
+            <a
+              href={isProjectPage ? "/#skills" : "#skills"}
+              className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
+            >
+              Skills
+              <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+            </a>
+
+            {/* Work dropdown — opens on hover */}
+            <div
+              ref={workRef}
+              className="relative"
+              onMouseEnter={() => setWorkOpen(true)}
+              onMouseLeave={() => setWorkOpen(false)}
+            >
+              <span className="relative flex cursor-default items-center gap-1 text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group">
                 Work
                 <svg
                   className={`h-3 w-3 transition-transform duration-200 ${workOpen ? "rotate-180" : ""}`}
@@ -106,7 +126,7 @@ export function Navigation() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
                 <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
-              </button>
+              </span>
 
               <AnimatePresence>
                 {workOpen && (
@@ -115,11 +135,11 @@ export function Navigation() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute left-1/2 top-full mt-3 w-56 -translate-x-1/2 overflow-hidden rounded-xl border border-border bg-background/95 shadow-lg backdrop-blur-xl"
+                    className="absolute left-1/2 top-full mt-1 w-56 -translate-x-1/2 overflow-hidden rounded-xl border border-border bg-background/95 pt-2 shadow-lg backdrop-blur-xl"
                   >
                     {/* Rainbow top accent */}
                     <div
-                      className="h-[2px] w-full"
+                      className="absolute top-0 left-0 right-0 h-[2px]"
                       style={{
                         background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                       }}
@@ -152,16 +172,14 @@ export function Navigation() {
               </AnimatePresence>
             </div>
 
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={isProjectPage ? `/${link.href}` : link.href}
-                className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
-              </a>
-            ))}
+            {/* Contact */}
+            <a
+              href={isProjectPage ? "/#contact" : "#contact"}
+              className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
+            >
+              Contact
+              <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+            </a>
           </div>
 
           <button
@@ -205,6 +223,31 @@ export function Navigation() {
             className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background md:hidden"
           >
             <nav className="flex flex-col items-center gap-8">
+              <motion.a
+                href={isProjectPage ? "/#about" : "#about"}
+                onClick={() => setMobileOpen(false)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0, duration: 0.4 }}
+                className="text-2xl font-light tracking-wide text-foreground"
+              >
+                About
+              </motion.a>
+              <motion.a
+                href={isProjectPage ? "/#skills" : "#skills"}
+                onClick={() => setMobileOpen(false)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.06, duration: 0.4 }}
+                className="text-2xl font-light tracking-wide text-foreground"
+              >
+                Skills
+              </motion.a>
+
+              <div className="my-2 h-px w-12 bg-border" />
+
               <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 Work
               </span>
@@ -214,7 +257,7 @@ export function Navigation() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: i * 0.06, duration: 0.4 }}
+                  transition={{ delay: (i + 2) * 0.06, duration: 0.4 }}
                 >
                   <Link
                     href={`/work/${project.slug}`}
@@ -225,21 +268,20 @@ export function Navigation() {
                   </Link>
                 </motion.div>
               ))}
+
               <div className="my-2 h-px w-12 bg-border" />
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={isProjectPage ? `/${link.href}` : link.href}
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: (projects.length + i) * 0.06, duration: 0.4 }}
-                  className="text-2xl font-light tracking-wide text-foreground"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+
+              <motion.a
+                href={isProjectPage ? "/#contact" : "#contact"}
+                onClick={() => setMobileOpen(false)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: (projects.length + 2) * 0.06, duration: 0.4 }}
+                className="text-2xl font-light tracking-wide text-foreground"
+              >
+                Contact
+              </motion.a>
             </nav>
           </motion.div>
         )}
