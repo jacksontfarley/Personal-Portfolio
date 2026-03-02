@@ -1,7 +1,8 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useInView, AnimatePresence } from "framer-motion"
+import { useRef, useState } from "react"
+import Image from "next/image"
 
 const skills = [
   {
@@ -36,29 +37,181 @@ const skills = [
   },
 ]
 
-const experience = [
+const companies = [
   {
-    period: "2022 -- Present",
-    role: "Senior Marketing Strategist",
-    company: "Freelance / Consulting",
+    name: "Kenvue",
+    logo: "/images/logos/kenvue.jpg",
+    role: "Associate Brand Manager",
+    period: "2024 -- Present",
     description:
-      "Leading brand strategy and growth marketing for startups and established companies across tech, wellness, and luxury sectors.",
+      "Leading brand strategy for a portfolio of iconic consumer health brands, driving NPI commercialization and omnichannel campaign execution.",
   },
   {
-    period: "2019 -- 2022",
-    role: "Marketing Lead",
-    company: "Vertex Digital",
+    name: "SMU",
+    logo: "/images/logos/smu.jpg",
+    role: "MBA Candidate",
+    period: "2022 -- 2024",
     description:
-      "Managed a team of 8, overseeing all digital marketing channels and driving 150% year-over-year revenue growth for key accounts.",
+      "Pursued graduate studies in brand management and marketing strategy, blending academic rigor with real-world consulting projects.",
   },
   {
-    period: "2017 -- 2019",
-    role: "Content Strategist",
-    company: "Bloom Agency",
+    name: "Uber",
+    logo: "/images/logos/uber.jpg",
+    role: "Operations & Strategy",
+    period: "2021 -- 2022",
     description:
-      "Developed content strategies and editorial calendars for B2B and DTC brands, growing organic acquisition by 3x on average.",
+      "Drove operational strategy and growth initiatives, leveraging data to optimize market performance and stakeholder engagement.",
+  },
+  {
+    name: "Worldwide Express",
+    logo: "/images/logos/worldwide-express.jpg",
+    role: "B2B Client Success",
+    period: "2020 -- 2021",
+    description:
+      "Managed enterprise client relationships and B2B sales strategy, building operational infrastructure that scaled revenue growth.",
+  },
+  {
+    name: "Liberty Public Schools",
+    logo: "/images/logos/liberty.jpg",
+    role: "Elementary Educator",
+    period: "2018 -- 2020",
+    description:
+      "Developed curriculum and led a classroom of 25+ students, honing communication, empathy, and the art of making complex ideas accessible.",
+  },
+  {
+    name: "CycleBar",
+    logo: "/images/logos/cyclebar.jpg",
+    role: "Studio Manager & Marketing",
+    period: "2017 -- 2018",
+    description:
+      "Ran studio operations, community marketing, and experiential activations that grew membership and deepened brand loyalty.",
+  },
+  {
+    name: "Mizzou",
+    logo: "/images/logos/mizzou.jpg",
+    role: "B.A. Communications",
+    period: "2014 -- 2018",
+    description:
+      "Studied strategic communication and journalism at the University of Missouri, building a foundation in storytelling and media.",
   },
 ]
+
+function ExperienceCard({
+  company,
+  index,
+  isInView,
+}: {
+  company: (typeof companies)[0]
+  index: number
+  isInView: boolean
+}) {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.6,
+        delay: 0.08 * index,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="group relative flex flex-col items-center"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Logo container */}
+      <motion.div
+        animate={{
+          scale: hovered ? 1.1 : 1,
+          boxShadow: hovered
+            ? "0 8px 30px rgba(0,0,0,0.12)"
+            : "0 2px 8px rgba(0,0,0,0.06)",
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="relative z-10 flex h-20 w-20 cursor-pointer items-center justify-center overflow-hidden rounded-2xl border border-border bg-background p-3 sm:h-24 sm:w-24"
+      >
+        {/* Rainbow border on hover */}
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{
+                padding: "2px",
+                background:
+                  "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                WebkitMask:
+                  "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                WebkitMaskComposite: "xor",
+                maskComposite: "exclude",
+              }}
+            />
+          )}
+        </AnimatePresence>
+        <Image
+          src={company.logo}
+          alt={`${company.name} logo`}
+          width={80}
+          height={80}
+          className="h-full w-full object-contain"
+        />
+      </motion.div>
+
+      {/* Company name */}
+      <motion.p
+        animate={{ opacity: hovered ? 1 : 0.6 }}
+        className="mt-3 text-center text-xs font-medium text-foreground sm:text-sm"
+      >
+        {company.name}
+      </motion.p>
+
+      {/* Hover reveal card */}
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.96 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-1/2 top-full z-20 mt-2 w-64 -translate-x-1/2 rounded-xl border border-border bg-background p-5 shadow-lg sm:w-72"
+          >
+            {/* Rainbow top accent line */}
+            <div
+              className="absolute left-4 right-4 top-0 h-[2px] rounded-full"
+              style={{
+                background:
+                  "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+              }}
+            />
+            <p
+              className="text-sm font-semibold"
+              style={{
+                width: "fit-content",
+                background:
+                  "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              {company.role}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {company.period}
+            </p>
+            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+              {company.description}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
 
 export function SkillsSection() {
   const ref = useRef(null)
@@ -127,12 +280,11 @@ export function SkillsSection() {
 
       {/* Experience */}
       <div className="mx-auto mt-32 max-w-6xl md:mt-40" ref={expRef}>
-        <div className="grid gap-16 md:grid-cols-12">
+        <div className="flex flex-col gap-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={expInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-4"
           >
             <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
               Experience
@@ -140,45 +292,14 @@ export function SkillsSection() {
             <div className="mt-3 h-[2px] w-8 rounded-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
           </motion.div>
 
-          <div className="flex flex-col md:col-span-8">
-            {experience.map((exp, i) => (
-              <motion.div
-                key={exp.role}
-                initial={{ opacity: 0, y: 30 }}
-                animate={expInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.1 + i * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group border-t border-border py-8 first:border-t-0 first:pt-0"
-              >
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-center">
-                    <h3 className="text-base font-medium text-foreground">
-                      {exp.role}
-                    </h3>
-                    <span className="text-xs tracking-wider text-muted-foreground">
-                      {exp.period}
-                    </span>
-                  </div>
-                  <p
-                    className="text-sm font-medium"
-                    style={{
-                      width: "fit-content",
-                      background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                    }}
-                  >
-                    {exp.company}
-                  </p>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {exp.description}
-                  </p>
-                </div>
-              </motion.div>
+          <div className="grid grid-cols-3 gap-x-6 gap-y-16 sm:grid-cols-4 md:grid-cols-7">
+            {companies.map((company, i) => (
+              <ExperienceCard
+                key={company.name}
+                company={company}
+                index={i}
+                isInView={expInView}
+              />
             ))}
           </div>
         </div>
