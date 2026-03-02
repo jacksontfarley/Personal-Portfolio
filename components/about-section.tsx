@@ -35,9 +35,9 @@ export function AboutSection() {
               className="text-pretty font-serif text-2xl leading-relaxed text-foreground md:text-3xl"
             >
               I&apos;m a brand marketer driven by a passion for making
-              people&apos;s lives better. My approach pairs a highly analytical
-              foundation with a consumer-first lens, translating complex market
-              signals into compelling brand experiences that resonate.
+              people&apos;s lives better. My approach blends analytics and
+              creativity, translating unique insights into compelling brand
+              experiences.
             </motion.p>
 
             <motion.p
@@ -45,18 +45,33 @@ export function AboutSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
                 duration: 0.8,
-                delay: 0.3,
+                delay: 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="max-w-xl text-base leading-relaxed text-muted-foreground"
             >
-              I believe in the power of authenticity. Throughout my experiences
-              in classroom teaching, B2B client partnership, and brand management, my north
-              star remains the same: bringing more voices to the table with a
-              relentless obsession for the consumer.
+              My non-traditional path from elementary education, to B2B client
+              success, to CPG brand management gives me 8+ years of unique
+              perspectives, with a red thread of authentic storytelling.
             </motion.p>
 
-            <motion.div
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.8,
+                delay: 0.35,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="max-w-xl text-base leading-relaxed text-muted-foreground"
+            >
+              Through all my experiences, I&apos;ve learned how to connect the
+              10,000-foot strategy with the 1-inch execution. I bring a
+              relentless focus and a fresh POV to tackle gnarly business
+              challenges with enthusiasm and agility.
+            </motion.p>
+
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -64,31 +79,12 @@ export function AboutSection() {
                 delay: 0.45,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="grid grid-cols-2 gap-8 pt-8 sm:grid-cols-3"
+              className="max-w-xl text-base leading-relaxed text-muted-foreground"
             >
-              {[
-                { number: "8+", label: "Years Experience" },
-                { number: "40+", label: "Brands Served" },
-                { number: "3x", label: "Avg. ROI Increase" },
-              ].map((stat) => (
-                <div key={stat.label} className="flex flex-col gap-2">
-                  <span
-                    className="font-serif text-3xl md:text-4xl"
-                    style={{
-                      backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                    }}
-                  >
-                    {stat.number}
-                  </span>
-                  <span className="text-sm text-muted-foreground">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
+              And most importantly, I believe in bringing more voices to the
+              table, because the most impactful ideas are built on genuine human
+              connection.
+            </motion.p>
           </div>
         </div>
       </div>
