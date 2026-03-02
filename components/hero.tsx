@@ -16,7 +16,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground"
             >
-              Marketing Strategist
+              Brand Marketer + Strategist
             </motion.p>
 
             <motion.h1
