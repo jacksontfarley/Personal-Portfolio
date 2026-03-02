@@ -218,15 +218,15 @@ function ExperienceCard({
               {company.period}
             </p>
             {company.brandLogos && (
-              <div className="mt-3 flex items-center gap-3">
+              <div className="mt-3 flex items-center gap-2">
                 {company.brandLogos.map((logo, i) => (
                   <Image
                     key={i}
                     src={logo}
                     alt="Brand logo"
                     width={60}
-                    height={30}
-                    className="h-6 w-auto object-contain grayscale"
+                    height={20}
+                    className="h-4 max-w-[30%] object-contain grayscale"
                   />
                 ))}
               </div>
