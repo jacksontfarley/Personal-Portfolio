@@ -249,65 +249,9 @@ export function SkillsSection() {
   const expInView = useInView(expRef, { once: true, margin: "-100px" })
 
   return (
-    <section id="skills" className="px-6 py-32 md:py-40">
-      {/* Skills */}
-      <div className="mx-auto max-w-6xl" ref={ref}>
-        <div className="grid gap-16 md:grid-cols-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-4"
-          >
-            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              Skills
-            </p>
-            <div className="mt-3 h-[2px] w-8 rounded-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
-          </motion.div>
-
-          <div className="grid gap-12 sm:grid-cols-3 md:col-span-8">
-            {skills.map((skill, i) => (
-              <motion.div
-                key={skill.category}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.1 + i * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="flex flex-col gap-4"
-              >
-                <h3
-                  className="text-sm font-medium tracking-wide"
-                  style={{
-                    width: "fit-content",
-                    background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  {skill.category}
-                </h3>
-                <ul className="flex flex-col gap-2.5">
-                  {skill.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-sm leading-relaxed text-muted-foreground"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Experience */}
-      <div id="experience" className="mx-auto mt-32 max-w-6xl scroll-mt-24 md:mt-40" ref={expRef}>
+    <section className="px-6 py-32 md:py-40">
+      {/* Experience — now first */}
+      <div id="experience" className="mx-auto max-w-6xl scroll-mt-24" ref={expRef}>
         <div className="flex flex-col gap-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -380,6 +324,62 @@ export function SkillsSection() {
               </a>
             </div>
           </motion.div>
+        </div>
+      </div>
+
+      {/* Skills — now second */}
+      <div id="skills" className="mx-auto mt-32 max-w-6xl scroll-mt-24 md:mt-40" ref={ref}>
+        <div className="grid gap-16 md:grid-cols-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-4"
+          >
+            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+              Skills
+            </p>
+            <div className="mt-3 h-[2px] w-8 rounded-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+          </motion.div>
+
+          <div className="grid gap-12 sm:grid-cols-3 md:col-span-8">
+            {skills.map((skill, i) => (
+              <motion.div
+                key={skill.category}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.1 + i * 0.12,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="flex flex-col gap-4"
+              >
+                <h3
+                  className="text-sm font-medium tracking-wide"
+                  style={{
+                    width: "fit-content",
+                    background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  {skill.category}
+                </h3>
+                <ul className="flex flex-col gap-2.5">
+                  {skill.items.map((item) => (
+                    <li
+                      key={item}
+                      className="text-sm leading-relaxed text-muted-foreground"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
