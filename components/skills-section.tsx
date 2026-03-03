@@ -192,35 +192,14 @@ function ExpandedModal({
       />
 
       {/* Expanded card + arrows */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8" onClick={onClose}>
-        {/* Left arrow */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center gap-4 p-4 sm:p-8" onClick={onClose}>
+        {/* Left arrow — flex sibling, sits naturally left of card */}
         <button
           onClick={(e) => { e.stopPropagation(); onPrev() }}
-          className="absolute z-50 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground"
-          style={{ 
-            left: "50%", 
-            top: "50%", 
-            transform: "translate(calc(-100% - 12px), -50%)",
-            maxWidth: "calc(50vw - 240px)"
-          }}
+          className="flex-shrink-0 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground"
           aria-label="Previous role"
         >
           <ChevronLeft className="h-5 w-5" />
-        </button>
-
-        {/* Right arrow */}
-        <button
-          onClick={(e) => { e.stopPropagation(); onNext() }}
-          className="absolute z-50 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground"
-          style={{ 
-            right: "50%", 
-            top: "50%", 
-            transform: "translate(calc(100% + 12px), -50%)",
-            maxWidth: "calc(50vw - 240px)"
-          }}
-          aria-label="Next role"
-        >
-          <ChevronRight className="h-5 w-5" />
         </button>
 
         <motion.div
@@ -330,6 +309,15 @@ function ExpandedModal({
             className="absolute bottom-6 right-6 h-8 w-8 rotate-[8deg] opacity-[0.4]"
           />
         </motion.div>
+
+        {/* Right arrow — flex sibling, sits naturally right of card */}
+        <button
+          onClick={(e) => { e.stopPropagation(); onNext() }}
+          className="flex-shrink-0 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground"
+          aria-label="Next role"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
       </div>
     </>
   )
