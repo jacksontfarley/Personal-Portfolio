@@ -323,6 +323,40 @@ function ExpandedModal({
   )
 }
 
+const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
+
+function ResumePill({ href, label }: { href: string; label: string }) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300"
+      style={{
+        background: hovered ? RAINBOW : "var(--background)",
+        color: hovered ? "#fff" : "var(--foreground)",
+      }}
+    >
+      {!hovered && (
+        <span
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            padding: "2px",
+            background: RAINBOW,
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+          }}
+        />
+      )}
+      {label}
+    </a>
+  )
+}
+
 export function SkillsSection() {
   const expRef = useRef(null)
   const expInView = useInView(expRef, { once: true, margin: "-100px" })
@@ -414,46 +448,8 @@ export function SkillsSection() {
               Grab a copy of my resume as a souvenir!
             </p>
             <div className="flex items-center gap-4">
-              <a
-                href="/resume-1-pager.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative rounded-full bg-background px-6 py-2.5 text-sm font-medium text-foreground transition-shadow duration-300 hover:shadow-lg"
-              >
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-full"
-                  style={{
-                    padding: "2px",
-                    background:
-                      "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                    WebkitMask:
-                      "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
-                  }}
-                />
-                1-Pager
-              </a>
-              <a
-                href="/resume-long-form.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative rounded-full bg-background px-6 py-2.5 text-sm font-medium text-foreground transition-shadow duration-300 hover:shadow-lg"
-              >
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-full"
-                  style={{
-                    padding: "2px",
-                    background:
-                      "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                    WebkitMask:
-                      "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
-                  }}
-                />
-                Long-Form
-              </a>
+              <ResumePill href="/resume-1-pager.pdf" label="1-Pager" />
+              <ResumePill href="/resume-long-form.pdf" label="Long-Form" />
             </div>
           </motion.div>
         </div>
