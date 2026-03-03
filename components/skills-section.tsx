@@ -1,8 +1,9 @@
 "use client"
 
-import { motion, useInView, LayoutGroup } from "framer-motion"
-import { useRef, useState, useCallback } from "react"
+import { motion, useInView, AnimatePresence } from "framer-motion"
+import { useRef, useState, useCallback, useEffect } from "react"
 import Image from "next/image"
+import { X } from "lucide-react"
 
 const skills = [
   {
@@ -110,106 +111,133 @@ const companies: Company[] = [
   },
 ]
 
-const springTransition = {
+const expandSpring = {
   type: "spring" as const,
-  stiffness: 400,
-  damping: 30,
-  mass: 0.8,
+  stiffness: 150,
+  damping: 20,
 }
 
-function BentoCard({
+function LogoCard({
   company,
   index,
   isInView,
-  isExpanded,
-  onToggle,
+  onSelect,
 }: {
   company: Company
   index: number
   isInView: boolean
-  isExpanded: boolean
-  onToggle: () => void
+  onSelect: () => void
 }) {
   return (
     <motion.div
-      layout
-      layoutId={`bento-${company.name}`}
+      layoutId={`card-${company.name}`}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        ...springTransition,
         opacity: { duration: 0.5, delay: 0.06 * index },
         y: { duration: 0.5, delay: 0.06 * index },
-        layout: springTransition,
+        layout: expandSpring,
       }}
-      onClick={onToggle}
-      onMouseEnter={() => {
-        if (window.matchMedia("(hover: hover)").matches) onToggle()
-      }}
-      onMouseLeave={() => {
-        if (window.matchMedia("(hover: hover)").matches && isExpanded) onToggle()
-      }}
-      className={`relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-background p-5 transition-shadow duration-300 ${
-        isExpanded
-          ? "col-span-2 row-span-2 shadow-xl"
-          : "col-span-1 row-span-1 shadow-sm hover:shadow-md"
-      }`}
+      onClick={onSelect}
+      className="flex aspect-square cursor-pointer items-center justify-center rounded-2xl border border-border bg-background p-6 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.97 }}
     >
-      {/* Rainbow top accent — visible when expanded */}
+      <Image
+        src={company.logo}
+        alt={`${company.name} logo`}
+        width={80}
+        height={80}
+        className="h-16 w-16 object-contain sm:h-20 sm:w-20"
+      />
+    </motion.div>
+  )
+}
+
+function ExpandedModal({
+  company,
+  onClose,
+}: {
+  company: Company
+  onClose: () => void
+}) {
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", handleKey)
+    return () => {
+      document.body.style.overflow = ""
+      window.removeEventListener("keydown", handleKey)
+    }
+  }, [onClose])
+
+  return (
+    <>
+      {/* Backdrop */}
       <motion.div
-        layout="position"
-        className="absolute left-0 right-0 top-0 h-[2px]"
-        style={{
-          background:
-            "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-        }}
-        initial={false}
-        animate={{ opacity: isExpanded ? 1 : 0, scaleX: isExpanded ? 1 : 0 }}
-        transition={springTransition}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="fixed inset-0 z-40 bg-foreground/40 backdrop-blur-sm"
+        onClick={onClose}
       />
 
-      {/* Collapsed: Logo + name */}
-      <div className={`flex items-center gap-4 ${isExpanded ? "mb-4" : ""}`}>
+      {/* Expanded card */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8" onClick={onClose}>
         <motion.div
-          layout="position"
-          className="flex h-14 w-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-xl bg-secondary/50 p-2 sm:h-16 sm:w-16"
+          layoutId={`card-${company.name}`}
+          transition={expandSpring}
+          className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-background p-8 shadow-2xl sm:p-10"
+          onClick={(e) => e.stopPropagation()}
         >
-          <Image
-            src={company.logo}
-            alt={`${company.name} logo`}
-            width={64}
-            height={64}
-            className="h-full w-full object-contain"
+          {/* Rainbow top accent */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-0 right-0 top-0 h-[2px] origin-left"
+            style={{
+              background:
+                "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+            }}
           />
-        </motion.div>
 
-        <motion.div layout="position" className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-foreground sm:text-base">
-            {company.name}
-          </p>
-          {!isExpanded && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="truncate text-xs text-muted-foreground"
-            >
-              {company.role}
-            </motion.p>
-          )}
-        </motion.div>
-      </div>
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute right-4 top-4 rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </button>
 
-      {/* Expanded: Full details */}
-      {isExpanded && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
-          className="flex flex-col gap-3"
-        >
-          <div>
+          {/* Logo + company name */}
+          <div className="mb-6 flex items-center gap-4">
+            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-secondary/50 p-2">
+              <Image
+                src={company.logo}
+                alt={`${company.name} logo`}
+                width={64}
+                height={64}
+                className="h-full w-full object-contain"
+              />
+            </div>
+            <p className="text-lg font-semibold text-foreground">
+              {company.name}
+            </p>
+          </div>
+
+          {/* Job title */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.4 }}
+          >
             <p
-              className="text-sm font-semibold"
+              className="text-base font-semibold sm:text-lg"
               style={{
                 width: "fit-content",
                 background:
@@ -221,13 +249,19 @@ function BentoCard({
             >
               {company.role}
             </p>
-            <p className="mt-0.5 text-xs text-muted-foreground">
+            <p className="mt-1 text-sm text-muted-foreground">
               {company.period}
             </p>
-          </div>
+          </motion.div>
 
+          {/* Brand logos */}
           {company.brandLogos && (
-            <div className="flex items-center gap-2">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.25, duration: 0.4 }}
+              className="mt-4 flex items-center gap-3"
+            >
               {company.brandLogos.map((logo, i) => (
                 <Image
                   key={i}
@@ -235,18 +269,33 @@ function BentoCard({
                   alt="Brand logo"
                   width={60}
                   height={20}
-                  className="h-4 max-w-[30%] object-contain grayscale"
+                  className="h-5 max-w-[30%] object-contain grayscale"
                 />
               ))}
-            </div>
+            </motion.div>
           )}
 
-          <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm sm:leading-relaxed">
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.4 }}
+            className="mt-5 text-sm leading-relaxed text-muted-foreground sm:text-base sm:leading-relaxed"
+          >
             {company.description}
-          </p>
+          </motion.p>
+
+          {/* Smiley watermark */}
+          <Image
+            src="/Smiley.PNG"
+            alt=""
+            width={40}
+            height={40}
+            className="absolute bottom-4 right-4 h-8 w-8 rotate-[8deg] opacity-[0.8]"
+          />
         </motion.div>
-      )}
-    </motion.div>
+      </div>
+    </>
   )
 }
 
@@ -257,10 +306,14 @@ export function SkillsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
-  const handleToggle = useCallback((index: number) => {
-    setExpandedIndex((prev) => (prev === index ? null : index))
+  const handleSelect = useCallback((index: number) => {
+    setSelectedIndex(index)
+  }, [])
+
+  const handleClose = useCallback(() => {
+    setSelectedIndex(null)
   }, [])
 
   return (
@@ -285,24 +338,28 @@ export function SkillsSection() {
             />
           </motion.div>
 
-          <LayoutGroup>
-            <motion.div
-              layout
-              className="grid auto-rows-auto grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
-              transition={springTransition}
-            >
-              {companies.map((company, i) => (
-                <BentoCard
-                  key={company.name}
-                  company={company}
-                  index={i}
-                  isInView={expInView}
-                  isExpanded={expandedIndex === i}
-                  onToggle={() => handleToggle(i)}
-                />
-              ))}
-            </motion.div>
-          </LayoutGroup>
+          {/* Logo-only grid */}
+          <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-7">
+            {companies.map((company, i) => (
+              <LogoCard
+                key={company.name}
+                company={company}
+                index={i}
+                isInView={expInView}
+                onSelect={() => handleSelect(i)}
+              />
+            ))}
+          </div>
+
+          {/* Expanded modal */}
+          <AnimatePresence>
+            {selectedIndex !== null && (
+              <ExpandedModal
+                company={companies[selectedIndex]}
+                onClose={handleClose}
+              />
+            )}
+          </AnimatePresence>
 
           {/* Resume CTA */}
           <motion.div
