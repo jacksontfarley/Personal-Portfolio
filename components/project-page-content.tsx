@@ -1,12 +1,110 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { ArrowLeft, ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRef } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { projects, type Project } from "@/lib/projects"
+
+const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
+
+function PillRow({
+  label,
+  content,
+  type,
+  index,
+}: {
+  label: string
+  content: string | string[]
+  type: "text" | "list"
+  index: number
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, {
+    margin: "-45% 0px -45% 0px",
+  })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.05,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
+    >
+      {/* Label pill */}
+      <div className="w-40 flex-shrink-0">
+        <div
+          className="relative inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-medium transition-all duration-500"
+          style={{
+            background: isInView ? RAINBOW : "var(--background)",
+            color: isInView ? "#fff" : "var(--foreground)",
+          }}
+        >
+          {!isInView && (
+            <span
+              className="pointer-events-none absolute inset-0 rounded-full"
+              style={{
+                padding: "1px",
+                background: RAINBOW,
+                WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                WebkitMaskComposite: "xor",
+                maskComposite: "exclude",
+              }}
+            />
+          )}
+          {label}
+        </div>
+      </div>
+
+      {/* Content pill */}
+      <div className="flex-1">
+        <div
+          className="rounded-2xl bg-white px-6 py-4 transition-all duration-500"
+          style={{
+            border: isInView ? "1.5px solid transparent" : "1px solid #e2e8f0",
+            backgroundImage: isInView
+              ? `linear-gradient(white, white), ${RAINBOW}`
+              : "none",
+            backgroundOrigin: "border-box",
+            backgroundClip: isInView ? "padding-box, border-box" : "border-box",
+          }}
+        >
+          {type === "list" && Array.isArray(content) ? (
+            <ul className="flex flex-col gap-2.5">
+              {(content as string[]).map((item, j) => (
+                <li
+                  key={j}
+                  className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground"
+                >
+                  <span
+                    className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                    style={{
+                      background: "linear-gradient(135deg, #FF3366, #CC33FF)",
+                    }}
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {content as string}
+            </p>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export function ProjectPageContent({ project }: { project: Project }) {
   const currentIndex = projects.findIndex((p) => p.slug === project.slug)
@@ -116,64 +214,13 @@ export function ProjectPageContent({ project }: { project: Project }) {
             { label: "The Impact", content: project.impact, type: "list" as const },
             { label: "The Takeaway", content: project.takeaway, type: "text" as const },
           ].map((row, i) => (
-            <motion.div
+            <PillRow
               key={row.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{
-                duration: 0.5,
-                delay: i * 0.05,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
-            >
-              {/* Label pill — fixed width so all right containers align */}
-              <div className="w-40 flex-shrink-0">
-                <div className="relative inline-flex w-full items-center justify-center rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground">
-                  <span
-                    className="pointer-events-none absolute inset-0 rounded-full"
-                    style={{
-                      padding: "1px",
-                      background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      WebkitMaskComposite: "xor",
-                      maskComposite: "exclude",
-                    }}
-                  />
-                  {row.label}
-                </div>
-              </div>
-
-              {/* Content pill */}
-              <div className="flex-1">
-                <div className="rounded-2xl border border-slate-200 bg-white px-6 py-4">
-                  {row.type === "list" && Array.isArray(row.content) ? (
-                    <ul className="flex flex-col gap-2.5">
-                      {(row.content as string[]).map((item, j) => (
-                        <li
-                          key={j}
-                          className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground"
-                        >
-                          <span
-                            className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
-                            style={{
-                              background:
-                                "linear-gradient(135deg, #FF3366, #CC33FF)",
-                            }}
-                          />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {row.content as string}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+              label={row.label}
+              content={row.content}
+              type={row.type}
+              index={i}
+            />
           ))}
 
           {/* Smiley stamp */}
