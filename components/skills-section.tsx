@@ -214,7 +214,7 @@ function ExpandedModal({
         <motion.div
           layoutId={`card-${company.name}`}
           transition={expandSpring}
-          className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-background p-8 shadow-2xl sm:p-10"
+          className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-background p-10 pb-24 shadow-2xl sm:p-12 sm:pb-28"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Rainbow top accent */}
@@ -315,7 +315,7 @@ function ExpandedModal({
             alt=""
             width={40}
             height={40}
-            className="absolute bottom-4 right-4 h-8 w-8 rotate-[8deg] opacity-[0.4]"
+            className="absolute bottom-6 right-6 h-8 w-8 rotate-[8deg] opacity-[0.4]"
           />
         </motion.div>
       </div>
