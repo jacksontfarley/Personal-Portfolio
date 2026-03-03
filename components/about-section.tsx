@@ -1,11 +1,18 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
+import Image from "next/image"
 
 export function AboutSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  })
+  const logoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 0.8])
 
   return (
     <section id="about" className="px-6 py-32 md:py-40" ref={ref}>
@@ -29,8 +36,8 @@ export function AboutSection() {
           />
         </motion.div>
 
-        {/* Text content */}
-        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
+        {/* Text content + rotating logo */}
+        <div className="relative grid items-start gap-12 md:grid-cols-12 md:gap-16">
           <div className="flex flex-col gap-6 md:col-span-9">
             <motion.p
               initial={{ opacity: 0, y: 30 }}
@@ -94,6 +101,33 @@ export function AboutSection() {
               connection.
             </motion.p>
           </div>
+
+          {/* Rotating name logo */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.4 }}
+            style={{ scale: logoScale }}
+            className="hidden items-start justify-end md:col-span-3 md:flex"
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="w-40 lg:w-48"
+            >
+              <Image
+                src="/NAME.png"
+                alt="Jackson Farley circular logo"
+                width={200}
+                height={200}
+                className="h-auto w-full"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
