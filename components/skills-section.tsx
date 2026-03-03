@@ -497,19 +497,18 @@ export function SkillsSection() {
                 }}
                 className="flex flex-col gap-4"
               >
-                <h3
-                  className="text-sm font-medium tracking-wide"
-                  style={{
-                    width: "fit-content",
-                    background:
-                      "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
+              <motion.div className="flex flex-col gap-2">
+                <h3 className="font-serif text-lg font-semibold tracking-tight text-foreground">
                   {skill.category}
                 </h3>
+                <div
+                  className="h-[2px] w-6 rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  }}
+                />
+              </motion.div>
                 <ul className="flex flex-col gap-2.5">
                   {skill.items.map((item) => (
                     <li
