@@ -62,7 +62,7 @@ const companies: Company[] = [
   },
   {
     name: "SMU",
-    logo: "/images/logos/large_blob.png",
+    logo: "/images/logos/SMU-Mustangs-Emblem.png",
     role: "MBA Candidate",
     period: "2022 -- 2024",
     description:
