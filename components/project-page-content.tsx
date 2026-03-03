@@ -106,7 +106,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
       </motion.section>
 
       {/* Content — Pill Row Layout */}
-      <section className="px-6 py-20 md:py-32">
+      <section className="px-6 py-12 md:py-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-5">
           {[
             { label: "The Objective", content: project.objective, type: "text" as const },
@@ -126,11 +126,21 @@ export function ProjectPageContent({ project }: { project: Project }) {
                 delay: i * 0.05,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="flex flex-col gap-3 sm:flex-row sm:gap-4"
+              className="flex flex-col gap-2 sm:flex-row sm:gap-1"
             >
               {/* Label pill */}
               <div className="flex-shrink-0 sm:w-[30%]">
-                <div className="inline-flex rounded-full bg-blue-50/50 px-5 py-3 text-sm font-medium text-foreground">
+                <div className="relative inline-flex rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground">
+                  <span
+                    className="pointer-events-none absolute inset-0 rounded-full"
+                    style={{
+                      padding: "1px",
+                      background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                      maskComposite: "exclude",
+                    }}
+                  />
                   {row.label}
                 </div>
               </div>
