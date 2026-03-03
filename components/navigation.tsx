@@ -251,9 +251,9 @@ export function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background md:hidden"
+            className="fixed inset-0 z-40 overflow-y-auto bg-background pt-24 pb-12 md:hidden"
           >
-            <nav className="flex flex-col items-center gap-8">
+            <nav className="flex flex-col items-center gap-6 px-6">
               <motion.a
                 href={isProjectPage ? "/#about" : "#about"}
                 onClick={() => setMobileOpen(false)}
@@ -261,7 +261,7 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0, duration: 0.4 }}
-                className="text-2xl font-light tracking-wide text-foreground"
+                className="text-xl font-light tracking-wide text-foreground"
               >
                 About
               </motion.a>
@@ -272,7 +272,7 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0.06, duration: 0.4 }}
-                className="text-2xl font-light tracking-wide text-foreground"
+                className="text-xl font-light tracking-wide text-foreground"
               >
                 Experience
               </motion.a>
@@ -283,12 +283,12 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0.12, duration: 0.4 }}
-                className="text-2xl font-light tracking-wide text-foreground"
+                className="text-xl font-light tracking-wide text-foreground"
               >
                 Skills
               </motion.a>
 
-              <div className="my-2 h-px w-12 bg-border" />
+              <div className="my-1 h-px w-12 bg-border" />
 
               <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 Work
@@ -304,14 +304,14 @@ export function Navigation() {
                   <Link
                     href={`/work/${project.slug}`}
                     onClick={() => setMobileOpen(false)}
-                    className="text-lg font-light tracking-wide text-foreground"
+                    className="text-base font-light tracking-wide text-foreground"
                   >
                     {project.title}
                   </Link>
                 </motion.div>
               ))}
 
-              <div className="my-2 h-px w-12 bg-border" />
+              <div className="my-1 h-px w-12 bg-border" />
 
               <motion.a
                 href={isProjectPage ? "/#contact" : "#contact"}
@@ -320,7 +320,7 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: (projects.length + 3) * 0.06, duration: 0.4 }}
-                className="text-2xl font-light tracking-wide text-foreground"
+                className="text-xl font-light tracking-wide text-foreground"
               >
                 Contact
               </motion.a>
