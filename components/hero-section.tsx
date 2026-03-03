@@ -6,14 +6,17 @@ import Image from "next/image"
 export function HeroSection() {
   return (
     <section className="relative flex min-h-[70vh] flex-col justify-center overflow-hidden px-6 py-32">
-      {/* Ghosted headshot background */}
-      <div className="pointer-events-none absolute right-[-10%] top-1/2 -translate-y-1/2 w-[70%] max-w-[600px] sm:w-[55%] sm:right-0 md:w-[45%] md:right-[2%]">
+      {/* Ghosted headshot — no motion wrapper to avoid hydration mismatch */}
+      <div
+        className="pointer-events-none absolute right-[-10%] top-1/2 -translate-y-1/2 w-[75%] max-w-[600px] sm:w-[55%] sm:right-0 md:w-[45%] md:right-[2%]"
+        style={{ opacity: 0.10 }}
+      >
         <Image
           src="/JF_headshot.png"
           alt=""
           width={600}
           height={600}
-          className="h-auto w-full opacity-[0.10] grayscale"
+          className="h-auto w-full grayscale"
           priority
         />
       </div>
