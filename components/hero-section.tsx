@@ -12,7 +12,7 @@ export function HeroSection() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5, delay: 0.2 }}
-        className="pointer-events-none absolute right-[-5%] top-1/2 -translate-y-1/2 w-[50%] max-w-[600px] sm:right-0 md:right-[5%]"
+        className="pointer-events-none absolute right-[-10%] top-1/2 -translate-y-1/2 w-[70%] max-w-[600px] sm:w-[55%] sm:right-0 md:w-[45%] md:right-[2%]"
       >
         <Image
           src="/JF_headshot.png"
