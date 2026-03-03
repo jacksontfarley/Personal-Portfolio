@@ -31,7 +31,7 @@ export const projects: Project[] = [
   },
   {
     title: "Aveeno® Daily Moisturizing Videos",
-    slug: "aveeno-dm-videos",
+    slug: "avo-videos",
     category: "Creative Development",
     description:
       "Designed and executed a multi-channel acquisition campaign that reduced CAC by 45% while scaling monthly revenue to $2M.",
@@ -49,7 +49,7 @@ export const projects: Project[] = [
   },
   {
     title: "Topgolf Consumer Retention",
-    slug: "topgolf-consumer-retention",
+    slug: "tg-consumer-retention",
     category: "Research & Insights",
     description:
       "Built a scalable content engine for a luxury fashion house, growing organic traffic 5x and establishing thought leadership.",
@@ -85,7 +85,7 @@ export const projects: Project[] = [
   },
   {
     title: "Uber Eats Role Pilot",
-    slug: "uber-eats-role-pilot",
+    slug: "ue-role-pilot",
     category: "Operational Strategy",
     description:
       "Built and launched a social-first brand presence from zero, growing to 100K engaged followers in 6 months with a community-led content strategy.",
@@ -121,7 +121,7 @@ export const projects: Project[] = [
   },
   {
     title: "Cyclebar Studio Growth",
-    slug: "cyclebar-studio-growth",
+    slug: "cb-studio-growth",
     category: "Experiential Strategy & Operations",
     description:
       "Developed a data-driven retail merchandising strategy that increased shelf velocity by 60% and secured premium placement across 500+ stores.",
