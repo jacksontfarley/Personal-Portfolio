@@ -19,7 +19,7 @@ export function HeroSection() {
           alt=""
           width={600}
           height={600}
-          className="h-auto w-full opacity-[0.07] grayscale"
+          className="h-auto w-full opacity-[0.10] grayscale"
           priority
         />
       </motion.div>
