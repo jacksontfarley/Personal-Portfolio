@@ -90,6 +90,39 @@ export function HeroSection() {
             </span>
           </motion.h1>
 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-wrap gap-3 md:max-w-[55%]"
+          >
+            {[
+              "Data Storyteller",
+              "Consumer Obsessed",
+              "Creative at Heart",
+              "Operationally Minded",
+              "Pop Culture Enthusiast",
+              "Fun to Be Around",
+            ].map((label) => (
+              <span
+                key={label}
+                className="relative inline-flex items-center rounded-full bg-background px-4 py-2 text-sm text-foreground"
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full"
+                  style={{
+                    padding: "1px",
+                    background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                />
+                {label}
+              </span>
+            ))}
+          </motion.div>
 
         </div>
       </div>
