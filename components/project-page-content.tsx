@@ -129,7 +129,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
               className="flex flex-col gap-2 sm:flex-row sm:gap-0"
             >
               {/* Label pill */}
-              <div className="flex-shrink-0 sm:w-[30%]">
+              <div className="flex-shrink-0">
                 <div className="relative inline-flex rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground">
                   <span
                     className="pointer-events-none absolute inset-0 rounded-full"
