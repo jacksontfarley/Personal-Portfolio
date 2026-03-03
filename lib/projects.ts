@@ -14,7 +14,7 @@ export const projects: Project[] = [
   {
     title: "Medicine Cabinet Cleanout",
     slug: "medicine-cabinet-cleanout",
-    category: "Brand Strategy",
+    category: "Omnichannel Campaign",
     description:
       "Led the full brand identity and go-to-market strategy for a DTC wellness startup, driving 200% growth in the first quarter.",
     tags: ["Brand Identity", "GTM Strategy", "Content"],
@@ -30,9 +30,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Meridian Growth Campaign",
-    slug: "meridian-growth-campaign",
-    category: "Performance Marketing",
+    title: "Aveeno® Daily Moisturizing Videos",
+    slug: "aveeno-dm-videos",
+    category: "Creative Development",
     description:
       "Designed and executed a multi-channel acquisition campaign that reduced CAC by 45% while scaling monthly revenue to $2M.",
     tags: ["Paid Media", "Analytics", "CRO"],
@@ -48,9 +48,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Atelier Content System",
-    slug: "atelier-content-system",
-    category: "Content Strategy",
+    title: "Topgolf Consumer Retention",
+    slug: "topgolf-consumer-retention",
+    category: "Research & Insights",
     description:
       "Built a scalable content engine for a luxury fashion house, growing organic traffic 5x and establishing thought leadership.",
     tags: ["SEO", "Storytelling", "Editorial"],
@@ -66,9 +66,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Nova Product Rebrand",
-    slug: "nova-product-rebrand",
-    category: "Rebranding",
+    title: "CES Market Research",
+    slug: "ces-market-research",
+    category: "Research & Insights",
     description:
       "Orchestrated a complete brand overhaul for a fintech company, resulting in 80% improvement in brand recall and customer trust scores.",
     tags: ["Positioning", "Visual Identity", "Research"],
@@ -84,9 +84,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Vero Social Launch",
-    slug: "vero-social-launch",
-    category: "Social Media",
+    title: "Uber Eats Role Pilot",
+    slug: "uber-eats-role-pilot",
+    category: "Operational Strategy",
     description:
       "Built and launched a social-first brand presence from zero, growing to 100K engaged followers in 6 months with a community-led content strategy.",
     tags: ["Social Strategy", "Community", "Content"],
@@ -102,9 +102,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Prism Product Launch",
-    slug: "prism-product-launch",
-    category: "Product Marketing",
+    title: "WWEX Brand Building",
+    slug: "wwex-brand-building",
+    category: "Creative Development",
     description:
       "Orchestrated a cross-channel product launch for a consumer tech brand, driving $5M in first-month revenue and earning press coverage in major outlets.",
     tags: ["Launch Strategy", "PR", "Experiential"],
