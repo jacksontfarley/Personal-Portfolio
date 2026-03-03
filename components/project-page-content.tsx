@@ -40,7 +40,10 @@ export function ProjectPageContent({ project }: { project: Project }) {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="md:col-span-8"
             >
-              <div className="flex flex-wrap gap-2 mb-4">
+              <h1 className="text-balance font-serif text-4xl font-normal leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+                {project.title}
+              </h1>
+              <div className="flex flex-wrap gap-2 mt-4">
                 <span className="relative rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground">
                   <span
                     className="pointer-events-none absolute inset-0 rounded-full"
@@ -68,9 +71,6 @@ export function ProjectPageContent({ project }: { project: Project }) {
                   {project.year}
                 </span>
               </div>
-              <h1 className="text-balance font-serif text-4xl font-normal leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl">
-                {project.title}
-              </h1>
             </motion.div>
 
             {/* No tags section */}
