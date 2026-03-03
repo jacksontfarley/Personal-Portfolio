@@ -18,7 +18,7 @@ export const projects: Project[] = [
     description:
       "Led the full brand identity and go-to-market strategy for a DTC wellness startup, driving 200% growth in the first quarter.",
     tags: ["Brand Identity", "GTM Strategy", "Content"],
-    image: "/images/project-1.jpg",
+    image: "/images/CTCM.png",
     year: "2025",
     longDescription:
       "Medicine Cabinet Cleanout was a DTC wellness initiative entering a crowded market with zero brand recognition. I led the full brand identity development and go-to-market strategy from the ground up, crafting a positioning rooted in authenticity and accessible wellness. From naming and visual identity to launch campaign and channel strategy, every touchpoint was designed to cut through the noise and build genuine connection with the target consumer.",
