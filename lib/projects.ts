@@ -54,7 +54,7 @@ export const projects: Project[] = [
     description:
       "Built a scalable content engine for a luxury fashion house, growing organic traffic 5x and establishing thought leadership.",
     tags: ["SEO", "Storytelling", "Editorial"],
-    image: "/images/project-3.jpg",
+    image: "/images/topgolf.png",
     year: "2024",
     longDescription:
       "Atelier, a luxury fashion house, had world-class products but no scalable content infrastructure. I built their editorial strategy from the ground up -- a content system that blended high-end storytelling with SEO rigor. The result was an engine that consistently produced culturally relevant content, driving organic discovery while maintaining the brand's premium positioning.",
