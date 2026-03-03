@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   title: "Jackson Farley - Marketing Strategist",
   description:
     "Jackson Farley is a marketing strategist crafting compelling brand narratives and driving growth through data-driven campaigns.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export const viewport: Viewport = {
