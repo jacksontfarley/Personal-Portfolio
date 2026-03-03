@@ -7,13 +7,7 @@ export function HeroSection() {
   return (
     <section className="relative flex min-h-[70vh] flex-col justify-center overflow-hidden px-6 py-32">
       {/* Ghosted headshot background */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, delay: 0.2 }}
-        className="pointer-events-none absolute right-[-10%] top-1/2 -translate-y-1/2 w-[70%] max-w-[600px] sm:w-[55%] sm:right-0 md:w-[45%] md:right-[2%]"
-      >
+      <div className="pointer-events-none absolute right-[-10%] top-1/2 -translate-y-1/2 w-[70%] max-w-[600px] sm:w-[55%] sm:right-0 md:w-[45%] md:right-[2%]">
         <Image
           src="/JF_headshot.png"
           alt=""
@@ -22,7 +16,7 @@ export function HeroSection() {
           className="h-auto w-full opacity-[0.10] grayscale"
           priority
         />
-      </motion.div>
+      </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         <div className="flex flex-col gap-8">
