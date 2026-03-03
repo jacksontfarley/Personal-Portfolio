@@ -85,7 +85,7 @@ export function AboutSection() {
             >
               My non-traditional path from elementary education, to B2B client
               success, to CPG brand management gives me 8+ years of unique
-              perspectives, with a red thread of authentic storytelling.
+              experiences, with a red thread of authentic storytelling.
             </motion.p>
 
             <motion.p
