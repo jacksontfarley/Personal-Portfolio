@@ -81,7 +81,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
         className="px-6"
       >
         <div className="mx-auto max-w-6xl">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-secondary">
+          <div className="relative aspect-[16/5] overflow-hidden rounded-xl bg-secondary">
             <Image
               src={project.image}
               alt={project.title}
