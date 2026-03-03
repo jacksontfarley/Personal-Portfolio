@@ -120,7 +120,7 @@ export function AboutSection() {
               className="w-40 lg:w-48"
             >
               <Image
-                src="/NAME.png"
+                src="/NAME2.png"
                 alt="Jackson Farley circular logo"
                 width={200}
                 height={200}
