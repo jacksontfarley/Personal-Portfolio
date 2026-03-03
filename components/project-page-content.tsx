@@ -17,7 +17,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
       <Navigation />
 
       {/* Hero */}
-      <section className="px-6 pt-32 pb-16 md:pt-40 md:pb-24">
+      <section className="px-6 pt-32 pb-8 md:pt-40 md:pb-12">
         <div className="mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
