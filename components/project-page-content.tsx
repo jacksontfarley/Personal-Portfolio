@@ -126,7 +126,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
                 delay: i * 0.05,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="flex flex-col gap-2 sm:flex-row sm:gap-1"
+              className="flex flex-col gap-2 sm:flex-row sm:gap-0"
             >
               {/* Label pill */}
               <div className="flex-shrink-0 sm:w-[30%]">
