@@ -1,5 +1,6 @@
 "use client"
 
+// Navigation component with JF logo and smiley
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
