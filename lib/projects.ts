@@ -120,9 +120,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Retail Shelf Strategy",
-    slug: "retail-shelf-strategy",
-    category: "Trade Marketing",
+    title: "Cyclebar Studio Growth",
+    slug: "cyclebar-studio-growth",
+    category: "Experiential Strategy & Operations",
     description:
       "Developed a data-driven retail merchandising strategy that increased shelf velocity by 60% and secured premium placement across 500+ stores.",
     tags: ["Retail Strategy", "Merchandising", "Analytics"],
@@ -138,9 +138,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "GTM Playbook",
-    slug: "gtm-playbook",
-    category: "Brand Strategy",
+    title: "Photography Portfolio",
+    slug: "photography-portfolio",
+    category: "Visual Storytelling",
     description:
       "Authored a repeatable go-to-market playbook that standardized launch processes and reduced time-to-market by 40% across the portfolio.",
     tags: ["GTM Strategy", "Process Design", "Frameworks"],
