@@ -3,7 +3,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef, useState, useCallback, useEffect } from "react"
 import Image from "next/image"
-import { X } from "lucide-react"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
 
 const skills = [
   {
@@ -157,13 +157,19 @@ function LogoCard({
 function ExpandedModal({
   company,
   onClose,
+  onPrev,
+  onNext,
 }: {
   company: Company
   onClose: () => void
+  onPrev: () => void
+  onNext: () => void
 }) {
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose()
+      if (e.key === "ArrowLeft") onPrev()
+      if (e.key === "ArrowRight") onNext()
     }
     document.body.style.overflow = "hidden"
     window.addEventListener("keydown", handleKey)
@@ -171,7 +177,7 @@ function ExpandedModal({
       document.body.style.overflow = ""
       window.removeEventListener("keydown", handleKey)
     }
-  }, [onClose])
+  }, [onClose, onPrev, onNext])
 
   return (
     <>
@@ -185,8 +191,26 @@ function ExpandedModal({
         onClick={onClose}
       />
 
-      {/* Expanded card */}
+      {/* Expanded card + arrows */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8" onClick={onClose}>
+        {/* Left arrow */}
+        <button
+          onClick={(e) => { e.stopPropagation(); onPrev() }}
+          className="absolute left-2 z-50 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground sm:left-6"
+          aria-label="Previous role"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+
+        {/* Right arrow */}
+        <button
+          onClick={(e) => { e.stopPropagation(); onNext() }}
+          className="absolute right-2 z-50 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground sm:right-6"
+          aria-label="Next role"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+
         <motion.div
           layoutId={`card-${company.name}`}
           transition={expandSpring}
@@ -291,7 +315,7 @@ function ExpandedModal({
             alt=""
             width={40}
             height={40}
-            className="absolute bottom-4 right-4 h-8 w-8 rotate-[8deg] opacity-[0.8]"
+            className="absolute bottom-4 right-4 h-8 w-8 rotate-[8deg] opacity-[0.4]"
           />
         </motion.div>
       </div>
@@ -314,6 +338,18 @@ export function SkillsSection() {
 
   const handleClose = useCallback(() => {
     setSelectedIndex(null)
+  }, [])
+
+  const handlePrev = useCallback(() => {
+    setSelectedIndex((prev) =>
+      prev === null ? null : prev === 0 ? companies.length - 1 : prev - 1
+    )
+  }, [])
+
+  const handleNext = useCallback(() => {
+    setSelectedIndex((prev) =>
+      prev === null ? null : prev === companies.length - 1 ? 0 : prev + 1
+    )
   }, [])
 
   return (
@@ -357,6 +393,8 @@ export function SkillsSection() {
               <ExpandedModal
                 company={companies[selectedIndex]}
                 onClose={handleClose}
+                onPrev={handlePrev}
+                onNext={handleNext}
               />
             )}
           </AnimatePresence>
