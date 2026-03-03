@@ -49,23 +49,46 @@ function ProjectCard({
           />
         </div>
 
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
+            <h3 className="text-xl font-medium tracking-tight text-foreground">
+              {project.title}
+            </h3>
+
+            <div className="flex flex-wrap gap-2">
+              <span className="relative rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground">
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full"
+                  style={{
+                    padding: "1px",
+                    background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                />
                 {project.category}
               </span>
-              <span className="text-xs text-border">{"/"}</span>
-              <span className="text-xs text-muted-foreground">
+              <span className="relative rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground">
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full"
+                  style={{
+                    padding: "1px",
+                    background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                />
                 {project.year}
               </span>
             </div>
-            <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
           </div>
 
-          <h3 className="text-xl font-medium tracking-tight text-foreground">
-            {project.title}
-          </h3>
+          <div className="flex items-center justify-between">
+            <div />
+            <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
+          </div>
         </div>
       </Link>
     </motion.article>

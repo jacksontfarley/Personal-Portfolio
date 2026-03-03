@@ -40,12 +40,31 @@ export function ProjectPageContent({ project }: { project: Project }) {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="md:col-span-8"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="relative rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground">
+                  <span
+                    className="pointer-events-none absolute inset-0 rounded-full"
+                    style={{
+                      padding: "1px",
+                      background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                      maskComposite: "exclude",
+                    }}
+                  />
                   {project.category}
                 </span>
-                <span className="text-xs text-border">{"/"}</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="relative rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground">
+                  <span
+                    className="pointer-events-none absolute inset-0 rounded-full"
+                    style={{
+                      padding: "1px",
+                      background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                      maskComposite: "exclude",
+                    }}
+                  />
                   {project.year}
                 </span>
               </div>
@@ -54,21 +73,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
               </h1>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-wrap gap-2 md:col-span-4 md:items-end md:justify-end"
-            >
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rainbow-border rounded-full bg-secondary px-3 py-1 text-xs text-muted-foreground"
-                >
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
+            {/* No tags section */}
           </div>
         </div>
       </section>
