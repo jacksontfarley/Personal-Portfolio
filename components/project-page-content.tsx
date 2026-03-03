@@ -126,11 +126,11 @@ export function ProjectPageContent({ project }: { project: Project }) {
                 delay: i * 0.05,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="flex flex-col gap-2 sm:flex-row sm:gap-0"
+              className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
             >
-              {/* Label pill */}
-              <div className="flex-shrink-0">
-                <div className="relative inline-flex rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground">
+              {/* Label pill — fixed width so all right containers align */}
+              <div className="w-40 flex-shrink-0">
+                <div className="relative inline-flex w-full items-center justify-center rounded-full bg-background px-5 py-3 text-sm font-medium text-foreground">
                   <span
                     className="pointer-events-none absolute inset-0 rounded-full"
                     style={{
