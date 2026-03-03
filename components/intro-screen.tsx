@@ -10,13 +10,44 @@ export function IntroScreen() {
     offset: ["start start", "end start"],
   })
 
+  // Main content fade / scale
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.95])
   const y = useTransform(scrollYProgress, [0, 0.6], [0, -40])
 
+  // JF. logo: starts large & centered, shrinks and moves to navbar position
+  const logoScale = useTransform(scrollYProgress, [0, 0.5], [3, 1])
+  const logoOpacity = useTransform(scrollYProgress, [0, 0.4, 0.7, 0.8], [0.3, 0.6, 1, 0])
+  const logoX = useTransform(scrollYProgress, [0, 0.5], ["0%", "0%"])
+  const logoY = useTransform(scrollYProgress, [0, 0.5], ["0%", "0%"])
+
   return (
     <section ref={ref} className="relative h-[200vh]">
       <div className="sticky top-0 flex h-svh flex-col overflow-hidden">
+        {/* Scroll-linked JF. logo — fixed, animates from center to top-left */}
+        <motion.div
+          style={{
+            opacity: logoOpacity,
+            scale: logoScale,
+          }}
+          className="pointer-events-none absolute left-6 top-5 z-50"
+        >
+          <span className="text-lg font-medium tracking-tight text-foreground">
+            JF
+            <span
+              style={{
+                backgroundImage:
+                  "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              .
+            </span>
+          </span>
+        </motion.div>
+
         {/* Centered name */}
         <div className="flex flex-1 items-center justify-center">
           <motion.div
@@ -26,13 +57,18 @@ export function IntroScreen() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 1,
+                delay: 0.3,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
             >
               Hello, I&apos;m{" "}
               <span
                 style={{
-                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF, #FF3366)",
+                  backgroundImage:
+                    "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF, #FF3366)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -44,7 +80,7 @@ export function IntroScreen() {
           </motion.div>
         </div>
 
-        {/* Scroll indicator pinned near bottom — wave-bouncing letters */}
+        {/* Scroll indicator — wave-bouncing letters */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -76,14 +112,20 @@ export function IntroScreen() {
           animate={{ opacity: 0.08 }}
           transition={{ delay: 0.8, duration: 2 }}
           className="pointer-events-none absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full blur-[120px]"
-          style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }}
+          style={{
+            background:
+              "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+          }}
         />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.06 }}
           transition={{ delay: 1.2, duration: 2 }}
           className="pointer-events-none absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full blur-[120px]"
-          style={{ background: "linear-gradient(135deg, #0099FF, #CC33FF, #FF3366, #FFCC00)" }}
+          style={{
+            background:
+              "linear-gradient(135deg, #0099FF, #CC33FF, #FF3366, #FFCC00)",
+          }}
         />
       </div>
     </section>
