@@ -1,35 +1,76 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import { ArrowLeft, ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRef } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { projects, type Project } from "@/lib/projects"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
 
+function useActiveRow(rowCount: number) {
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [activeIndex, setActiveIndex] = useState<number>(-1)
+
+  const setRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
+    rowRefs.current[index] = el
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const center = window.innerHeight / 2
+      let closest = -1
+      let closestDist = Infinity
+
+      for (let i = 0; i < rowCount; i++) {
+        const el = rowRefs.current[i]
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        const elCenter = rect.top + rect.height / 2
+        const dist = Math.abs(elCenter - center)
+        if (dist < closestDist) {
+          closestDist = dist
+          closest = i
+        }
+      }
+
+      // Only highlight if the closest row is reasonably near viewport center
+      if (closestDist < window.innerHeight * 0.4) {
+        setActiveIndex(closest)
+      } else {
+        setActiveIndex(-1)
+      }
+    }
+
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [rowCount])
+
+  return { setRef, activeIndex }
+}
+
 function PillRow({
   label,
   content,
   type,
   index,
+  isActive,
+  rowRef,
 }: {
   label: string
   content: string | string[]
   type: "text" | "list"
   index: number
+  isActive: boolean
+  rowRef: (el: HTMLDivElement | null) => void
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, {
-    margin: "-45% 0px -45% 0px",
-  })
-
   return (
     <motion.div
-      ref={ref}
+      ref={rowRef}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
@@ -45,13 +86,13 @@ function PillRow({
         <div
           className="relative inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-medium transition-all duration-500"
           style={{
-            background: isInView ? RAINBOW : "var(--background)",
-            color: isInView ? "#fff" : "var(--foreground)",
+            background: isActive ? RAINBOW : "var(--background)",
+            color: isActive ? "#fff" : "var(--foreground)",
           }}
         >
-          {!isInView && (
+          {!isActive && (
             <span
-              className="pointer-events-none absolute inset-0 rounded-full"
+              className="pointer-events-none absolute inset-0 rounded-full transition-opacity duration-500"
               style={{
                 padding: "1px",
                 background: RAINBOW,
@@ -70,12 +111,12 @@ function PillRow({
         <div
           className="rounded-2xl bg-white px-6 py-4 transition-all duration-500"
           style={{
-            border: isInView ? "1.5px solid transparent" : "1px solid #e2e8f0",
-            backgroundImage: isInView
+            border: isActive ? "1.5px solid transparent" : "1px solid #e2e8f0",
+            backgroundImage: isActive
               ? `linear-gradient(white, white), ${RAINBOW}`
               : "none",
             backgroundOrigin: "border-box",
-            backgroundClip: isInView ? "padding-box, border-box" : "border-box",
+            backgroundClip: isActive ? "padding-box, border-box" : "border-box",
           }}
         >
           {type === "list" && Array.isArray(content) ? (
@@ -106,9 +147,19 @@ function PillRow({
   )
 }
 
+const PILL_ROWS = [
+  { label: "The Objective", key: "objective", type: "text" as const },
+  { label: "The Role", key: "role", type: "text" as const },
+  { label: "The Challenge", key: "challenge", type: "text" as const },
+  { label: "The Actions", key: "actions", type: "list" as const },
+  { label: "The Impact", key: "impact", type: "list" as const },
+  { label: "The Takeaway", key: "takeaway", type: "text" as const },
+]
+
 export function ProjectPageContent({ project }: { project: Project }) {
   const currentIndex = projects.findIndex((p) => p.slug === project.slug)
   const nextProject = projects[(currentIndex + 1) % projects.length]
+  const { setRef, activeIndex } = useActiveRow(PILL_ROWS.length)
 
   return (
     <main className="relative">
@@ -206,20 +257,15 @@ export function ProjectPageContent({ project }: { project: Project }) {
       {/* Content — Pill Row Layout */}
       <section className="px-6 py-12 md:py-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-5">
-          {[
-            { label: "The Objective", content: project.objective, type: "text" as const },
-            { label: "The Role", content: project.role, type: "text" as const },
-            { label: "The Challenge", content: project.challenge, type: "text" as const },
-            { label: "The Actions", content: project.actions, type: "list" as const },
-            { label: "The Impact", content: project.impact, type: "list" as const },
-            { label: "The Takeaway", content: project.takeaway, type: "text" as const },
-          ].map((row, i) => (
+          {PILL_ROWS.map((row, i) => (
             <PillRow
               key={row.label}
               label={row.label}
-              content={row.content}
+              content={project[row.key as keyof Project] as string | string[]}
               type={row.type}
               index={i}
+              isActive={activeIndex === i}
+              rowRef={setRef(i)}
             />
           ))}
 
