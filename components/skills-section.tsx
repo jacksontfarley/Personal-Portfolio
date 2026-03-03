@@ -196,7 +196,7 @@ function ExpandedModal({
         {/* Left arrow */}
         <button
           onClick={(e) => { e.stopPropagation(); onPrev() }}
-          className="absolute left-2 z-50 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground sm:left-6"
+          className="absolute left-0 z-50 -translate-x-16 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground"
           aria-label="Previous role"
         >
           <ChevronLeft className="h-5 w-5" />
@@ -205,7 +205,7 @@ function ExpandedModal({
         {/* Right arrow */}
         <button
           onClick={(e) => { e.stopPropagation(); onNext() }}
-          className="absolute right-2 z-50 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground sm:right-6"
+          className="absolute right-0 z-50 translate-x-16 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground"
           aria-label="Next role"
         >
           <ChevronRight className="h-5 w-5" />
