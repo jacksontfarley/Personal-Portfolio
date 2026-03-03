@@ -105,65 +105,84 @@ export function ProjectPageContent({ project }: { project: Project }) {
         </div>
       </motion.section>
 
-      {/* Content */}
+      {/* Content — Pill Row Layout */}
       <section className="px-6 py-20 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-16 md:grid-cols-12">
-            {/* Description */}
+        <div className="mx-auto flex max-w-6xl flex-col gap-5">
+          {[
+            { label: "The Objective", content: project.objective, type: "text" as const },
+            { label: "The Role", content: project.role, type: "text" as const },
+            { label: "The Challenge", content: project.challenge, type: "text" as const },
+            { label: "The Actions", content: project.actions, type: "list" as const },
+            { label: "The Impact", content: project.impact, type: "list" as const },
+            { label: "The Takeaway", content: project.takeaway, type: "text" as const },
+          ].map((row, i) => (
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              key={row.label}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="md:col-span-7"
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{
+                duration: 0.5,
+                delay: i * 0.05,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="flex flex-col gap-3 sm:flex-row sm:gap-4"
             >
-              <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-                Overview
-              </p>
-              <div
-                className="mt-3 mb-8 h-[2px] w-8 rounded-full"
-                style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }}
-              />
-              <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
-                {project.longDescription}
-              </p>
-            </motion.div>
+              {/* Label pill */}
+              <div className="flex-shrink-0 sm:w-[30%]">
+                <div className="inline-flex rounded-full bg-blue-50/50 px-5 py-3 text-sm font-medium text-foreground">
+                  {row.label}
+                </div>
+              </div>
 
-            {/* Highlights */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="md:col-span-5"
-            >
-              <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-                Key Results
-              </p>
-              <div
-                className="mt-3 mb-8 h-[2px] w-8 rounded-full"
-                style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }}
-              />
-              <ul className="flex flex-col gap-5">
-                {project.highlights.map((highlight, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
-                    className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground"
-                  >
-                    <span
-                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
-                      style={{ background: "linear-gradient(135deg, #FF3366, #CC33FF)" }}
-                    />
-                    {highlight}
-                  </motion.li>
-                ))}
-              </ul>
+              {/* Content pill */}
+              <div className="flex-1">
+                <div className="rounded-2xl border border-slate-200 bg-white px-6 py-4">
+                  {row.type === "list" && Array.isArray(row.content) ? (
+                    <ul className="flex flex-col gap-2.5">
+                      {(row.content as string[]).map((item, j) => (
+                        <li
+                          key={j}
+                          className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground"
+                        >
+                          <span
+                            className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                            style={{
+                              background:
+                                "linear-gradient(135deg, #FF3366, #CC33FF)",
+                            }}
+                          />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {row.content as string}
+                    </p>
+                  )}
+                </div>
+              </div>
             </motion.div>
-          </div>
+          ))}
+
+          {/* Smiley stamp */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex justify-end pt-4"
+          >
+            <Image
+              src="/Smiley.PNG"
+              alt=""
+              width={48}
+              height={48}
+              className="rotate-[15deg] opacity-75"
+              style={{ width: 48, height: 48 }}
+            />
+          </motion.div>
         </div>
       </section>
 

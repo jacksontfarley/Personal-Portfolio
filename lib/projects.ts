@@ -8,6 +8,12 @@ export interface Project {
   year: string
   longDescription: string
   highlights: string[]
+  objective: string
+  role: string
+  challenge: string
+  actions: string[]
+  impact: string[]
+  takeaway: string
 }
 
 export const projects: Project[] = [
@@ -28,6 +34,21 @@ export const projects: Project[] = [
       "Drove 200% revenue growth in the first quarter post-launch",
       "Built a content engine generating 50+ assets per month across platforms",
     ],
+    objective: "Launch a DTC wellness brand from scratch with zero brand recognition, building an identity and go-to-market strategy that could break through a saturated market.",
+    role: "Brand Strategy Lead -- owned end-to-end brand development from naming and visual identity through launch campaign and channel strategy.",
+    challenge: "Entering a crowded wellness category with no existing audience, brand equity, or retail relationships required a positioning rooted in authenticity to earn consumer trust.",
+    actions: [
+      "Developed brand positioning, visual identity, and tone of voice from scratch",
+      "Designed multi-channel GTM strategy spanning social, paid media, and retail",
+      "Built a content engine producing 50+ assets per month across platforms",
+      "Established retail partnerships and DTC infrastructure simultaneously",
+    ],
+    impact: [
+      "200% revenue growth in the first quarter post-launch",
+      "50+ content assets per month fueling consistent brand awareness",
+      "Secured initial retail placement within 90 days of launch",
+    ],
+    takeaway: "Authenticity isn't a buzzword -- it's a strategy. When the brand story is genuine and the execution is rigorous, even zero-awareness brands can earn loyalty fast.",
   },
   {
     title: "Aveeno® Daily Moisturizing Videos",
@@ -46,6 +67,21 @@ export const projects: Project[] = [
       "Built a creative testing framework that improved CTR by 3x",
       "Implemented attribution modeling to connect spend to downstream revenue",
     ],
+    objective: "Scale customer acquisition efficiently while growing monthly revenue from $800K to $2M without sacrificing brand integrity.",
+    role: "Performance Marketing Lead -- designed full-funnel strategy pairing audience segmentation with creative testing at scale.",
+    challenge: "Balancing aggressive growth targets with budget efficiency required a rigorous analytics framework and constant creative optimization.",
+    actions: [
+      "Built deep audience segmentation models for targeted paid campaigns",
+      "Developed creative testing framework improving click-through rates by 3x",
+      "Implemented multi-touch attribution modeling across all paid channels",
+      "Optimized every touchpoint from impression to conversion",
+    ],
+    impact: [
+      "Reduced customer acquisition cost (CAC) by 45% in 6 months",
+      "Scaled monthly revenue from $800K to $2M",
+      "3x improvement in creative click-through rates",
+    ],
+    takeaway: "Performance marketing is a creative discipline. The best results come from pairing data rigor with bold creative experimentation.",
   },
   {
     title: "Topgolf Consumer Retention",
@@ -64,6 +100,21 @@ export const projects: Project[] = [
       "Built thought leadership positioning that earned features in Vogue and WWD",
       "Created a scalable content workflow reducing production time by 60%",
     ],
+    objective: "Build a scalable content engine for a luxury fashion house that drives organic discovery while maintaining premium brand positioning.",
+    role: "Content Strategy Lead -- built editorial infrastructure from the ground up, blending high-end storytelling with SEO rigor.",
+    challenge: "World-class products with no scalable content system meant the brand was invisible in organic search despite strong offline reputation.",
+    actions: [
+      "Built editorial strategy combining luxury storytelling with technical SEO",
+      "Established editorial calendar producing 20+ premium pieces monthly",
+      "Created scalable content workflow reducing production time by 60%",
+      "Developed thought leadership positioning for industry publications",
+    ],
+    impact: [
+      "5x organic traffic growth within 8 months",
+      "Earned features in Vogue and WWD through thought leadership",
+      "60% reduction in content production time via streamlined workflows",
+    ],
+    takeaway: "Premium brands can win at organic discovery without compromising their voice -- the key is treating SEO as a storytelling tool, not a formula.",
   },
   {
     title: "CES Market Research",
@@ -82,6 +133,21 @@ export const projects: Project[] = [
       "Achieved 80% improvement in unaided brand recall post-rebrand",
       "Coordinated rollout across product, marketing, sales, and customer success teams",
     ],
+    objective: "Rebuild brand perception and trust for a fintech company losing ground to competitors with sharper, more modern identities.",
+    role: "Brand Strategist -- led comprehensive rebrand from consumer research through visual identity redesign and coordinated rollout.",
+    challenge: "A stale brand identity was eroding customer trust, while internal stakeholders across product, marketing, and sales needed alignment on the new direction.",
+    actions: [
+      "Conducted consumer research with 500+ respondents to identify perception gaps",
+      "Developed new brand positioning, messaging architecture, and visual system",
+      "Redesigned all customer-facing touchpoints for consistency",
+      "Coordinated rollout across product, marketing, sales, and customer success",
+    ],
+    impact: [
+      "80% improvement in unaided brand recall post-rebrand",
+      "Unified brand experience across all customer touchpoints",
+      "Cross-functional alignment achieved across 4 major departments",
+    ],
+    takeaway: "Rebranding isn't just about new visuals -- it's about rebuilding the internal narrative so every team tells the same story.",
   },
   {
     title: "Uber Eats Role Pilot",
@@ -100,6 +166,21 @@ export const projects: Project[] = [
       "Built influencer partnership program with 50+ creators generating authentic UGC",
       "Social-driven revenue accounted for 35% of total DTC sales within first year",
     ],
+    objective: "Build a social-first brand presence from zero to 100K engaged followers, converting audience growth into measurable DTC revenue.",
+    role: "Social Strategy Lead -- developed community-first approach prioritizing authentic engagement over vanity metrics.",
+    challenge: "A new lifestyle brand with no existing social presence needed to build genuine community in platforms dominated by established competitors.",
+    actions: [
+      "Developed content pillars and editorial calendar driving 8% avg engagement rate",
+      "Built influencer partnership program with 50+ creators generating authentic UGC",
+      "Designed platform-specific strategies for Instagram and TikTok",
+      "Created UGC programs turning customers into brand advocates",
+    ],
+    impact: [
+      "0 to 100K followers across Instagram and TikTok in 6 months",
+      "8% average engagement rate -- 4x industry benchmark",
+      "Social-driven revenue = 35% of total DTC sales within first year",
+    ],
+    takeaway: "Community isn't built through broadcasting -- it's built through listening. The brands that grow fastest are the ones that make their audience feel heard.",
   },
   {
     title: "WWEX Brand Building",
@@ -118,6 +199,21 @@ export const projects: Project[] = [
       "Designed experiential pop-up events in 3 cities driving 10K+ attendees",
       "Built retail launch playbook adopted across 200+ retail partner locations",
     ],
+    objective: "Orchestrate a product launch that generates $5M in first-month revenue by creating a cultural moment, not just a product release.",
+    role: "Integrated Launch Lead -- led cross-channel strategy spanning experiential, PR, digital, and retail partnerships.",
+    challenge: "Launching into a competitive consumer tech market required differentiation through experience, not just features.",
+    actions: [
+      "Designed experiential pop-up events across 3 cities driving 10K+ attendees",
+      "Coordinated PR strategy securing coverage in TechCrunch, The Verge, and Wired",
+      "Built integrated digital campaign supporting pre-launch through post-launch",
+      "Developed retail launch playbook for 200+ partner locations",
+    ],
+    impact: [
+      "$5M in revenue within the first 30 days of launch",
+      "Major press coverage in TechCrunch, The Verge, and Wired",
+      "10K+ attendees across experiential pop-up events in 3 cities",
+    ],
+    takeaway: "The best product launches are cultural moments. When you design for experience first and product second, demand takes care of itself.",
   },
   {
     title: "Cyclebar Studio Growth",
@@ -136,6 +232,21 @@ export const projects: Project[] = [
       "Built shopper insights program analyzing 10K+ in-store purchase behaviors",
       "Designed modular POS toolkit adopted by 3 national retail chains",
     ],
+    objective: "Recapture premium shelf placement and increase velocity across 500+ retail stores by redesigning the in-store brand experience.",
+    role: "Trade Marketing Lead -- led strategy rooted in shopper insights, category management, and retailer collaboration.",
+    challenge: "Aggressive competitors with stronger retail relationships were winning shelf share, requiring a data-driven approach to reclaim premium placement.",
+    actions: [
+      "Built shopper insights program analyzing 10K+ in-store purchase behaviors",
+      "Redesigned shelf layout, POS materials, and promotional cadence",
+      "Developed modular POS toolkit adopted by 3 national retail chains",
+      "Established direct retailer collaboration for premium endcap placement",
+    ],
+    impact: [
+      "60% increase in shelf velocity across top-tier retail partners",
+      "Premium endcap and eye-level placement in 500+ stores",
+      "POS toolkit adopted by 3 national retail chains",
+    ],
+    takeaway: "Retail isn't won in the boardroom -- it's won at the shelf. The brands that invest in understanding the shopper's last 3 feet win the war.",
   },
   {
     title: "Photography Portfolio",
@@ -154,5 +265,20 @@ export const projects: Project[] = [
       "Built cross-functional alignment templates improving stakeholder buy-in by 2x",
       "Designed measurement dashboards tracking launch KPIs in real-time",
     ],
+    objective: "Create a standardized, repeatable go-to-market framework that reduces time-to-market and improves launch consistency across the portfolio.",
+    role: "GTM Strategy Lead -- codified best practices across research, positioning, creative development, channel strategy, and measurement.",
+    challenge: "Multiple product launches with varying degrees of structure led to inconsistent results and misaligned cross-functional teams.",
+    actions: [
+      "Audited past launches to identify patterns in success and failure",
+      "Created modular GTM framework adopted across 12+ product launches",
+      "Built cross-functional alignment templates improving stakeholder buy-in by 2x",
+      "Designed real-time measurement dashboards tracking launch KPIs",
+    ],
+    impact: [
+      "40% reduction in average time-to-market",
+      "Framework adopted across 12+ product launches",
+      "2x improvement in cross-functional stakeholder buy-in",
+    ],
+    takeaway: "Repeatable doesn't mean rigid. The best frameworks are modular -- they give teams a shared language while leaving room for creative adaptation.",
   },
 ]
