@@ -81,21 +81,7 @@ export function IntroScreen() {
           </span>
         </motion.div>
 
-        {/* Decorative rainbow gradient orbs */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.08 }}
-          transition={{ delay: 0.8, duration: 2 }}
-          className="pointer-events-none absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full blur-[120px]"
-          style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }}
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.06 }}
-          transition={{ delay: 1.2, duration: 2 }}
-          className="pointer-events-none absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full blur-[120px]"
-          style={{ background: "linear-gradient(135deg, #0099FF, #CC33FF, #FF3366, #FFCC00)" }}
-        />
+
       </div>
     </section>
   )
