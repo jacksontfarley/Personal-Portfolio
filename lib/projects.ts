@@ -119,4 +119,40 @@ export const projects: Project[] = [
       "Built retail launch playbook adopted across 200+ retail partner locations",
     ],
   },
+  {
+    title: "Retail Shelf Strategy",
+    slug: "retail-shelf-strategy",
+    category: "Trade Marketing",
+    description:
+      "Developed a data-driven retail merchandising strategy that increased shelf velocity by 60% and secured premium placement across 500+ stores.",
+    tags: ["Retail Strategy", "Merchandising", "Analytics"],
+    image: "/images/project-7.jpg",
+    year: "2021",
+    longDescription:
+      "A leading CPG brand was losing shelf share to aggressive competitors with stronger retail relationships. I led the development of a comprehensive trade marketing strategy rooted in shopper insights, category management data, and retailer collaboration. By redesigning the in-store experience -- from shelf layout and POS materials to promotional cadence -- we recaptured premium placement and drove measurable velocity gains across key retail partners.",
+    highlights: [
+      "Increased shelf velocity by 60% across top-tier retail partners",
+      "Secured premium endcap and eye-level placement in 500+ stores",
+      "Built shopper insights program analyzing 10K+ in-store purchase behaviors",
+      "Designed modular POS toolkit adopted by 3 national retail chains",
+    ],
+  },
+  {
+    title: "GTM Playbook",
+    slug: "gtm-playbook",
+    category: "Brand Strategy",
+    description:
+      "Authored a repeatable go-to-market playbook that standardized launch processes and reduced time-to-market by 40% across the portfolio.",
+    tags: ["GTM Strategy", "Process Design", "Frameworks"],
+    image: "/images/project-8.jpg",
+    year: "2020",
+    longDescription:
+      "After leading multiple product launches with varying degrees of structure, I identified the need for a standardized, repeatable go-to-market framework. I built a comprehensive GTM playbook that codified best practices across consumer research, positioning, creative development, channel strategy, and measurement. The playbook became the organization's default launch methodology, reducing time-to-market while improving consistency and cross-functional alignment.",
+    highlights: [
+      "Reduced average time-to-market by 40% through standardized processes",
+      "Created a modular framework adopted across 12+ product launches",
+      "Built cross-functional alignment templates improving stakeholder buy-in by 2x",
+      "Designed measurement dashboards tracking launch KPIs in real-time",
+    ],
+  },
 ]
