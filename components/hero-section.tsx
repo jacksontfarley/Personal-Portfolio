@@ -39,7 +39,7 @@ export function HeroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-balance font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
+              className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl md:max-w-[55%]"
             >
               I solve business challenges with{" "}
               <span
@@ -54,7 +54,8 @@ export function HeroSection() {
               >
                 curiosity
               </span>
-              {" "}and{" "}
+              <br />
+              and{" "}
               <span
                 className="italic"
                 style={{
