@@ -8,7 +8,7 @@ export function HeroSection() {
     <section className="relative flex min-h-[70vh] flex-col justify-center overflow-hidden px-6 py-32">
       {/* Ghosted headshot — no motion wrapper to avoid hydration mismatch */}
       <div
-        className="pointer-events-none absolute right-[-5%] top-[10%] w-[60%] max-w-[600px] sm:top-[8%] sm:w-[55%] sm:right-0 md:w-[45%] md:right-[2%] md:top-[5%]"
+        className="pointer-events-none absolute right-[-5%] top-1/2 -translate-y-1/2 w-[60%] max-w-[600px] sm:w-[50%] sm:right-0 md:w-[42%] md:right-[2%]"
         style={{ opacity: 0.10 }}
       >
         <Image
