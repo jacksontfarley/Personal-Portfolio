@@ -28,7 +28,7 @@ export function IntroScreen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-center gap-0"
+              className="flex flex-col items-center gap-4"
             >
               <p className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
                 Hello, I&apos;m{" "}
@@ -43,16 +43,14 @@ export function IntroScreen() {
                   Jackson Farley
                 </span>
               </p>
-              <div className="flex w-full justify-end">
-                <Image
-                  src="/Smiley.PNG"
-                  alt="Smiley"
-                  width={80}
-                  height={80}
-                  className="h-auto w-auto"
-                  style={{ maxHeight: "1.1em", width: "auto" }}
-                />
-              </div>
+              <Image
+                src="/Smiley.PNG"
+                alt="Smiley"
+                width={80}
+                height={80}
+                className="h-auto w-auto"
+                style={{ maxHeight: "1.2em", width: "auto" }}
+              />
             </motion.div>
           </motion.div>
         </div>
