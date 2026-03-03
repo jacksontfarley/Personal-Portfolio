@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView, AnimatePresence } from "framer-motion"
+import { motion, useInView, LayoutGroup } from "framer-motion"
 import { useRef, useState, useCallback } from "react"
 import Image from "next/image"
 
@@ -117,64 +117,135 @@ const springTransition = {
   mass: 0.8,
 }
 
-function SpotlightCard({
+function BentoCard({
   company,
   index,
   isInView,
-  isActive,
-  isDimmed,
-  onActivate,
-  onDeactivate,
+  isExpanded,
+  onToggle,
 }: {
   company: Company
   index: number
   isInView: boolean
-  isActive: boolean
-  isDimmed: boolean
-  onActivate: () => void
-  onDeactivate: () => void
+  isExpanded: boolean
+  onToggle: () => void
 }) {
-  const isTouchDevice = typeof window !== "undefined" && !window.matchMedia("(hover: hover)").matches
-
   return (
     <motion.div
+      layout
+      layoutId={`bento-${company.name}`}
       initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: isDimmed ? 0.4 : 1, y: 0, scale: isActive ? 1.05 : 1 } : {}}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        opacity: { duration: 0.3 },
-        scale: springTransition,
+        ...springTransition,
+        opacity: { duration: 0.5, delay: 0.06 * index },
         y: { duration: 0.5, delay: 0.06 * index },
+        layout: springTransition,
       }}
-      onMouseEnter={() => !isTouchDevice && onActivate()}
-      onMouseLeave={() => !isTouchDevice && onDeactivate()}
-      onClick={() => isTouchDevice && (isActive ? onDeactivate() : onActivate())}
-      className="relative flex cursor-pointer flex-col items-center gap-3 rounded-2xl border border-border bg-background p-5 shadow-sm"
-      style={
-        isActive
-          ? {
-              boxShadow:
-                "0 0 0 2px transparent, 0 0 20px 2px rgba(255,51,102,0.15), 0 0 40px 4px rgba(0,153,255,0.1)",
-              border: "2px solid transparent",
-              backgroundImage:
-                "linear-gradient(white, white), linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-              backgroundOrigin: "border-box",
-              backgroundClip: "padding-box, border-box",
-            }
-          : {}
-      }
+      onClick={onToggle}
+      onMouseEnter={() => {
+        if (window.matchMedia("(hover: hover)").matches) onToggle()
+      }}
+      onMouseLeave={() => {
+        if (window.matchMedia("(hover: hover)").matches && isExpanded) onToggle()
+      }}
+      className={`relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-background p-5 transition-shadow duration-300 ${
+        isExpanded
+          ? "col-span-2 row-span-2 shadow-xl"
+          : "col-span-1 row-span-1 shadow-sm hover:shadow-md"
+      }`}
     >
-      <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl bg-secondary/50 p-2">
-        <Image
-          src={company.logo}
-          alt={`${company.name} logo`}
-          width={64}
-          height={64}
-          className="h-full w-full object-contain"
-        />
+      {/* Rainbow top accent — visible when expanded */}
+      <motion.div
+        layout="position"
+        className="absolute left-0 right-0 top-0 h-[2px]"
+        style={{
+          background:
+            "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+        }}
+        initial={false}
+        animate={{ opacity: isExpanded ? 1 : 0, scaleX: isExpanded ? 1 : 0 }}
+        transition={springTransition}
+      />
+
+      {/* Collapsed: Logo + name */}
+      <div className={`flex items-center gap-4 ${isExpanded ? "mb-4" : ""}`}>
+        <motion.div
+          layout="position"
+          className="flex h-14 w-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-xl bg-secondary/50 p-2 sm:h-16 sm:w-16"
+        >
+          <Image
+            src={company.logo}
+            alt={`${company.name} logo`}
+            width={64}
+            height={64}
+            className="h-full w-full object-contain"
+          />
+        </motion.div>
+
+        <motion.div layout="position" className="min-w-0 flex-1">
+          <p className="truncate text-sm font-semibold text-foreground sm:text-base">
+            {company.name}
+          </p>
+          {!isExpanded && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="truncate text-xs text-muted-foreground"
+            >
+              {company.role}
+            </motion.p>
+          )}
+        </motion.div>
       </div>
-      <p className="text-center text-xs font-medium text-foreground sm:text-sm">
-        {company.name}
-      </p>
+
+      {/* Expanded: Full details */}
+      {isExpanded && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1, duration: 0.3 }}
+          className="flex flex-col gap-3"
+        >
+          <div>
+            <p
+              className="text-sm font-semibold"
+              style={{
+                width: "fit-content",
+                background:
+                  "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              {company.role}
+            </p>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              {company.period}
+            </p>
+          </div>
+
+          {company.brandLogos && (
+            <div className="flex items-center gap-2">
+              {company.brandLogos.map((logo, i) => (
+                <Image
+                  key={i}
+                  src={logo}
+                  alt="Brand logo"
+                  width={60}
+                  height={20}
+                  className="h-4 max-w-[30%] object-contain grayscale"
+                />
+              ))}
+            </div>
+          )}
+
+          <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm sm:leading-relaxed">
+            {company.description}
+          </p>
+        </motion.div>
+      )}
     </motion.div>
   )
 }
@@ -186,17 +257,11 @@ export function SkillsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
 
-  const handleActivate = useCallback((index: number) => {
-    setActiveIndex(index)
+  const handleToggle = useCallback((index: number) => {
+    setExpandedIndex((prev) => (prev === index ? null : index))
   }, [])
-
-  const handleDeactivate = useCallback(() => {
-    setActiveIndex(null)
-  }, [])
-
-  const activeCompany = activeIndex !== null ? companies[activeIndex] : null
 
   return (
     <section className="px-6 py-32 md:py-40">
@@ -220,96 +285,24 @@ export function SkillsSection() {
             />
           </motion.div>
 
-          {/* Spotlight grid */}
-          <div
-            className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-7"
-            onMouseLeave={handleDeactivate}
-          >
-            {companies.map((company, i) => (
-              <SpotlightCard
-                key={company.name}
-                company={company}
-                index={i}
-                isInView={expInView}
-                isActive={activeIndex === i}
-                isDimmed={activeIndex !== null && activeIndex !== i}
-                onActivate={() => handleActivate(i)}
-                onDeactivate={handleDeactivate}
-              />
-            ))}
-          </div>
-
-          {/* Description box */}
-          <div className="min-h-[120px]">
-            <AnimatePresence mode="wait">
-              {activeCompany ? (
-                <motion.div
-                  key={activeCompany.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative overflow-hidden rounded-2xl border border-border bg-background p-6"
-                >
-                  {/* Rainbow top accent */}
-                  <div
-                    className="absolute left-0 right-0 top-0 h-[2px]"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                    }}
-                  />
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-8">
-                    <div className="flex-shrink-0">
-                      <p
-                        className="text-sm font-semibold"
-                        style={{
-                          width: "fit-content",
-                          background:
-                            "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                          backgroundClip: "text",
-                        }}
-                      >
-                        {activeCompany.role}
-                      </p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">
-                        {activeCompany.period}
-                      </p>
-                      {activeCompany.brandLogos && (
-                        <div className="mt-3 flex items-center gap-2">
-                          {activeCompany.brandLogos.map((logo, i) => (
-                            <Image
-                              key={i}
-                              src={logo}
-                              alt="Brand logo"
-                              width={60}
-                              height={20}
-                              className="h-4 max-w-[30%] object-contain grayscale"
-                            />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {activeCompany.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.p
-                  key="placeholder"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-center text-sm text-muted-foreground/50"
-                >
-                  Hover over a logo to learn more
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
+          <LayoutGroup>
+            <motion.div
+              layout
+              className="grid auto-rows-auto grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
+              transition={springTransition}
+            >
+              {companies.map((company, i) => (
+                <BentoCard
+                  key={company.name}
+                  company={company}
+                  index={i}
+                  isInView={expInView}
+                  isExpanded={expandedIndex === i}
+                  onToggle={() => handleToggle(i)}
+                />
+              ))}
+            </motion.div>
+          </LayoutGroup>
 
           {/* Resume CTA */}
           <motion.div

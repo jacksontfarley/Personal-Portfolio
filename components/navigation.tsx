@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { projects } from "@/lib/projects"
@@ -15,36 +15,21 @@ const navLinks = [
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [visible, setVisible] = useState(false)
   const [workOpen, setWorkOpen] = useState(false)
   const workRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isProjectPage = pathname.startsWith("/work/")
 
-  // Scroll-linked navbar + JF. logo reveal (no React state for scroll tracking)
-  const { scrollY } = useScroll()
-
-  // Navbar: starts fading in once hero is ~50% scrolled, fully visible at 80%
-  const navRawOpacity = useTransform(scrollY, [0, 300, 500], [0, 0, 1])
-  const navRawY = useTransform(scrollY, [0, 300, 500], [-20, -20, 0])
-
-  // JF. logo: hidden at start, slides up from below once hero is ~50% off-screen
-  const logoRawOpacity = useTransform(scrollY, [300, 500], [0, 1])
-  const logoRawY = useTransform(scrollY, [300, 500], [12, 0])
-
-  // Smooth everything with springs to eliminate jitter
-  const springConfig = { stiffness: 120, damping: 25, restDelta: 0.001 }
-  const navOpacity = useSpring(navRawOpacity, springConfig)
-  const navY = useSpring(navRawY, springConfig)
-  const logoOpacity = useSpring(logoRawOpacity, springConfig)
-  const logoY = useSpring(logoRawY, springConfig)
-
   useEffect(() => {
     if (isProjectPage) {
+      setVisible(true)
       setScrolled(true)
       return
     }
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
+      setVisible(window.scrollY > window.innerHeight * 0.8)
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -75,37 +60,33 @@ export function Navigation() {
   return (
     <>
       <motion.header
-        style={isProjectPage ? {} : { y: navY, opacity: navOpacity }}
-        initial={isProjectPage ? { y: 0, opacity: 1 } : false}
-        className={`fixed top-0 left-0 right-0 z-50 transition-[background,border] duration-500 ${
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: visible ? 0 : -20, opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? "bg-background/80 backdrop-blur-xl border-b border-border"
             : "bg-transparent"
         }`}
+        style={{ pointerEvents: visible ? "auto" : "none" }}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <motion.div
-            style={isProjectPage ? {} : { y: logoY, opacity: logoOpacity }}
-            initial={isProjectPage ? { y: 0, opacity: 1 } : false}
-            className="transform-gpu will-change-transform"
+          <Link
+            href="/"
+            className="text-lg font-medium tracking-tight text-foreground"
           >
-            <Link
-              href="/"
-              className="text-lg font-medium tracking-tight text-foreground"
+            JF
+            <span
+              style={{
+                backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
             >
-              JF
-              <span
-                style={{
-                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                .
-              </span>
-            </Link>
-          </motion.div>
+              .
+            </span>
+          </Link>
 
           <div className="hidden items-center gap-10 md:flex">
             {/* About */}
@@ -251,9 +232,9 @@ export function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 overflow-y-auto bg-background pt-24 pb-12 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background md:hidden"
           >
-            <nav className="flex flex-col items-center gap-6 px-6">
+            <nav className="flex flex-col items-center gap-8">
               <motion.a
                 href={isProjectPage ? "/#about" : "#about"}
                 onClick={() => setMobileOpen(false)}
@@ -261,7 +242,7 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0, duration: 0.4 }}
-                className="text-xl font-light tracking-wide text-foreground"
+                className="text-2xl font-light tracking-wide text-foreground"
               >
                 About
               </motion.a>
@@ -272,7 +253,7 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0.06, duration: 0.4 }}
-                className="text-xl font-light tracking-wide text-foreground"
+                className="text-2xl font-light tracking-wide text-foreground"
               >
                 Experience
               </motion.a>
@@ -283,12 +264,12 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0.12, duration: 0.4 }}
-                className="text-xl font-light tracking-wide text-foreground"
+                className="text-2xl font-light tracking-wide text-foreground"
               >
                 Skills
               </motion.a>
 
-              <div className="my-1 h-px w-12 bg-border" />
+              <div className="my-2 h-px w-12 bg-border" />
 
               <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 Work
@@ -304,14 +285,14 @@ export function Navigation() {
                   <Link
                     href={`/work/${project.slug}`}
                     onClick={() => setMobileOpen(false)}
-                    className="text-base font-light tracking-wide text-foreground"
+                    className="text-lg font-light tracking-wide text-foreground"
                   >
                     {project.title}
                   </Link>
                 </motion.div>
               ))}
 
-              <div className="my-1 h-px w-12 bg-border" />
+              <div className="my-2 h-px w-12 bg-border" />
 
               <motion.a
                 href={isProjectPage ? "/#contact" : "#contact"}
@@ -320,7 +301,7 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: (projects.length + 3) * 0.06, duration: 0.4 }}
-                className="text-xl font-light tracking-wide text-foreground"
+                className="text-2xl font-light tracking-wide text-foreground"
               >
                 Contact
               </motion.a>
