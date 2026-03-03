@@ -49,9 +49,20 @@ export function AboutSection() {
               }}
               className="text-pretty font-serif text-2xl leading-relaxed text-foreground md:text-3xl"
             >
-              I&apos;m a brand marketer driven by a passion for making
-              people&apos;s lives better. My approach blends analytics and
-              creativity, translating unique insights into compelling brand
+              I&apos;m a brand marketer driven by a passion for{" "}
+              <span
+                className="italic"
+                style={{
+                  padding: "0 0.1em 0.05em 0",
+                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                making people&apos;s lives better
+              </span>
+              . My approach blends analytics and creativity, translating unique insights into compelling brand
               experiences.
             </motion.p>
 
