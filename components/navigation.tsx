@@ -1,18 +1,11 @@
 "use client"
 
-// Navigation component with JF logo and smiley
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { projects } from "@/lib/projects"
-
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
-]
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
@@ -48,7 +41,6 @@ export function Navigation() {
     }
   }, [mobileOpen])
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (workRef.current && !workRef.current.contains(e.target as Node)) {
@@ -73,15 +65,13 @@ export function Navigation() {
         style={{ pointerEvents: visible ? "auto" : "none" }}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link
-            href="/"
-            className="flex items-center gap-2"
-          >
+          <Link href="/" className="flex items-center gap-2">
             <span className="text-lg font-medium tracking-tight text-foreground">
               JF
               <span
                 style={{
-                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  backgroundImage:
+                    "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -100,34 +90,48 @@ export function Navigation() {
           </Link>
 
           <div className="hidden items-center gap-10 md:flex">
-            {/* About */}
             <a
               href={isProjectPage ? "/#about" : "#about"}
               className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
             >
               About
-              <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+              <span
+                className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                }}
+              />
             </a>
 
-            {/* Experience */}
             <a
               href={isProjectPage ? "/#experience" : "#experience"}
               className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
             >
               Experience
-              <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+              <span
+                className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                }}
+              />
             </a>
 
-            {/* Skills */}
             <a
               href={isProjectPage ? "/#skills" : "#skills"}
               className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
             >
               Skills
-              <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+              <span
+                className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                }}
+              />
             </a>
 
-            {/* Work dropdown — opens on hover */}
             <div
               ref={workRef}
               className="relative"
@@ -140,15 +144,27 @@ export function Navigation() {
               >
                 Work
                 <svg
-                  className={`h-3 w-3 transition-transform duration-200 ${workOpen ? "rotate-180" : ""}`}
+                  className={`h-3 w-3 transition-transform duration-200 ${
+                    workOpen ? "rotate-180" : ""
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
-                <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+                <span
+                  className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  }}
+                />
               </a>
 
               <AnimatePresence>
@@ -160,11 +176,11 @@ export function Navigation() {
                     transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="absolute left-1/2 top-full mt-1 w-56 -translate-x-1/2 overflow-hidden rounded-xl border border-border bg-background/95 pt-2 shadow-lg backdrop-blur-xl"
                   >
-                    {/* Rainbow top accent */}
                     <div
                       className="absolute top-0 left-0 right-0 h-[2px]"
                       style={{
-                        background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                        background:
+                          "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
                       }}
                     />
                     <div className="flex flex-col py-2">
@@ -195,13 +211,18 @@ export function Navigation() {
               </AnimatePresence>
             </div>
 
-            {/* Contact */}
             <a
               href={isProjectPage ? "/#contact" : "#contact"}
               className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
             >
               Contact
-              <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
+              <span
+                className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                }}
+              />
             </a>
           </div>
 
@@ -311,7 +332,10 @@ export function Navigation() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: (projects.length + 3) * 0.06, duration: 0.4 }}
+                transition={{
+                  delay: (projects.length + 3) * 0.06,
+                  duration: 0.4,
+                }}
                 className="text-2xl font-light tracking-wide text-foreground"
               >
                 Contact
