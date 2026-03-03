@@ -36,7 +36,7 @@ export const projects: Project[] = [
     description:
       "Designed and executed a multi-channel acquisition campaign that reduced CAC by 45% while scaling monthly revenue to $2M.",
     tags: ["Paid Media", "Analytics", "CRO"],
-    image: "/images/project-2.jpg",
+    image: "/images/AVO.png",
     year: "2024",
     longDescription:
       "Meridian needed to scale their customer acquisition without burning through budget. I designed a full-funnel performance marketing strategy that paired deep audience segmentation with creative testing at scale. By building a rigorous analytics framework and optimizing every touchpoint from impression to conversion, we achieved dramatic efficiency gains while maintaining quality and brand integrity.",
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     description:
       "Orchestrated a cross-channel product launch for a consumer tech brand, driving $5M in first-month revenue and earning press coverage in major outlets.",
     tags: ["Launch Strategy", "PR", "Experiential"],
-    image: "/images/WWEX.png",
+    image: "/images/wwex2.png",
     year: "2022",
     longDescription:
       "Prism was launching their flagship consumer tech product into a competitive market. I led the integrated product launch strategy spanning experiential activations, PR, digital campaigns, and retail partnerships. The launch was designed as a cultural moment, not just a product release -- combining physical experiences with digital storytelling to create maximum impact at launch and sustained demand post-launch.",
