@@ -90,7 +90,7 @@ export const projects: Project[] = [
     description:
       "Built and launched a social-first brand presence from zero, growing to 100K engaged followers in 6 months with a community-led content strategy.",
     tags: ["Social Strategy", "Community", "Content"],
-    image: "/images/project-5.jpg",
+    image: "/images/UE.png",
     year: "2023",
     longDescription:
       "Vero was a new lifestyle brand with no existing social media presence. I developed a community-first social strategy that prioritized authentic engagement over vanity metrics. From platform selection and content pillars to influencer partnerships and UGC programs, every element was designed to build a genuine, engaged audience that converted into loyal customers.",
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     description:
       "Orchestrated a cross-channel product launch for a consumer tech brand, driving $5M in first-month revenue and earning press coverage in major outlets.",
     tags: ["Launch Strategy", "PR", "Experiential"],
-    image: "/images/project-6.jpg",
+    image: "/images/WWEX.png",
     year: "2022",
     longDescription:
       "Prism was launching their flagship consumer tech product into a competitive market. I led the integrated product launch strategy spanning experiential activations, PR, digital campaigns, and retail partnerships. The launch was designed as a cultural moment, not just a product release -- combining physical experiences with digital storytelling to create maximum impact at launch and sustained demand post-launch.",
@@ -126,7 +126,7 @@ export const projects: Project[] = [
     description:
       "Developed a data-driven retail merchandising strategy that increased shelf velocity by 60% and secured premium placement across 500+ stores.",
     tags: ["Retail Strategy", "Merchandising", "Analytics"],
-    image: "/images/project-7.jpg",
+    image: "/images/CB.png",
     year: "2021",
     longDescription:
       "A leading CPG brand was losing shelf share to aggressive competitors with stronger retail relationships. I led the development of a comprehensive trade marketing strategy rooted in shopper insights, category management data, and retailer collaboration. By redesigning the in-store experience -- from shelf layout and POS materials to promotional cadence -- we recaptured premium placement and drove measurable velocity gains across key retail partners.",
