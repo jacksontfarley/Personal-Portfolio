@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
+import Image from "next/image"
 
 export function IntroScreen() {
   const ref = useRef(null)
@@ -27,7 +28,7 @@ export function IntroScreen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
+              className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl flex items-center justify-center gap-4"
             >
               Hello, I&apos;m{" "}
               <span
@@ -40,6 +41,14 @@ export function IntroScreen() {
               >
                 Jackson Farley
               </span>
+              <Image
+                src="/Smiley.PNG"
+                alt="Smiley"
+                width={80}
+                height={80}
+                className="h-auto w-auto"
+                style={{ maxHeight: "1em", width: "auto" }}
+              />
             </motion.p>
           </motion.div>
         </div>

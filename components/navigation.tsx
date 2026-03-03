@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { projects } from "@/lib/projects"
 
@@ -71,22 +72,33 @@ export function Navigation() {
         style={{ pointerEvents: visible ? "auto" : "none" }}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link
-            href="/"
-            className="text-lg font-medium tracking-tight text-foreground"
-          >
-            JF
-            <span
-              style={{
-                backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+          <div className="flex items-center gap-2">
+            <Link
+              href="/"
+              className="text-lg font-medium tracking-tight text-foreground"
             >
-              .
-            </span>
-          </Link>
+              JF
+              <span
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                .
+              </span>
+            </Link>
+            <Image
+              src="/Smiley.PNG"
+              alt="Smiley"
+              width={24}
+              height={24}
+              className="h-6 w-6"
+            />
+          </div>
+
+          </div>
 
           <div className="hidden items-center gap-10 md:flex">
             {/* About */}
