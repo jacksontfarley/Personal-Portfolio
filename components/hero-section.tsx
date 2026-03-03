@@ -1,25 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
+import { HeroGhostImage } from "@/components/hero-ghost-image"
 
 export function HeroSection() {
   return (
     <section className="relative flex min-h-[70vh] flex-col justify-center overflow-hidden px-6 py-32">
-      {/* Ghosted headshot */}
-      <div
-        className="pointer-events-none absolute right-[-5%] top-1/2 -translate-y-1/2 w-[60%] max-w-[600px] sm:w-[50%] sm:right-0 md:w-[42%] md:right-[2%]"
-        style={{ opacity: 0.1 }}
-      >
-        <Image
-          src="/JF_headshot.png"
-          alt=""
-          width={600}
-          height={600}
-          className="h-auto w-full grayscale"
-          priority
-        />
-      </div>
+      <HeroGhostImage />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         <div className="flex flex-col gap-8">
