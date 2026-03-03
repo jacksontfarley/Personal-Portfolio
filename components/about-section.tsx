@@ -15,7 +15,7 @@ export function AboutSection() {
   const logoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 0.8])
 
   return (
-    <section id="about" className="px-6 py-32 md:py-40" ref={ref}>
+    <section id="about" className="relative px-6 py-32 md:py-40" ref={ref}>
       <div className="mx-auto max-w-6xl">
         {/* Section label */}
         <motion.div
