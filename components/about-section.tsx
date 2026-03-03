@@ -1,18 +1,12 @@
 "use client"
 
-import { motion, useInView, useScroll, useTransform } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import Image from "next/image"
 
 export function AboutSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  })
-  const logoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 0.8])
 
   return (
     <section id="about" className="relative px-6 py-32 md:py-40" ref={ref}>
@@ -118,7 +112,6 @@ export function AboutSection() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.4 }}
-            style={{ scale: logoScale }}
             className="hidden md:col-span-3 md:flex md:items-start md:justify-end md:-mt-16"
           >
             <motion.div
