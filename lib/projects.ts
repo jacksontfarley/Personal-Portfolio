@@ -12,8 +12,8 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Solara Brand Launch",
-    slug: "solara-brand-launch",
+    title: "Medicine Cabinet Cleanout",
+    slug: "medicine-cabinet-cleanout",
     category: "Brand Strategy",
     description:
       "Led the full brand identity and go-to-market strategy for a DTC wellness startup, driving 200% growth in the first quarter.",
@@ -21,7 +21,7 @@ export const projects: Project[] = [
     image: "/images/project-1.jpg",
     year: "2025",
     longDescription:
-      "Solara was a DTC wellness startup entering a crowded market with zero brand recognition. I led the full brand identity development and go-to-market strategy from the ground up, crafting a positioning rooted in authenticity and accessible wellness. From naming and visual identity to launch campaign and channel strategy, every touchpoint was designed to cut through the noise and build genuine connection with the target consumer.",
+      "Medicine Cabinet Cleanout was a DTC wellness initiative entering a crowded market with zero brand recognition. I led the full brand identity development and go-to-market strategy from the ground up, crafting a positioning rooted in authenticity and accessible wellness. From naming and visual identity to launch campaign and channel strategy, every touchpoint was designed to cut through the noise and build genuine connection with the target consumer.",
     highlights: [
       "Developed brand positioning, visual identity, and tone of voice from scratch",
       "Designed and executed multi-channel GTM strategy across social, paid, and retail",
