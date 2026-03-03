@@ -119,7 +119,7 @@ export function AboutSection() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.4 }}
             style={{ scale: logoScale }}
-            className="flex items-center justify-center md:col-span-3 md:items-start md:justify-end md:-mt-16"
+            className="hidden md:col-span-3 md:flex md:items-start md:justify-end md:-mt-16"
           >
             <motion.div
               animate={{ rotate: 360 }}
