@@ -11,7 +11,7 @@ function GhostHeadshot() {
       style={{
         position: "absolute",
         top: "50%",
-        right: "-5%",
+        right: "0%",
         transform: "translateY(-50%)",
         width: "60%",
         maxWidth: "600px",
@@ -36,7 +36,7 @@ export function HeroSection() {
   return (
     <section
       style={{ position: "relative" }}
-      className="flex min-h-[70vh] flex-col justify-center overflow-hidden px-6 py-32"
+      className="flex min-h-[70vh] flex-col justify-center px-6 py-32"
     >
       <GhostHeadshot />
 
