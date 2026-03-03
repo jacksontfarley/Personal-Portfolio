@@ -197,7 +197,12 @@ function ExpandedModal({
         <button
           onClick={(e) => { e.stopPropagation(); onPrev() }}
           className="absolute z-50 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground"
-          style={{ right: "100%", top: "50%", transform: "translateY(-50%) translateX(12px)" }}
+          style={{ 
+            left: "50%", 
+            top: "50%", 
+            transform: "translate(calc(-100% - 12px), -50%)",
+            maxWidth: "calc(50vw - 240px)"
+          }}
           aria-label="Previous role"
         >
           <ChevronLeft className="h-5 w-5" />
@@ -207,7 +212,12 @@ function ExpandedModal({
         <button
           onClick={(e) => { e.stopPropagation(); onNext() }}
           className="absolute z-50 rounded-full bg-background/80 p-2 text-muted-foreground shadow-lg backdrop-blur-sm transition-colors hover:bg-background hover:text-foreground"
-          style={{ left: "100%", top: "50%", transform: "translateY(-50%) translateX(-12px)" }}
+          style={{ 
+            right: "50%", 
+            top: "50%", 
+            transform: "translate(calc(100% + 12px), -50%)",
+            maxWidth: "calc(50vw - 240px)"
+          }}
           aria-label="Next role"
         >
           <ChevronRight className="h-5 w-5" />
