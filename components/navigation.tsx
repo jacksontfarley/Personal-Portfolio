@@ -72,11 +72,11 @@ export function Navigation() {
         style={{ pointerEvents: visible ? "auto" : "none" }}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <div className="flex items-center gap-2">
-            <Link
-              href="/"
-              className="text-lg font-medium tracking-tight text-foreground"
-            >
+          <Link
+            href="/"
+            className="flex items-center gap-2"
+          >
+            <span className="text-lg font-medium tracking-tight text-foreground">
               JF
               <span
                 style={{
@@ -88,7 +88,7 @@ export function Navigation() {
               >
                 .
               </span>
-            </Link>
+            </span>
             <Image
               src="/Smiley.PNG"
               alt="Smiley"
@@ -96,7 +96,7 @@ export function Navigation() {
               height={24}
               className="h-6 w-6"
             />
-          </div>
+          </Link>
 
           <div className="hidden items-center gap-10 md:flex">
             {/* About */}
