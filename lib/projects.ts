@@ -72,7 +72,7 @@ export const projects: Project[] = [
     description:
       "Orchestrated a complete brand overhaul for a fintech company, resulting in 80% improvement in brand recall and customer trust scores.",
     tags: ["Positioning", "Visual Identity", "Research"],
-    image: "/images/ces.png",
+    image: "/images/CES.png",
     year: "2023",
     longDescription:
       "Nova's fintech brand had grown stale and was losing ground to competitors with sharper, more modern identities. I led a comprehensive rebrand that began with deep consumer research and competitive analysis, then moved through strategic repositioning, visual identity redesign, and a coordinated rollout across every customer touchpoint. The goal was to rebuild trust and make the brand feel as innovative as the product.",
