@@ -30,7 +30,7 @@ function ProjectCard({
       className="group"
     >
       <Link href={`/work/${project.slug}`} className="flex flex-col gap-6">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-secondary">
+        <div className="relative aspect-[16/5] overflow-hidden rounded-lg bg-secondary">
           <Image
             src={project.image}
             alt={project.title}
@@ -66,21 +66,6 @@ function ProjectCard({
           <h3 className="text-xl font-medium tracking-tight text-foreground">
             {project.title}
           </h3>
-
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            {project.description}
-          </p>
-
-          <div className="flex flex-wrap gap-2 pt-1">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rainbow-border rounded-full bg-secondary px-3 py-1 text-xs text-muted-foreground"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
         </div>
       </Link>
     </motion.article>

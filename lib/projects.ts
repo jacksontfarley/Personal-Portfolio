@@ -83,4 +83,40 @@ export const projects: Project[] = [
       "Coordinated rollout across product, marketing, sales, and customer success teams",
     ],
   },
+  {
+    title: "Vero Social Launch",
+    slug: "vero-social-launch",
+    category: "Social Media",
+    description:
+      "Built and launched a social-first brand presence from zero, growing to 100K engaged followers in 6 months with a community-led content strategy.",
+    tags: ["Social Strategy", "Community", "Content"],
+    image: "/images/project-5.jpg",
+    year: "2023",
+    longDescription:
+      "Vero was a new lifestyle brand with no existing social media presence. I developed a community-first social strategy that prioritized authentic engagement over vanity metrics. From platform selection and content pillars to influencer partnerships and UGC programs, every element was designed to build a genuine, engaged audience that converted into loyal customers.",
+    highlights: [
+      "Grew from 0 to 100K followers across Instagram and TikTok in 6 months",
+      "Developed content pillars and editorial calendar driving 8% avg engagement rate",
+      "Built influencer partnership program with 50+ creators generating authentic UGC",
+      "Social-driven revenue accounted for 35% of total DTC sales within first year",
+    ],
+  },
+  {
+    title: "Prism Product Launch",
+    slug: "prism-product-launch",
+    category: "Product Marketing",
+    description:
+      "Orchestrated a cross-channel product launch for a consumer tech brand, driving $5M in first-month revenue and earning press coverage in major outlets.",
+    tags: ["Launch Strategy", "PR", "Experiential"],
+    image: "/images/project-6.jpg",
+    year: "2022",
+    longDescription:
+      "Prism was launching their flagship consumer tech product into a competitive market. I led the integrated product launch strategy spanning experiential activations, PR, digital campaigns, and retail partnerships. The launch was designed as a cultural moment, not just a product release -- combining physical experiences with digital storytelling to create maximum impact at launch and sustained demand post-launch.",
+    highlights: [
+      "Generated $5M in revenue within the first 30 days of launch",
+      "Secured press coverage in TechCrunch, The Verge, and Wired",
+      "Designed experiential pop-up events in 3 cities driving 10K+ attendees",
+      "Built retail launch playbook adopted across 200+ retail partner locations",
+    ],
+  },
 ]
