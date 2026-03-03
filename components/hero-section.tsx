@@ -2,6 +2,38 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useState } from "react"
+
+const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
+
+function HeroPill({ label }: { label: string }) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <span
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative inline-flex cursor-default items-center rounded-full px-4 py-2 text-sm transition-colors duration-300"
+      style={{
+        background: hovered ? RAINBOW : "var(--background)",
+        color: hovered ? "#fff" : "var(--foreground)",
+      }}
+    >
+      {!hovered && (
+        <span
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            padding: "1px",
+            background: RAINBOW,
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+          }}
+        />
+      )}
+      {label}
+    </span>
+  )
+}
 
 // GhostHeadshot: no motion wrapper, renders identically on server and client
 function GhostHeadshot() {
@@ -105,22 +137,7 @@ export function HeroSection() {
               "Pop Culture Enthusiast",
               "Fun to Be Around",
             ].map((label) => (
-              <span
-                key={label}
-                className="relative inline-flex items-center rounded-full bg-background px-4 py-2 text-sm text-foreground"
-              >
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-full"
-                  style={{
-                    padding: "1px",
-                    background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
-                  }}
-                />
-                {label}
-              </span>
+              <HeroPill key={label} label={label} />
             ))}
           </motion.div>
 
