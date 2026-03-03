@@ -90,16 +90,7 @@ export function HeroSection() {
             </span>
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg"
-          >
-            Marrying analytical rigor and bold innovation to shake up the status
-            quo and craft strategies that resonate, inspire, and drive growth.
-          </motion.p>
+
         </div>
       </div>
     </section>
