@@ -176,12 +176,10 @@ function PillRow({
 function DockIcon({
   project: p,
   isCurrent,
-  index,
   mouseX,
 }: {
   project: Project
   isCurrent: boolean
-  index: number
   mouseX: ReturnType<typeof useMotionValue<number>>
 }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -189,32 +187,36 @@ function DockIcon({
 
   const distanceFromMouse = useTransform(mouseX, (val: number) => {
     const el = ref.current
-    if (!el) return 200
+    if (!el) return 300
     const rect = el.getBoundingClientRect()
     return val - (rect.left + rect.width / 2)
   })
 
-  // Magnification: hovered = 1.3x, neighbors = 1.1x, rest = 1x
-  const scaleRaw = useTransform(distanceFromMouse, [-120, -60, 0, 60, 120], [1, 1.1, 1.3, 1.1, 1])
-  const scale = useSpring(scaleRaw, { mass: 0.1, stiffness: 200, damping: 15 })
+  // Tight magnification curve: only the icon directly under cursor gets full scale
+  const scaleRaw = useTransform(
+    distanceFromMouse,
+    [-140, -70, 0, 70, 140],
+    [1, 1.1, 1.3, 1.1, 1]
+  )
+  const scale = useSpring(scaleRaw, { mass: 0.08, stiffness: 250, damping: 14 })
 
   return (
     <motion.div
       ref={ref}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative flex flex-col items-center"
-      style={{ zIndex: hovered ? 10 : 1, transformGpu: true } as React.CSSProperties}
+      className="relative flex flex-col items-center will-change-transform"
+      style={{ zIndex: hovered ? 10 : 1 }}
     >
       {/* Floating tooltip */}
       <AnimatePresence>
         {hovered && (
           <motion.div
-            initial={{ opacity: 0, y: 6, scale: 0.95 }}
+            initial={{ opacity: 0, y: 6, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="pointer-events-none absolute -top-11 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground/90 px-3 py-1.5 text-xs font-medium text-background shadow-xl backdrop-blur-sm"
+            exit={{ opacity: 0, y: 4, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 500, damping: 22 }}
+            className="pointer-events-none absolute -top-12 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground/90 px-3 py-1.5 text-xs font-medium text-background shadow-xl backdrop-blur-sm"
           >
             {p.title}
             <span className="absolute -bottom-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 bg-foreground/90" />
@@ -225,20 +227,20 @@ function DockIcon({
       {/* Icon */}
       <Link href={`/work/${p.slug}`}>
         <motion.div
-          className="relative overflow-hidden rounded-xl will-change-transform"
+          className="relative overflow-hidden rounded-2xl will-change-transform"
           style={{
-            width: 52,
-            height: 52,
+            width: 72,
+            height: 72,
             scale,
             transformOrigin: "bottom center",
           }}
         >
           <Image
-            src={p.image}
+            src={p.dockIcon}
             alt={p.title}
             fill
             className="object-cover"
-            sizes="52px"
+            sizes="72px"
           />
         </motion.div>
       </Link>
@@ -250,7 +252,7 @@ function DockIcon({
           style={{
             background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)",
           }}
-          animate={{ opacity: [1, 0.4, 1], scale: [1, 1.3, 1] }}
+          animate={{ opacity: [1, 0.4, 1], scale: [1, 1.4, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
       )}
@@ -263,19 +265,19 @@ function MobileDockIcon({ project: p, isCurrent }: { project: Project; isCurrent
   return (
     <Link
       href={`/work/${p.slug}`}
-      className="flex w-[72px] flex-shrink-0 snap-center flex-col items-center gap-1.5"
+      className="flex w-[76px] flex-shrink-0 snap-center flex-col items-center gap-1.5"
     >
       <div className="relative h-[60px] w-[60px] overflow-hidden rounded-2xl">
-        <Image src={p.image} alt={p.title} fill className="object-cover" sizes="60px" />
+        <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="60px" />
       </div>
-      <p className="max-w-[72px] truncate text-center text-[10px] leading-tight text-muted-foreground">
+      <p className="max-w-[76px] truncate text-center text-[10px] leading-tight text-muted-foreground">
         {p.title}
       </p>
       {isCurrent && (
         <motion.span
           className="block h-1.5 w-1.5 rounded-full"
           style={{ background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)" }}
-          animate={{ opacity: [1, 0.4, 1], scale: [1, 1.3, 1] }}
+          animate={{ opacity: [1, 0.4, 1], scale: [1, 1.4, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
       )}
@@ -285,15 +287,15 @@ function MobileDockIcon({ project: p, isCurrent }: { project: Project; isCurrent
 
 /* ── Project Dock ── */
 function ProjectDock({ currentSlug }: { currentSlug: string }) {
-  const mouseX = useMotionValue(0)
+  const mouseX = useMotionValue(-1000)
 
   return (
     <>
       {/* Desktop dock */}
       <div
-        className="relative hidden items-end gap-3 rounded-2xl px-6 pb-4 pt-6 shadow-xl backdrop-blur-md sm:inline-flex"
+        className="relative hidden w-full max-w-4xl items-end justify-center gap-5 rounded-2xl px-10 pb-5 pt-8 shadow-xl backdrop-blur-md sm:flex"
         style={{
-          background: "rgba(255,255,255,0.6)",
+          background: "rgba(255,255,255,0.55)",
         }}
         onMouseMove={(e) => mouseX.set(e.clientX)}
         onMouseLeave={() => mouseX.set(-1000)}
@@ -310,12 +312,11 @@ function ProjectDock({ currentSlug }: { currentSlug: string }) {
           }}
         />
 
-        {projects.map((p, i) => (
+        {projects.map((p) => (
           <DockIcon
             key={p.slug}
             project={p}
             isCurrent={p.slug === currentSlug}
-            index={i}
             mouseX={mouseX}
           />
         ))}
@@ -489,8 +490,8 @@ export function ProjectPageContent({ project }: { project: Project }) {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center"
           >
-            <p className="mb-8 text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              All Projects
+            <p className="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
+              EXPLORE
             </p>
             <ProjectDock currentSlug={project.slug} />
           </motion.div>

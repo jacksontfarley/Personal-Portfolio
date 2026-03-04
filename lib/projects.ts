@@ -5,6 +5,7 @@ export interface Project {
   description: string
   tags: string[]
   image: string
+  dockIcon: string
   year: string
   longDescription: string
   highlights: string[]
@@ -25,6 +26,7 @@ export const projects: Project[] = [
       "Led the full brand identity and go-to-market strategy for a DTC wellness startup, driving 200% growth in the first quarter.",
     tags: ["Brand Identity", "GTM Strategy", "Content"],
     image: "/images/CTCM.png",
+    dockIcon: "/images/dock/medicine-cabinet.jpg",
     year: "2025",
     longDescription:
       "Medicine Cabinet Cleanout was a DTC wellness initiative entering a crowded market with zero brand recognition. I led the full brand identity development and go-to-market strategy from the ground up, crafting a positioning rooted in authenticity and accessible wellness. From naming and visual identity to launch campaign and channel strategy, every touchpoint was designed to cut through the noise and build genuine connection with the target consumer.",
@@ -70,6 +72,7 @@ export const projects: Project[] = [
       "Designed and executed a multi-channel acquisition campaign that reduced CAC by 45% while scaling monthly revenue to $2M.",
     tags: ["Paid Media", "Analytics", "CRO"],
     image: "/images/AVO.png",
+    dockIcon: "/images/dock/aveeno.jpg",
     year: "2024",
     longDescription:
       "Meridian needed to scale their customer acquisition without burning through budget. I designed a full-funnel performance marketing strategy that paired deep audience segmentation with creative testing at scale. By building a rigorous analytics framework and optimizing every touchpoint from impression to conversion, we achieved dramatic efficiency gains while maintaining quality and brand integrity.",
@@ -104,6 +107,7 @@ export const projects: Project[] = [
       "Built a scalable content engine for a luxury fashion house, growing organic traffic 5x and establishing thought leadership.",
     tags: ["SEO", "Storytelling", "Editorial"],
     image: "/images/topgolf2.png",
+    dockIcon: "/images/dock/topgolf.jpg",
     year: "2024",
     longDescription:
       "Atelier, a luxury fashion house, had world-class products but no scalable content infrastructure. I built their editorial strategy from the ground up -- a content system that blended high-end storytelling with SEO rigor. The result was an engine that consistently produced culturally relevant content, driving organic discovery while maintaining the brand's premium positioning.",
@@ -137,6 +141,7 @@ export const projects: Project[] = [
       "Orchestrated a complete brand overhaul for a fintech company, resulting in 80% improvement in brand recall and customer trust scores.",
     tags: ["Positioning", "Visual Identity", "Research"],
     image: "/images/CES2.png",
+    dockIcon: "/images/dock/ces.jpg",
     year: "2023",
     longDescription:
       "Nova's fintech brand had grown stale and was losing ground to competitors with sharper, more modern identities. I led a comprehensive rebrand that began with deep consumer research and competitive analysis, then moved through strategic repositioning, visual identity redesign, and a coordinated rollout across every customer touchpoint. The goal was to rebuild trust and make the brand feel as innovative as the product.",
@@ -170,6 +175,7 @@ export const projects: Project[] = [
       "Built and launched a social-first brand presence from zero, growing to 100K engaged followers in 6 months with a community-led content strategy.",
     tags: ["Social Strategy", "Community", "Content"],
     image: "/images/UE.png",
+    dockIcon: "/images/dock/uber-eats.jpg",
     year: "2023",
     longDescription:
       "Vero was a new lifestyle brand with no existing social media presence. I developed a community-first social strategy that prioritized authentic engagement over vanity metrics. From platform selection and content pillars to influencer partnerships and UGC programs, every element was designed to build a genuine, engaged audience that converted into loyal customers.",
@@ -203,6 +209,7 @@ export const projects: Project[] = [
       "Orchestrated a cross-channel product launch for a consumer tech brand, driving $5M in first-month revenue and earning press coverage in major outlets.",
     tags: ["Launch Strategy", "PR", "Experiential"],
     image: "/images/wwex2.png",
+    dockIcon: "/images/dock/wwex.jpg",
     year: "2022",
     longDescription:
       "Prism was launching their flagship consumer tech product into a competitive market. I led the integrated product launch strategy spanning experiential activations, PR, digital campaigns, and retail partnerships. The launch was designed as a cultural moment, not just a product release -- combining physical experiences with digital storytelling to create maximum impact at launch and sustained demand post-launch.",
@@ -236,6 +243,7 @@ export const projects: Project[] = [
       "Developed a data-driven retail merchandising strategy that increased shelf velocity by 60% and secured premium placement across 500+ stores.",
     tags: ["Retail Strategy", "Merchandising", "Analytics"],
     image: "/images/CB.png",
+    dockIcon: "/images/dock/cyclebar.jpg",
     year: "2021",
     longDescription:
       "A leading CPG brand was losing shelf share to aggressive competitors with stronger retail relationships. I led the development of a comprehensive trade marketing strategy rooted in shopper insights, category management data, and retailer collaboration. By redesigning the in-store experience -- from shelf layout and POS materials to promotional cadence -- we recaptured premium placement and drove measurable velocity gains across key retail partners.",
@@ -269,6 +277,7 @@ export const projects: Project[] = [
       "Authored a repeatable go-to-market playbook that standardized launch processes and reduced time-to-market by 40% across the portfolio.",
     tags: ["GTM Strategy", "Process Design", "Frameworks"],
     image: "/images/JF pics.png",
+    dockIcon: "/images/dock/just-fund.jpg",
     year: "2020",
     longDescription:
       "After leading multiple product launches with varying degrees of structure, I identified the need for a standardized, repeatable go-to-market framework. I built a comprehensive GTM playbook that codified best practices across consumer research, positioning, creative development, channel strategy, and measurement. The playbook became the organization's default launch methodology, reducing time-to-market while improving consistency and cross-functional alignment.",
