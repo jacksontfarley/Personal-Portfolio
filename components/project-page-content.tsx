@@ -1,200 +1,307 @@
 "use client"
 
-// Force cache bust - v2
-import { ArrowLeft } from "lucide-react"
+import { motion } from "framer-motion"
+import { ArrowLeft, ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRef, useState, useEffect, useCallback } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { projects, type Project } from "@/lib/projects"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
 
-/* ── Pill Row with IntersectionObserver for scroll activation ── */
+function useActiveRow(rowCount: number) {
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [activeIndex, setActiveIndex] = useState<number>(-1)
+
+  const setRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
+    rowRefs.current[index] = el
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const center = window.innerHeight / 2
+      let closest = -1
+      let closestDist = Infinity
+
+      for (let i = 0; i < rowCount; i++) {
+        const el = rowRefs.current[i]
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        const elCenter = rect.top + rect.height / 2
+        const dist = Math.abs(elCenter - center)
+        if (dist < closestDist) {
+          closestDist = dist
+          closest = i
+        }
+      }
+
+      // Only highlight if the closest row is reasonably near viewport center
+      if (closestDist < window.innerHeight * 0.4) {
+        setActiveIndex(closest)
+      } else {
+        setActiveIndex(-1)
+      }
+    }
+
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [rowCount])
+
+  return { setRef, activeIndex }
+}
+
 function PillRow({
   label,
-  children,
+  content,
+  type,
   index,
+  isActive,
+  rowRef,
 }: {
   label: string
-  children: React.ReactNode
+  content: string | string[]
+  type: "text" | "list"
   index: number
+  isActive: boolean
+  rowRef: (el: HTMLDivElement | null) => void
 }) {
-  const rowId = `pill-row-${index}`
-
   return (
-    <div
-      id={rowId}
-      className="pill-row flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
-    >
-      {/* Left pill */}
-      <div className="w-40 flex-shrink-0">
-        <span className="pill-label inline-flex w-full items-center justify-center rounded-full border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-all duration-300">
-          {label}
-        </span>
-      </div>
-      {/* Right content */}
-      <div className="pill-content flex-1 rounded-2xl border border-border bg-white px-6 py-4 transition-all duration-300">
-        {children}
-      </div>
-    </div>
-  )
-}
-
-/* ── Text row ── */
-function TextRow({ label, text, index }: { label: string; text: string; index: number }) {
-  return (
-    <PillRow label={label} index={index}>
-      <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
-    </PillRow>
-  )
-}
-
-/* ── List row ── */
-function ListRow({ label, items, index }: { label: string; items: string[]; index: number }) {
-  return (
-    <PillRow label={label} index={index}>
-      <div className="flex flex-col gap-2.5">
-        {items.map((item, j) => {
-          if (item === "") return <div key={j} className="h-2" />
-          if (/^\d+\.\s/.test(item)) {
-            return (
-              <p key={j} className="text-sm font-semibold leading-relaxed text-foreground">
-                {item}
-              </p>
-            )
-          }
-          const colonIdx = item.indexOf(":")
-          return (
-            <div key={j} className="flex items-start gap-3 pl-5 text-sm leading-relaxed text-muted-foreground">
-              <span
-                className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
-                style={{ background: "linear-gradient(135deg, #FF3366, #CC33FF)" }}
-              />
-              {colonIdx > -1 ? (
-                <span>
-                  <span className="font-semibold text-foreground">{item.slice(0, colonIdx + 1)}</span>
-                  {item.slice(colonIdx + 1)}
-                </span>
-              ) : (
-                item
-              )}
-            </div>
-          )
-        })}
-      </div>
-    </PillRow>
-  )
-}
-
-/* ── Project Card (no images, text only) ── */
-function ProjectCard({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
-  return (
-    <Link
-      href={`/work/${p.slug}`}
-      className={
-        "group relative flex items-center justify-center rounded-xl border p-3 text-center transition-colors duration-150 hover:bg-secondary/50 " +
-        (isCurrent ? "border-transparent" : "border-border bg-white")
-      }
-      style={
-        isCurrent
-          ? {
-              backgroundImage: `linear-gradient(white, white), ${RAINBOW}`,
-              backgroundOrigin: "border-box",
-              backgroundClip: "padding-box, border-box",
-            }
-          : undefined
-      }
-    >
-      <span className="line-clamp-2 text-xs font-medium leading-tight text-muted-foreground group-hover:text-foreground">
-        {p.title}
-      </span>
-    </Link>
-  )
-}
-
-/* ── Scroll Observer Script ── */
-function ScrollObserverScript() {
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
-(function() {
-  if (typeof IntersectionObserver === 'undefined') return;
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      var row = entry.target;
-      if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
-        row.classList.add('pill-active');
-      } else {
-        row.classList.remove('pill-active');
-      }
-    });
-  }, { threshold: [0, 0.4, 1], rootMargin: '-20% 0px -20% 0px' });
-
-  document.querySelectorAll('.pill-row').forEach(function(el) {
-    observer.observe(el);
-  });
-})();
-`,
+    <motion.div
+      ref={rowRef}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.05,
+        ease: [0.22, 1, 0.36, 1],
       }}
-    />
+      className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
+    >
+      {/* Label pill */}
+      <div className="w-40 flex-shrink-0">
+        <div
+          className="relative inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-medium transition-all duration-500"
+          style={{
+            background: isActive ? RAINBOW : "var(--background)",
+            color: isActive ? "#fff" : "var(--foreground)",
+          }}
+        >
+          {!isActive && (
+            <span
+              className="pointer-events-none absolute inset-0 rounded-full transition-opacity duration-500"
+              style={{
+                padding: "1px",
+                background: RAINBOW,
+                WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                WebkitMaskComposite: "xor",
+                maskComposite: "exclude",
+              }}
+            />
+          )}
+          {label}
+        </div>
+      </div>
+
+      {/* Content pill */}
+      <div className="flex-1">
+        <div
+          className="rounded-2xl bg-white px-6 py-4 transition-all duration-500"
+          style={{
+            border: isActive ? "1.5px solid transparent" : "1px solid #e2e8f0",
+            backgroundImage: isActive
+              ? `linear-gradient(white, white), ${RAINBOW}`
+              : "none",
+            backgroundOrigin: "border-box",
+            backgroundClip: isActive ? "padding-box, border-box" : "border-box",
+          }}
+        >
+          {type === "list" && Array.isArray(content) ? (
+            <div className="flex flex-col gap-2.5">
+              {(content as string[]).map((item, j) => {
+                // Empty string = spacer between sections
+                if (item === "") return <div key={j} className="h-2" />
+
+                // Numbered header (e.g. "1. Cultural Arbitrage...")
+                if (/^\d+\.\s/.test(item)) {
+                  return (
+                    <p key={j} className="text-sm font-semibold leading-relaxed text-foreground">
+                      {item}
+                    </p>
+                  )
+                }
+
+                // Regular sub-bullet with bold label before colon
+                const colonIdx = item.indexOf(":")
+                return (
+                  <div
+                    key={j}
+                    className="flex items-start gap-3 pl-5 text-sm leading-relaxed text-muted-foreground"
+                  >
+                    <span
+                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                      style={{
+                        background: "linear-gradient(135deg, #FF3366, #CC33FF)",
+                      }}
+                    />
+                    {colonIdx > -1 ? (
+                      <span>
+                        <span className="font-semibold text-foreground">
+                          {item.slice(0, colonIdx + 1)}
+                        </span>
+                        {item.slice(colonIdx + 1)}
+                      </span>
+                    ) : (
+                      item
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {content as string}
+            </p>
+          )}
+        </div>
+      </div>
+    </motion.div>
   )
 }
+
+const PILL_ROWS = [
+  { label: "Challenge", key: "challenge", type: "text" as const },
+  { label: "Objective", key: "objective", type: "text" as const },
+  { label: "Role", key: "role", type: "text" as const },
+  { label: "Actions", key: "actions", type: "list" as const },
+  { label: "Impact", key: "impact", type: "list" as const },
+  { label: "Takeaway", key: "takeaway", type: "text" as const },
+]
 
 export function ProjectPageContent({ project }: { project: Project }) {
+  const currentIndex = projects.findIndex((p) => p.slug === project.slug)
+  const nextProject = projects[(currentIndex + 1) % projects.length]
+  const { setRef, activeIndex } = useActiveRow(PILL_ROWS.length)
+
   return (
-    <main>
+    <main className="relative">
       <Navigation />
 
       {/* Hero */}
-      <section className="px-6 pb-8 pt-32 md:pb-12 md:pt-40">
+      <section className="px-6 pt-32 pb-8 md:pt-40 md:pb-12">
         <div className="mx-auto max-w-6xl">
-          <Link
-            href="/#work"
-            className="group mb-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-            Back to all work
-          </Link>
+            <Link
+              href="/#work"
+              className="group mb-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+              Back to all work
+            </Link>
+          </motion.div>
 
-          <h1 className="text-balance font-serif text-4xl font-normal leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            {project.title}
-          </h1>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {[project.category, project.year].map((tag) => (
-              <span key={tag} className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground">
-                {tag}
-              </span>
-            ))}
+          <div className="grid gap-10 md:grid-cols-12">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="md:col-span-8"
+            >
+              <h1 className="text-balance font-serif text-4xl font-normal leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+                {project.title}
+              </h1>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <span className="relative rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground">
+                  <span
+                    className="pointer-events-none absolute inset-0 rounded-full"
+                    style={{
+                      padding: "1px",
+                      background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                      maskComposite: "exclude",
+                    }}
+                  />
+                  {project.category}
+                </span>
+                <span className="relative rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground">
+                  <span
+                    className="pointer-events-none absolute inset-0 rounded-full"
+                    style={{
+                      padding: "1px",
+                      background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                      maskComposite: "exclude",
+                    }}
+                  />
+                  {project.year}
+                </span>
+              </div>
+            </motion.div>
+
+            {/* No tags section */}
           </div>
         </div>
       </section>
 
-      {/* Hero image */}
-      <section className="px-6">
+      {/* Image */}
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="px-6"
+      >
         <div className="mx-auto max-w-6xl">
           <div className="relative aspect-[16/5] overflow-hidden rounded-xl bg-secondary">
-            <Image src={project.image} alt={project.title} fill className="object-cover" priority />
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Rainbow bottom line */}
             <div
               className="absolute bottom-0 left-0 right-0 h-[2px]"
-              style={{ background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }}
+              style={{
+                background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+              }}
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Content */}
-      <section className="relative px-6 py-12 md:py-16">
+      {/* Content — Pill Row Layout */}
+      <section className="px-6 py-12 md:py-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-5">
-          <TextRow label="Challenge" text={project.challenge} index={0} />
-          <TextRow label="Objective" text={project.objective} index={1} />
-          <TextRow label="Role" text={project.role} index={2} />
-          <ListRow label="Actions" items={project.actions} index={3} />
-          <ListRow label="Impact" items={project.impact} index={4} />
-          <TextRow label="Takeaway" text={project.takeaway} index={5} />
+          {PILL_ROWS.map((row, i) => (
+            <PillRow
+              key={row.label}
+              label={row.label}
+              content={project[row.key as keyof Project] as string | string[]}
+              type={row.type}
+              index={i}
+              isActive={activeIndex === i}
+              rowRef={setRef(i)}
+            />
+          ))}
 
-          <div className="flex justify-end pt-4">
+          {/* Smiley stamp */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex justify-end pt-4"
+          >
             <Image
               src="/Smiley.PNG"
               alt=""
@@ -203,30 +310,40 @@ export function ProjectPageContent({ project }: { project: Project }) {
               className="rotate-[15deg] opacity-75"
               style={{ width: 48, height: 48 }}
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Other Projects */}
-      <section className="px-6 py-16 md:py-24">
+      {/* Next Project */}
+      <section className="border-t border-border px-6 py-20 md:py-32">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col items-center">
-            <p className="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
-              {"DON'T STOP NOW!"}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
+              Next Project
             </p>
-            <div className="grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-4">
-              {projects.map((p) => (
-                <ProjectCard key={p.slug} project={p} isCurrent={p.slug === project.slug} />
-              ))}
-            </div>
-          </div>
+            <Link
+              href={`/work/${nextProject.slug}`}
+              className="group flex items-center justify-between"
+            >
+              <h2 className="font-serif text-3xl font-normal tracking-tight text-foreground transition-colors duration-300 group-hover:text-muted-foreground sm:text-4xl md:text-5xl">
+                {nextProject.title}
+              </h2>
+              <ArrowUpRight className="h-6 w-6 text-muted-foreground transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-foreground md:h-8 md:w-8" />
+            </Link>
+            <div
+              className="mt-4 h-[2px] w-full rounded-full opacity-30"
+              style={{ background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }}
+            />
+          </motion.div>
         </div>
       </section>
 
       <Footer />
-
-      {/* Inline script for scroll-based pill activation — no React hooks */}
-      <ScrollObserverScript />
     </main>
   )
 }

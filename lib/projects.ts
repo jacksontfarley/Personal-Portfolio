@@ -5,7 +5,6 @@ export interface Project {
   description: string
   tags: string[]
   image: string
-  dockIcon: string
   year: string
   longDescription: string
   highlights: string[]
@@ -26,7 +25,6 @@ export const projects: Project[] = [
       "Led the full brand identity and go-to-market strategy for a DTC wellness startup, driving 200% growth in the first quarter.",
     tags: ["Brand Identity", "GTM Strategy", "Content"],
     image: "/images/CTCM.png",
-    dockIcon: "/images/dock/2.png",
     year: "2025",
     longDescription:
       "Medicine Cabinet Cleanout was a DTC wellness initiative entering a crowded market with zero brand recognition. I led the full brand identity development and go-to-market strategy from the ground up, crafting a positioning rooted in authenticity and accessible wellness. From naming and visual identity to launch campaign and channel strategy, every touchpoint was designed to cut through the noise and build genuine connection with the target consumer.",
@@ -72,7 +70,6 @@ export const projects: Project[] = [
       "Designed and executed a multi-channel acquisition campaign that reduced CAC by 45% while scaling monthly revenue to $2M.",
     tags: ["Paid Media", "Analytics", "CRO"],
     image: "/images/AVO.png",
-    dockIcon: "/images/dock/7.png",
     year: "2024",
     longDescription:
       "Meridian needed to scale their customer acquisition without burning through budget. I designed a full-funnel performance marketing strategy that paired deep audience segmentation with creative testing at scale. By building a rigorous analytics framework and optimizing every touchpoint from impression to conversion, we achieved dramatic efficiency gains while maintaining quality and brand integrity.",
@@ -107,7 +104,6 @@ export const projects: Project[] = [
       "Built a scalable content engine for a luxury fashion house, growing organic traffic 5x and establishing thought leadership.",
     tags: ["SEO", "Storytelling", "Editorial"],
     image: "/images/topgolf2.png",
-    dockIcon: "/images/dock/3.png",
     year: "2024",
     longDescription:
       "Atelier, a luxury fashion house, had world-class products but no scalable content infrastructure. I built their editorial strategy from the ground up -- a content system that blended high-end storytelling with SEO rigor. The result was an engine that consistently produced culturally relevant content, driving organic discovery while maintaining the brand's premium positioning.",
@@ -117,21 +113,21 @@ export const projects: Project[] = [
       "Built thought leadership positioning that earned features in Vogue and WWD",
       "Created a scalable content workflow reducing production time by 60%",
     ],
-    objective: "Analyze global brand positioning and consumer sentiment to identify exactly where the experience was failing to convert one-time players into loyalists. The goal was to deliver a data-backed roadmap for CX improvements and a comprehensive retention strategy supported by robust statistical modeling.",
-    role: "Lead Marketing Research Strategist. As an MBA candidate at SMU, I spearheaded the end-to-end research design and analytical framework for this corporate partnership. I led a team to transform raw data into a strategic narrative for Topgolf's corporate leadership, ensuring that our recommendations were both statistically significant and operationally feasible within the 2-month timeline.",
-    challenge: "Topgolf was operating in a tightening economy where discretionary spending was shrinking and venue traffic was declining. With a surge in specialized entertainment competitors vying for the same \"night out\" budget, the brand reached a critical crossroads: they could no longer rely on novelty to drive growth. They needed to move beyond the \"one-and-done\" visit and decode the exact loyalty triggers that convert a first-time player into a lifetime advocate—and they needed that roadmap in a high-intensity 8-week sprint.",
+    objective: "Build a scalable content engine for a luxury fashion house that drives organic discovery while maintaining premium brand positioning.",
+    role: "Content Strategy Lead -- built editorial infrastructure from the ground up, blending high-end storytelling with SEO rigor.",
+    challenge: "World-class products with no scalable content system meant the brand was invisible in organic search despite strong offline reputation.",
     actions: [
-      "High-Velocity Data Collection: Designed and deployed a comprehensive survey (Screener, Interests, Experience, Intent) that captured 2,880 total respondents in just one week.",
-      "Statistical Modeling: Leveraged Regression Models and Descriptive Statistics to isolate the variables that most strongly predicted a player's intent to return, separating \"noise\" from actionable \"loyalty triggers.\"",
-      "Qualitative Sentiment Synthesis: Conducted deep-dive qualitative analysis on open-ended feedback to identify the \"emotional friction\" experienced by the 9.9% of first-time visitors compared to the 90.1% returning base.",
-      "Persona Segmentation: Developed a \"Needs-Met\" matrix to segment players, allowing Topgolf to tailor experience improvements to specific consumer archetypes.",
+      "Built editorial strategy combining luxury storytelling with technical SEO",
+      "Established editorial calendar producing 20+ premium pieces monthly",
+      "Created scalable content workflow reducing production time by 60%",
+      "Developed thought leadership positioning for industry publications",
     ],
     impact: [
-      "Strategic CX Roadmap: Delivered three major recommendations to Topgolf Corporate focused on systemic improvements to the first-timer journey and overall venue experience.",
-      "Retention Insight: Identified the specific service and experience gaps that caused a \"drop-off\" after the first visit, providing a clear roadmap for the Q3/Q4 retention strategy.",
-      "Massive Data Repository: Provided the brand with a robust repository of sentiment data from nearly 3,000 players, defining their global positioning across key demographics.",
+      "5x organic traffic growth within 8 months",
+      "Earned features in Vogue and WWD through thought leadership",
+      "60% reduction in content production time via streamlined workflows",
     ],
-    takeaway: "In a tightening economy with shrinking traffic, you can't afford a 'one-and-done' customer. By using regression modeling to cut through the noise of a saturated market, we delivered a retention strategy that treated every first visit as the beginning of a lifetime habit. Success wasn't just about finding what was broken—it was about building an 8-week bridge between deep data and a more intuitive, repeatable customer experience.",
+    takeaway: "Premium brands can win at organic discovery without compromising their voice -- the key is treating SEO as a storytelling tool, not a formula.",
   },
   {
     title: "CES Market Research",
@@ -141,32 +137,30 @@ export const projects: Project[] = [
       "Orchestrated a complete brand overhaul for a fintech company, resulting in 80% improvement in brand recall and customer trust scores.",
     tags: ["Positioning", "Visual Identity", "Research"],
     image: "/images/CES2.png",
-    dockIcon: "/images/dock/4.png",
     year: "2023",
     longDescription:
-      "City Electric Supply faced a critical disconnect between corporate brand strategy and branch-level execution. While the company owned six distinct in-house TAMCO brands, corporate leadership lacked a clear pulse on the ground-level drivers and barriers to growth—causing inconsistent performance across 500+ global branches.",
+      "Nova's fintech brand had grown stale and was losing ground to competitors with sharper, more modern identities. I led a comprehensive rebrand that began with deep consumer research and competitive analysis, then moved through strategic repositioning, visual identity redesign, and a coordinated rollout across every customer touchpoint. The goal was to rebuild trust and make the brand feel as innovative as the product.",
     highlights: [
-      "Engineered a 19-question interview protocol across four categories: Brand Sentiment, End-User Experience, Incentives, and Communications",
-      "Executed 51 deep-dive interviews across top and bottom performance quartiles over a six-week sprint",
-      "Synthesized 1,000+ minutes of qualitative feedback into four strategic opportunity pillars",
-      "Created a direct C-suite feedback loop surfacing previously invisible operational problems",
+      "Led consumer research with 500+ respondents to identify brand perception gaps",
+      "Developed new brand positioning, messaging architecture, and visual system",
+      "Achieved 80% improvement in unaided brand recall post-rebrand",
+      "Coordinated rollout across product, marketing, sales, and customer success teams",
     ],
-    objective: "Conduct a comprehensive qualitative audit of the six TAMCO brands—F4P, Tamlite, Centaur, MCG, RPP, and Fusion Lamps—to identify the DNA of high-performing branches, isolate friction points for underperforming ones, and deliver a strategic roadmap to executive leadership to improve the \"last mile\" consumer experience.",
-    role: "Collaborating within a four-person strategic team, I owned the internal system and interview protocol architecture. I specifically designed and managed the engine for our field research—developing the 19-question protocol and the technical framework required to capture, record, and synthesize high-volume qualitative data from 51 branch and district managers.",
-    challenge: "CES faced a significant \"information siloing\" effect: branch managers were dealing with recurring logistical and communication issues that never funneled up to the C-suite. With 500+ global branches operating independently, corporate leadership had no clear pulse on ground-level drivers of success or failure across any of the six TAMCO in-house brands.",
+    objective: "Rebuild brand perception and trust for a fintech company losing ground to competitors with sharper, more modern identities.",
+    role: "Brand Strategist -- led comprehensive rebrand from consumer research through visual identity redesign and coordinated rollout.",
+    challenge: "A stale brand identity was eroding customer trust, while internal stakeholders across product, marketing, and sales needed alignment on the new direction.",
     actions: [
-      "Interview Architecture: Engineered a 19-question protocol categorized into Brand Sentiment, End-User Experience, Incentives, and Communications to ensure standardized data collection across 51 unique sessions.",
-      "The \"Top vs. Bottom\" Audit: Targeted managers from the top and bottom performance quartiles for each of the six brands to isolate the specific environmental factors driving sales success.",
-      "High-Velocity Field Research: Managed the outreach and execution of 51 deep-dive interviews over a six-week sprint, navigating the schedules of 97 total potential respondents.",
-      "The \"4 Pillars\" Synthesis: Synthesized over 1,000 minutes of qualitative feedback to identify four critical opportunity areas: Logistics & Delivery, Communication, Sales Rep Relationships, and Digital/Website Infrastructure.",
+      "Conducted consumer research with 500+ respondents to identify perception gaps",
+      "Developed new brand positioning, messaging architecture, and visual system",
+      "Redesigned all customer-facing touchpoints for consistency",
+      "Coordinated rollout across product, marketing, sales, and customer success",
     ],
     impact: [
-      "C-Suite Channel: Created a direct feedback loop that allowed ground-level operational problems—previously invisible to corporate—to be presented directly to the C-suite.",
-      "Identifying Trust Drivers: Discovered that sales representative frequency was the #1 driver of branch trust, leading to an overhaul of the internal \"Product Education\" program.",
-      "Operational Fixes: Delivered actionable solutions for the \"Communication Gap,\" including the recommendation for a centralized Internal Sales Representative to act as a single point of contact for branch managers.",
-      "Bespoke Brand Strategy: Provided tailored growth recommendations for each of the six in-house brands based on manager-specific expertise and competitor activity.",
+      "80% improvement in unaided brand recall post-rebrand",
+      "Unified brand experience across all customer touchpoints",
+      "Cross-functional alignment achieved across 4 major departments",
     ],
-    takeaway: "The most valuable data often lives in the \"last mile\" of the business. By building a rigorous interview protocol that bridged the gap between ground-level managers and the C-suite, we transformed anecdotal grievances into a unified strategic roadmap. This project proved that in a relationship-heavy industry, listening to the frontline isn't just an HR exercise—it's the ultimate competitive advantage for brand growth.",
+    takeaway: "Rebranding isn't just about new visuals -- it's about rebuilding the internal narrative so every team tells the same story.",
   },
   {
     title: "Uber Eats Role Pilot",
@@ -176,7 +170,6 @@ export const projects: Project[] = [
       "Built and launched a social-first brand presence from zero, growing to 100K engaged followers in 6 months with a community-led content strategy.",
     tags: ["Social Strategy", "Community", "Content"],
     image: "/images/UE.png",
-    dockIcon: "/images/dock/1.png",
     year: "2023",
     longDescription:
       "Vero was a new lifestyle brand with no existing social media presence. I developed a community-first social strategy that prioritized authentic engagement over vanity metrics. From platform selection and content pillars to influencer partnerships and UGC programs, every element was designed to build a genuine, engaged audience that converted into loyal customers.",
@@ -210,7 +203,6 @@ export const projects: Project[] = [
       "Orchestrated a cross-channel product launch for a consumer tech brand, driving $5M in first-month revenue and earning press coverage in major outlets.",
     tags: ["Launch Strategy", "PR", "Experiential"],
     image: "/images/wwex2.png",
-    dockIcon: "/images/dock/8.png",
     year: "2022",
     longDescription:
       "Prism was launching their flagship consumer tech product into a competitive market. I led the integrated product launch strategy spanning experiential activations, PR, digital campaigns, and retail partnerships. The launch was designed as a cultural moment, not just a product release -- combining physical experiences with digital storytelling to create maximum impact at launch and sustained demand post-launch.",
@@ -244,7 +236,6 @@ export const projects: Project[] = [
       "Developed a data-driven retail merchandising strategy that increased shelf velocity by 60% and secured premium placement across 500+ stores.",
     tags: ["Retail Strategy", "Merchandising", "Analytics"],
     image: "/images/CB.png",
-    dockIcon: "/images/dock/5.png",
     year: "2021",
     longDescription:
       "A leading CPG brand was losing shelf share to aggressive competitors with stronger retail relationships. I led the development of a comprehensive trade marketing strategy rooted in shopper insights, category management data, and retailer collaboration. By redesigning the in-store experience -- from shelf layout and POS materials to promotional cadence -- we recaptured premium placement and drove measurable velocity gains across key retail partners.",
@@ -278,7 +269,6 @@ export const projects: Project[] = [
       "Authored a repeatable go-to-market playbook that standardized launch processes and reduced time-to-market by 40% across the portfolio.",
     tags: ["GTM Strategy", "Process Design", "Frameworks"],
     image: "/images/JF pics.png",
-    dockIcon: "/images/dock/6.png",
     year: "2020",
     longDescription:
       "After leading multiple product launches with varying degrees of structure, I identified the need for a standardized, repeatable go-to-market framework. I built a comprehensive GTM playbook that codified best practices across consumer research, positioning, creative development, channel strategy, and measurement. The playbook became the organization's default launch methodology, reducing time-to-market while improving consistency and cross-functional alignment.",
