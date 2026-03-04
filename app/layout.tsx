@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Jackson Farley - Marketing Strategist",
+  title: "Jackson Farley",
   description:
     "Jackson Farley is a marketing strategist crafting compelling brand narratives and driving growth through data-driven campaigns.",
   robots: {
