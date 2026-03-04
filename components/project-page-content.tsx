@@ -73,13 +73,13 @@ function PillRow({
       ref={rowRef}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{
         duration: 0.5,
         delay: index * 0.05,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
+      className="relative flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
     >
       {/* Label pill */}
       <div className="w-40 flex-shrink-0">
@@ -429,7 +429,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
       </motion.section>
 
       {/* Content — Pill Row Layout */}
-      <section className="px-6 py-12 md:py-16">
+      <section className="relative px-6 py-12 md:py-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-5">
           {PILL_ROWS.map((row, i) => (
             <PillRow
