@@ -32,34 +32,9 @@ export function AboutSection() {
 
         {/* Text content + rotating logo */}
         <div className="relative grid items-start gap-8 md:grid-cols-12 md:gap-16">
-          {/* Rotating name logo — first on mobile (order-1), last on desktop (md:order-2) */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="order-1 flex items-center justify-center md:order-2 md:col-span-3 md:items-start md:justify-end md:-mt-16"
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="w-24 sm:w-28 md:w-40 lg:w-48"
-            >
-              <Image
-                src="/NAME2.png"
-                alt="Jackson Farley circular logo"
-                width={200}
-                height={200}
-                className="h-auto w-full"
-              />
-            </motion.div>
-          </motion.div>
+          {/* Text content */}
+          <div className="flex flex-col gap-6 md:col-span-9">
 
-          {/* Text content — second on mobile (order-2), first on desktop (md:order-1) */}
-          <div className="order-2 flex flex-col gap-6 md:order-1 md:col-span-9">
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -133,6 +108,32 @@ export function AboutSection() {
               connection.
             </motion.p>
           </div>
+
+          {/* Rotating name logo — below text on mobile (right-aligned), right column on desktop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="flex items-center justify-end md:col-span-3 md:items-start md:justify-end md:-mt-16"
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="w-24 sm:w-28 md:w-40 lg:w-48"
+            >
+              <Image
+                src="/NAME2.png"
+                alt="Jackson Farley circular logo"
+                width={200}
+                height={200}
+                className="h-auto w-full"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
