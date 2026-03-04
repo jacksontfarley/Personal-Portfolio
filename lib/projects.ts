@@ -83,16 +83,9 @@ export const projects: Project[] = [
     role: "Lead Strategist and Creative Director. I spearheaded the creative rescue mission, managing the transition from strategic pivot to final asset delivery. My role spanned scripting, creative direction, and high-velocity project management, acting as the primary bridge between business necessity and creative execution.",
     challenge: "In Q3 2025, a strategic shift moved national media focus away from Aveeno's core Daily Moisturizing (DM) engine to the Skin Relief platform, under the assumption that Skin Relief would \"halo\" back to the rest of the portfolio. The result was a dual-threat business crisis: Skin Relief sales failed to accelerate, while the core DM business saw a significant deceleration and a loss of retained buyers. By Q1 2026, the brand needed to pivot back to DM immediately, but faced a total creative vacuum: zero assets existed that reflected the brand's recent full-scale packaging restage.",
     actions: [
-      "1. Rapid Asset Architecture",
       "Rapid Asset Architecture: Developed and delivered 14 new video assets and a complete suite of programmatic banners in just 60 days—a process that typically takes 6+ months.",
-      "",
-      "2. High-Efficiency Production",
       "High-Efficiency Production: Orchestrated a high-intensity production schedule, including the filming of two national TV commercials in a single 24-hour shoot.",
-      "",
-      "3. Creative Directing & Scripting",
       "Creative Directing & Scripting: Authored scripts that balanced the brand's legacy equity with its \"new restage\" aesthetic, ensuring the new packaging was the hero of the narrative.",
-      "",
-      "4. Strategic Pivot Management",
       "Strategic Pivot Management: Navigated the internal transition of the national media plan, ensuring alignment between media buying, retail inventory, and creative output.",
     ],
     impact: [
