@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowLeft, ArrowUpRight } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRef, useState, useEffect, useCallback } from "react"
@@ -172,6 +172,138 @@ function PillRow({
   )
 }
 
+function DockItem({
+  project: p,
+  isCurrent,
+  mouseX,
+}: {
+  project: Project
+  isCurrent: boolean
+  mouseX: React.MutableRefObject<number | null>
+}) {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const [hovered, setHovered] = useState(false)
+
+  // Calculate scale based on mouse distance
+  const [scale, setScale] = useState(1)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    let raf: number
+    const update = () => {
+      if (mouseX.current === null) {
+        setScale(1)
+        return
+      }
+      const rect = el.getBoundingClientRect()
+      const center = rect.left + rect.width / 2
+      const dist = Math.abs(mouseX.current - center)
+      const maxDist = 150
+      const minScale = 1
+      const maxScale = 1.45
+      const s = Math.max(minScale, maxScale - (dist / maxDist) * (maxScale - minScale))
+      setScale(s)
+      raf = requestAnimationFrame(update)
+    }
+    raf = requestAnimationFrame(update)
+    return () => cancelAnimationFrame(raf)
+  }, [mouseX])
+
+  return (
+    <Link
+      ref={ref}
+      href={`/work/${p.slug}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative flex flex-col items-center"
+      style={{ zIndex: hovered ? 10 : 1 }}
+    >
+      {/* Project name tooltip */}
+      <div
+        className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2.5 py-1 text-xs text-background shadow-lg transition-all duration-200"
+        style={{
+          opacity: hovered ? 1 : 0,
+          transform: `translateX(-50%) translateY(${hovered ? "0" : "4px"})`,
+        }}
+      >
+        {p.title}
+        <span className="absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-foreground" />
+      </div>
+
+      {/* Icon */}
+      <div
+        className="relative overflow-hidden rounded-xl transition-transform duration-200 ease-out"
+        style={{
+          width: 56,
+          height: 56,
+          transform: `scale(${scale})`,
+          transformOrigin: "bottom center",
+        }}
+      >
+        <Image
+          src={p.image}
+          alt={p.title}
+          fill
+          className="object-cover"
+          sizes="56px"
+        />
+        {/* Rainbow ring for current project */}
+        {isCurrent && (
+          <span
+            className="pointer-events-none absolute inset-0 rounded-xl"
+            style={{
+              padding: "2px",
+              background: RAINBOW,
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+            }}
+          />
+        )}
+      </div>
+
+      {/* Current indicator dot */}
+      {isCurrent && (
+        <span
+          className="mt-1.5 h-1 w-1 rounded-full"
+          style={{ background: RAINBOW }}
+        />
+      )}
+    </Link>
+  )
+}
+
+function ProjectDock({ currentSlug }: { currentSlug: string }) {
+  const mouseX = useRef<number | null>(null)
+
+  return (
+    <div
+      className="relative inline-flex items-end gap-2 rounded-2xl border border-border/60 bg-background/80 px-4 pb-3 pt-5 shadow-lg backdrop-blur-md sm:gap-3 sm:px-6"
+      onMouseMove={(e) => { mouseX.current = e.clientX }}
+      onMouseLeave={() => { mouseX.current = null }}
+    >
+      {/* Rainbow top line */}
+      <div
+        className="absolute inset-x-0 top-0 h-[2px] rounded-t-2xl"
+        style={{
+          background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+        }}
+      />
+
+      {projects.map((p) => (
+        <DockItem
+          key={p.slug}
+          project={p}
+          isCurrent={p.slug === currentSlug}
+          mouseX={mouseX}
+        />
+      ))}
+    </div>
+  )
+}
+
 const PILL_ROWS = [
   { label: "Challenge", key: "challenge", type: "text" as const },
   { label: "Objective", key: "objective", type: "text" as const },
@@ -182,8 +314,6 @@ const PILL_ROWS = [
 ]
 
 export function ProjectPageContent({ project }: { project: Project }) {
-  const currentIndex = projects.findIndex((p) => p.slug === project.slug)
-  const nextProject = projects[(currentIndex + 1) % projects.length]
   const { setRef, activeIndex } = useActiveRow(PILL_ROWS.length)
 
   return (
@@ -314,31 +444,20 @@ export function ProjectPageContent({ project }: { project: Project }) {
         </div>
       </section>
 
-      {/* Next Project */}
-      <section className="border-t border-border px-6 py-20 md:py-32">
+      {/* Project Dock */}
+      <section className="border-t border-border px-6 py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center"
           >
-            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              Next Project
+            <p className="mb-8 text-sm uppercase tracking-[0.3em] text-muted-foreground">
+              All Projects
             </p>
-            <Link
-              href={`/work/${nextProject.slug}`}
-              className="group flex items-center justify-between"
-            >
-              <h2 className="font-serif text-3xl font-normal tracking-tight text-foreground transition-colors duration-300 group-hover:text-muted-foreground sm:text-4xl md:text-5xl">
-                {nextProject.title}
-              </h2>
-              <ArrowUpRight className="h-6 w-6 text-muted-foreground transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-foreground md:h-8 md:w-8" />
-            </Link>
-            <div
-              className="mt-4 h-[2px] w-full rounded-full opacity-30"
-              style={{ background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }}
-            />
+            <ProjectDock currentSlug={project.slug} />
           </motion.div>
         </div>
       </section>
