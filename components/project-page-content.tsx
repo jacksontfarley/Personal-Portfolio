@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -69,17 +69,14 @@ function PillRow({
   rowRef: (el: HTMLDivElement | null) => void
 }) {
   return (
-    <motion.div
+    <div
       ref={rowRef}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.05,
-        ease: [0.22, 1, 0.36, 1],
-      }}
       className="relative flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
+      style={{
+        opacity: 0,
+        transform: "translateY(20px)",
+        animation: `fadeSlideIn 0.5s ${index * 0.05}s ease forwards`,
+      }}
     >
       {/* Label pill */}
       <div className="w-40 flex-shrink-0">
@@ -168,77 +165,55 @@ function PillRow({
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 /* ── Desktop Dock Icon ── */
-function DockIcon({
-  project: p,
-  isCurrent,
-}: {
-  project: Project
-  isCurrent: boolean
-}) {
+function DockIcon({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
   const [hovered, setHovered] = useState(false)
-  const scaleVal = useMotionValue(1)
-  const scale = useSpring(scaleVal, { stiffness: 300, damping: 20, mass: 0.05 })
-
-  useEffect(() => {
-    scaleVal.set(hovered ? 1.3 : 1)
-  }, [hovered, scaleVal])
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative flex flex-col items-center"
-      style={{ zIndex: hovered ? 10 : 1 }}
+      className="group relative flex flex-col items-center"
     >
-      {/* Floating tooltip */}
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 6, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 500, damping: 22 }}
-            className="pointer-events-none absolute -top-12 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground/90 px-3 py-1.5 text-xs font-medium text-background shadow-xl backdrop-blur-sm"
-          >
-            {p.title}
-            <span className="absolute -bottom-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 bg-foreground/90" />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Tooltip */}
+      <div
+        className="pointer-events-none absolute -top-11 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground/90 px-3 py-1.5 text-xs font-medium text-background shadow-lg transition-all duration-150"
+        style={{
+          opacity: hovered ? 1 : 0,
+          transform: `translateX(-50%) translateY(${hovered ? "0px" : "4px"})`,
+        }}
+      >
+        {p.title}
+        <span className="absolute -bottom-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 bg-foreground/90" />
+      </div>
 
       {/* Icon */}
       <Link href={`/work/${p.slug}`}>
-        <motion.div
-          className="relative overflow-hidden rounded-2xl"
+        <div
+          className="relative overflow-hidden rounded-2xl transition-transform duration-200 ease-out"
           style={{
             width: 72,
             height: 72,
-            scale,
+            transform: hovered ? "scale(1.3)" : "scale(1)",
             transformOrigin: "bottom center",
           }}
         >
-          <Image
-            src={p.dockIcon}
-            alt={p.title}
-            fill
-            className="object-cover"
-            sizes="72px"
-          />
-        </motion.div>
+          <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="72px" />
+        </div>
       </Link>
 
-      {/* Pulsing rainbow dot for current project */}
+      {/* Pulsing dot for current project */}
       {isCurrent && (
-        <motion.span
-          className="mt-2 block h-1.5 w-1.5 rounded-full"
-          style={{ background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)" }}
-          animate={{ opacity: [1, 0.4, 1], scale: [1, 1.4, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="mt-2 h-1.5 w-1.5 rounded-full"
+          style={{
+            background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)",
+            animation: "pulse 2s ease-in-out infinite",
+          }}
         />
       )}
     </div>
@@ -248,19 +223,17 @@ function DockIcon({
 /* ── Mobile / Grid Dock Icon ── */
 function GridDockIcon({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
   return (
-    <Link
-      href={`/work/${p.slug}`}
-      className="flex flex-col items-center gap-1.5"
-    >
+    <Link href={`/work/${p.slug}`} className="flex flex-col items-center gap-1.5">
       <div className="relative h-[60px] w-[60px] overflow-hidden rounded-2xl">
         <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="60px" />
       </div>
       {isCurrent && (
-        <motion.span
-          className="block h-1.5 w-1.5 rounded-full"
-          style={{ background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)" }}
-          animate={{ opacity: [1, 0.4, 1], scale: [1, 1.4, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="h-1.5 w-1.5 rounded-full"
+          style={{
+            background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)",
+            animation: "pulse 2s ease-in-out infinite",
+          }}
         />
       )}
     </Link>
