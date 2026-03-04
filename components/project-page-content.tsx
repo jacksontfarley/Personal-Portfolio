@@ -148,12 +148,12 @@ function PillRow({
 }
 
 const PILL_ROWS = [
-  { label: "The Objective", key: "objective", type: "text" as const },
-  { label: "The Role", key: "role", type: "text" as const },
-  { label: "The Challenge", key: "challenge", type: "text" as const },
-  { label: "The Actions", key: "actions", type: "list" as const },
-  { label: "The Impact", key: "impact", type: "list" as const },
-  { label: "The Takeaway", key: "takeaway", type: "text" as const },
+  { label: "Challenge", key: "challenge", type: "text" as const },
+  { label: "Objective", key: "objective", type: "text" as const },
+  { label: "Role", key: "role", type: "text" as const },
+  { label: "Actions", key: "actions", type: "list" as const },
+  { label: "Impact", key: "impact", type: "list" as const },
+  { label: "Takeaway", key: "takeaway", type: "text" as const },
 ]
 
 export function ProjectPageContent({ project }: { project: Project }) {
