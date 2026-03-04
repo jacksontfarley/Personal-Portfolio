@@ -260,17 +260,17 @@ function DockIcon({
   )
 }
 
-/* ── Mobile Dock Icon ── */
-function MobileDockIcon({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
+/* ── Mobile / Grid Dock Icon ── */
+function GridDockIcon({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
   return (
     <Link
       href={`/work/${p.slug}`}
-      className="flex w-[76px] flex-shrink-0 snap-center flex-col items-center gap-1.5"
+      className="flex flex-col items-center gap-1.5"
     >
       <div className="relative h-[60px] w-[60px] overflow-hidden rounded-2xl">
         <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="60px" />
       </div>
-      <p className="max-w-[76px] truncate text-center text-[10px] leading-tight text-muted-foreground">
+      <p className="max-w-[72px] truncate text-center text-[10px] leading-tight text-muted-foreground">
         {p.title}
       </p>
       {isCurrent && (
@@ -291,9 +291,9 @@ function ProjectDock({ currentSlug }: { currentSlug: string }) {
 
   return (
     <>
-      {/* Desktop dock */}
+      {/* Desktop dock (md+): horizontal bar */}
       <div
-        className="relative hidden w-full max-w-4xl items-end justify-center gap-5 rounded-2xl px-10 pb-5 pt-8 shadow-xl backdrop-blur-md sm:flex"
+        className="relative hidden w-full max-w-3xl items-end justify-center gap-6 rounded-2xl px-8 pb-5 pt-8 shadow-xl backdrop-blur-md md:flex"
         style={{
           background: "rgba(255,255,255,0.55)",
         }}
@@ -322,19 +322,27 @@ function ProjectDock({ currentSlug }: { currentSlug: string }) {
         ))}
       </div>
 
-      {/* Mobile carousel */}
+      {/* Mobile / Tablet dock (<md): responsive grid inside glass container */}
       <div
-        className="flex gap-3 overflow-x-auto px-4 pb-2 pt-1 sm:hidden"
-        style={{
-          scrollSnapType: "x mandatory",
-          WebkitOverflowScrolling: "touch",
-          msOverflowStyle: "none",
-          scrollbarWidth: "none",
-        }}
+        className="relative w-full max-w-xs rounded-2xl px-6 py-6 shadow-xl backdrop-blur-md md:hidden"
+        style={{ background: "rgba(255,255,255,0.55)" }}
       >
-        {projects.map((p) => (
-          <MobileDockIcon key={p.slug} project={p} isCurrent={p.slug === currentSlug} />
-        ))}
+        {/* Rainbow border overlay */}
+        <span
+          className="pointer-events-none absolute inset-0 rounded-2xl"
+          style={{
+            padding: "1px",
+            background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+          }}
+        />
+        <div className="grid grid-cols-4 justify-items-center gap-4">
+          {projects.map((p) => (
+            <GridDockIcon key={p.slug} project={p} isCurrent={p.slug === currentSlug} />
+          ))}
+        </div>
       </div>
     </>
   )
@@ -490,9 +498,22 @@ export function ProjectPageContent({ project }: { project: Project }) {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center"
           >
-            <p className="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
-              EXPLORE
-            </p>
+            <span className="mb-8 flex gap-[2px] text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
+              {"DON'T STOP NOW!".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{
+                    duration: 1.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.08,
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </span>
             <ProjectDock currentSlug={project.slug} />
           </motion.div>
         </div>
