@@ -270,9 +270,6 @@ function GridDockIcon({ project: p, isCurrent }: { project: Project; isCurrent: 
       <div className="relative h-[60px] w-[60px] overflow-hidden rounded-2xl">
         <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="60px" />
       </div>
-      <p className="max-w-[72px] truncate text-center text-[10px] leading-tight text-muted-foreground">
-        {p.title}
-      </p>
       {isCurrent && (
         <motion.span
           className="block h-1.5 w-1.5 rounded-full"
@@ -489,7 +486,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
       </section>
 
       {/* Project Dock */}
-      <section className="border-t border-border px-6 py-16 md:py-24">
+      <section className="px-6 py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
