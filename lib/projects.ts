@@ -25,7 +25,7 @@ export const projects: Project[] = [
       "Led the full brand identity and go-to-market strategy for a DTC wellness startup, driving 200% growth in the first quarter.",
     tags: ["Brand Identity", "GTM Strategy", "Content"],
     image: "/images/CTCM.png",
-    year: "2025",
+    year: "2024",
     longDescription:
       "Medicine Cabinet Cleanout was a DTC wellness initiative entering a crowded market with zero brand recognition. I led the full brand identity development and go-to-market strategy from the ground up, crafting a positioning rooted in authenticity and accessible wellness. From naming and visual identity to launch campaign and channel strategy, every touchpoint was designed to cut through the noise and build genuine connection with the target consumer.",
     highlights: [
@@ -70,7 +70,7 @@ export const projects: Project[] = [
       "Designed and executed a multi-channel acquisition campaign that reduced CAC by 45% while scaling monthly revenue to $2M.",
     tags: ["Paid Media", "Analytics", "CRO"],
     image: "/images/AVO.png",
-    year: "2024",
+    year: "2026",
     longDescription:
       "Meridian needed to scale their customer acquisition without burning through budget. I designed a full-funnel performance marketing strategy that paired deep audience segmentation with creative testing at scale. By building a rigorous analytics framework and optimizing every touchpoint from impression to conversion, we achieved dramatic efficiency gains while maintaining quality and brand integrity.",
     highlights: [
@@ -171,7 +171,7 @@ export const projects: Project[] = [
       "Architected and piloted a new Onboarding Specialist role from the ground up to solve silent churn in the Southwest territory, creating a scalable framework now deployed nationally.",
     tags: ["Operational Strategy", "Process Design", "Training"],
     image: "/images/UE.png",
-    year: "2023",
+    year: "2022",
     longDescription:
       "The Southwest territory was experiencing a high rate of \"silent churn\" — restaurants that signed contracts but never processed a single order. This wasn't a sales problem; it was an activation problem. Both AEs and AMs lacked the dedicated time and bandwidth required to guide new partners through the complex setup phase, leaving merchants without the proactive support needed to navigate technical hurdles and menu integration.",
     highlights: [
@@ -205,7 +205,7 @@ export const projects: Project[] = [
       "As the third marketing hire at Worldwide Express, architected a unified brand ecosystem standardizing storytelling across 750+ sales executives and pioneering the company's first social, internal, and sales-enablement content strategies.",
     tags: ["Brand Architecture", "Content Strategy", "Sales Enablement"],
     image: "/images/wwex2.png",
-    year: "2022",
+    year: "2019-2020",
     longDescription:
       "Worldwide Express was in a state of hyper-growth, scaling toward a headcount of 1,500, but the brand's new identity existed primarily as a foundational theory. While the core visual identity had been established, it had never been executed across the company's vital communication channels. As the third marketing hire, the challenge was to take that identity and develop it into a functional ecosystem — standardizing the storytelling for 750+ sales executives and pioneering the company's first-ever social, internal, and sales-enablement content strategies.",
     highlights: [
@@ -238,7 +238,7 @@ export const projects: Project[] = [
       "Served as Lead Instructor and Creative Consultant for one of the Top 5 most successful Cyclebar franchises in the country, architecting talent development systems and sustaining a 90%+ class utilization rate.",
     tags: ["Talent Development", "Operations", "Creative Direction"],
     image: "/images/CB.png",
-    year: "2021",
+    year: "2021-2023",
     longDescription:
       "The role of a Lead Instructor often defaults to basic scheduling and staff management, but at a top-tier national studio, the demands are much higher. The challenge was to balance a high-intensity personal performance — maintaining one of the highest fill rates in the region — with the creative and operational needs of the studio. I took on the responsibility of serving as the primary strategic liaison and creative director, doing the \"extra\" work of talent development and digital branding that many lead roles overlook.",
     highlights: [
