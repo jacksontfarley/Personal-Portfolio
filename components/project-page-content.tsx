@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion"
+import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -176,36 +176,23 @@ function PillRow({
 function DockIcon({
   project: p,
   isCurrent,
-  mouseX,
 }: {
   project: Project
   isCurrent: boolean
-  mouseX: ReturnType<typeof useMotionValue<number>>
 }) {
-  const ref = useRef<HTMLDivElement>(null)
   const [hovered, setHovered] = useState(false)
+  const scaleVal = useMotionValue(1)
+  const scale = useSpring(scaleVal, { stiffness: 300, damping: 20, mass: 0.05 })
 
-  const distanceFromMouse = useTransform(mouseX, (val: number) => {
-    const el = ref.current
-    if (!el) return 300
-    const rect = el.getBoundingClientRect()
-    return val - (rect.left + rect.width / 2)
-  })
-
-  // Tight magnification curve: only the icon directly under cursor gets full scale
-  const scaleRaw = useTransform(
-    distanceFromMouse,
-    [-140, -70, 0, 70, 140],
-    [1, 1.1, 1.3, 1.1, 1]
-  )
-  const scale = useSpring(scaleRaw, { mass: 0.08, stiffness: 250, damping: 14 })
+  useEffect(() => {
+    scaleVal.set(hovered ? 1.3 : 1)
+  }, [hovered, scaleVal])
 
   return (
-    <motion.div
-      ref={ref}
+    <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative flex flex-col items-center will-change-transform"
+      className="relative flex flex-col items-center"
       style={{ zIndex: hovered ? 10 : 1 }}
     >
       {/* Floating tooltip */}
@@ -227,7 +214,7 @@ function DockIcon({
       {/* Icon */}
       <Link href={`/work/${p.slug}`}>
         <motion.div
-          className="relative overflow-hidden rounded-2xl will-change-transform"
+          className="relative overflow-hidden rounded-2xl"
           style={{
             width: 72,
             height: 72,
@@ -249,14 +236,12 @@ function DockIcon({
       {isCurrent && (
         <motion.span
           className="mt-2 block h-1.5 w-1.5 rounded-full"
-          style={{
-            background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)",
-          }}
+          style={{ background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)" }}
           animate={{ opacity: [1, 0.4, 1], scale: [1, 1.4, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
       )}
-    </motion.div>
+    </div>
   )
 }
 
@@ -284,18 +269,12 @@ function GridDockIcon({ project: p, isCurrent }: { project: Project; isCurrent: 
 
 /* ── Project Dock ── */
 function ProjectDock({ currentSlug }: { currentSlug: string }) {
-  const mouseX = useMotionValue(-1000)
-
   return (
     <>
       {/* Desktop dock (md+): horizontal bar */}
       <div
         className="relative hidden w-full max-w-3xl items-end justify-center gap-6 rounded-2xl px-8 pb-5 pt-8 shadow-xl backdrop-blur-md md:flex"
-        style={{
-          background: "rgba(255,255,255,0.55)",
-        }}
-        onMouseMove={(e) => mouseX.set(e.clientX)}
-        onMouseLeave={() => mouseX.set(-1000)}
+        style={{ background: "rgba(255,255,255,0.55)" }}
       >
         {/* Rainbow border overlay */}
         <span
@@ -314,7 +293,6 @@ function ProjectDock({ currentSlug }: { currentSlug: string }) {
             key={p.slug}
             project={p}
             isCurrent={p.slug === currentSlug}
-            mouseX={mouseX}
           />
         ))}
       </div>
