@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -172,135 +172,170 @@ function PillRow({
   )
 }
 
-function DockItem({
+/* ── Desktop Dock Icon ── */
+function DockIcon({
   project: p,
   isCurrent,
+  index,
   mouseX,
 }: {
   project: Project
   isCurrent: boolean
-  mouseX: React.MutableRefObject<number | null>
+  index: number
+  mouseX: ReturnType<typeof useMotionValue<number>>
 }) {
-  const ref = useRef<HTMLAnchorElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [hovered, setHovered] = useState(false)
 
-  // Calculate scale based on mouse distance
-  const [scale, setScale] = useState(1)
-
-  useEffect(() => {
+  const distanceFromMouse = useTransform(mouseX, (val: number) => {
     const el = ref.current
-    if (!el) return
+    if (!el) return 200
+    const rect = el.getBoundingClientRect()
+    return val - (rect.left + rect.width / 2)
+  })
 
-    let raf: number
-    const update = () => {
-      if (mouseX.current === null) {
-        setScale(1)
-        return
-      }
-      const rect = el.getBoundingClientRect()
-      const center = rect.left + rect.width / 2
-      const dist = Math.abs(mouseX.current - center)
-      const maxDist = 150
-      const minScale = 1
-      const maxScale = 1.45
-      const s = Math.max(minScale, maxScale - (dist / maxDist) * (maxScale - minScale))
-      setScale(s)
-      raf = requestAnimationFrame(update)
-    }
-    raf = requestAnimationFrame(update)
-    return () => cancelAnimationFrame(raf)
-  }, [mouseX])
+  // Magnification: hovered = 1.3x, neighbors = 1.1x, rest = 1x
+  const scaleRaw = useTransform(distanceFromMouse, [-120, -60, 0, 60, 120], [1, 1.1, 1.3, 1.1, 1])
+  const scale = useSpring(scaleRaw, { mass: 0.1, stiffness: 200, damping: 15 })
 
   return (
-    <Link
+    <motion.div
       ref={ref}
-      href={`/work/${p.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative flex flex-col items-center"
-      style={{ zIndex: hovered ? 10 : 1 }}
+      style={{ zIndex: hovered ? 10 : 1, transformGpu: true } as React.CSSProperties}
     >
-      {/* Project name tooltip */}
-      <div
-        className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2.5 py-1 text-xs text-background shadow-lg transition-all duration-200"
-        style={{
-          opacity: hovered ? 1 : 0,
-          transform: `translateX(-50%) translateY(${hovered ? "0" : "4px"})`,
-        }}
-      >
-        {p.title}
-        <span className="absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-foreground" />
-      </div>
+      {/* Floating tooltip */}
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 6, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 4, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className="pointer-events-none absolute -top-11 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground/90 px-3 py-1.5 text-xs font-medium text-background shadow-xl backdrop-blur-sm"
+          >
+            {p.title}
+            <span className="absolute -bottom-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 bg-foreground/90" />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Icon */}
-      <div
-        className="relative overflow-hidden rounded-xl transition-transform duration-200 ease-out"
-        style={{
-          width: 56,
-          height: 56,
-          transform: `scale(${scale})`,
-          transformOrigin: "bottom center",
-        }}
-      >
-        <Image
-          src={p.image}
-          alt={p.title}
-          fill
-          className="object-cover"
-          sizes="56px"
-        />
-        {/* Rainbow ring for current project */}
-        {isCurrent && (
-          <span
-            className="pointer-events-none absolute inset-0 rounded-xl"
-            style={{
-              padding: "2px",
-              background: RAINBOW,
-              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-              WebkitMaskComposite: "xor",
-              maskComposite: "exclude",
-            }}
+      <Link href={`/work/${p.slug}`}>
+        <motion.div
+          className="relative overflow-hidden rounded-xl will-change-transform"
+          style={{
+            width: 52,
+            height: 52,
+            scale,
+            transformOrigin: "bottom center",
+          }}
+        >
+          <Image
+            src={p.image}
+            alt={p.title}
+            fill
+            className="object-cover"
+            sizes="52px"
           />
-        )}
-      </div>
+        </motion.div>
+      </Link>
 
-      {/* Current indicator dot */}
+      {/* Pulsing rainbow dot for current project */}
       {isCurrent && (
-        <span
-          className="mt-1.5 h-1 w-1 rounded-full"
-          style={{ background: RAINBOW }}
+        <motion.span
+          className="mt-2 block h-1.5 w-1.5 rounded-full"
+          style={{
+            background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)",
+          }}
+          animate={{ opacity: [1, 0.4, 1], scale: [1, 1.3, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        />
+      )}
+    </motion.div>
+  )
+}
+
+/* ── Mobile Dock Icon ── */
+function MobileDockIcon({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
+  return (
+    <Link
+      href={`/work/${p.slug}`}
+      className="flex w-[72px] flex-shrink-0 snap-center flex-col items-center gap-1.5"
+    >
+      <div className="relative h-[60px] w-[60px] overflow-hidden rounded-2xl">
+        <Image src={p.image} alt={p.title} fill className="object-cover" sizes="60px" />
+      </div>
+      <p className="max-w-[72px] truncate text-center text-[10px] leading-tight text-muted-foreground">
+        {p.title}
+      </p>
+      {isCurrent && (
+        <motion.span
+          className="block h-1.5 w-1.5 rounded-full"
+          style={{ background: "linear-gradient(135deg, #FF3366, #0099FF, #CC33FF)" }}
+          animate={{ opacity: [1, 0.4, 1], scale: [1, 1.3, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
       )}
     </Link>
   )
 }
 
+/* ── Project Dock ── */
 function ProjectDock({ currentSlug }: { currentSlug: string }) {
-  const mouseX = useRef<number | null>(null)
+  const mouseX = useMotionValue(0)
 
   return (
-    <div
-      className="relative inline-flex items-end gap-2 rounded-2xl border border-border/60 bg-background/80 px-4 pb-3 pt-5 shadow-lg backdrop-blur-md sm:gap-3 sm:px-6"
-      onMouseMove={(e) => { mouseX.current = e.clientX }}
-      onMouseLeave={() => { mouseX.current = null }}
-    >
-      {/* Rainbow top line */}
+    <>
+      {/* Desktop dock */}
       <div
-        className="absolute inset-x-0 top-0 h-[2px] rounded-t-2xl"
+        className="relative hidden items-end gap-3 rounded-2xl px-6 pb-4 pt-6 shadow-xl backdrop-blur-md sm:inline-flex"
         style={{
-          background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+          background: "rgba(255,255,255,0.6)",
         }}
-      />
-
-      {projects.map((p) => (
-        <DockItem
-          key={p.slug}
-          project={p}
-          isCurrent={p.slug === currentSlug}
-          mouseX={mouseX}
+        onMouseMove={(e) => mouseX.set(e.clientX)}
+        onMouseLeave={() => mouseX.set(-1000)}
+      >
+        {/* Rainbow border overlay */}
+        <span
+          className="pointer-events-none absolute inset-0 rounded-2xl"
+          style={{
+            padding: "1px",
+            background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+          }}
         />
-      ))}
-    </div>
+
+        {projects.map((p, i) => (
+          <DockIcon
+            key={p.slug}
+            project={p}
+            isCurrent={p.slug === currentSlug}
+            index={i}
+            mouseX={mouseX}
+          />
+        ))}
+      </div>
+
+      {/* Mobile carousel */}
+      <div
+        className="flex gap-3 overflow-x-auto px-4 pb-2 pt-1 sm:hidden"
+        style={{
+          scrollSnapType: "x mandatory",
+          WebkitOverflowScrolling: "touch",
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+        }}
+      >
+        {projects.map((p) => (
+          <MobileDockIcon key={p.slug} project={p} isCurrent={p.slug === currentSlug} />
+        ))}
+      </div>
+    </>
   )
 }
 
