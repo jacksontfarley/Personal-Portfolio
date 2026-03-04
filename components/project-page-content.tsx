@@ -120,22 +120,47 @@ function PillRow({
           }}
         >
           {type === "list" && Array.isArray(content) ? (
-            <ul className="flex flex-col gap-2.5">
-              {(content as string[]).map((item, j) => (
-                <li
-                  key={j}
-                  className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground"
-                >
-                  <span
-                    className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
-                    style={{
-                      background: "linear-gradient(135deg, #FF3366, #CC33FF)",
-                    }}
-                  />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className="flex flex-col gap-2.5">
+              {(content as string[]).map((item, j) => {
+                // Empty string = spacer between sections
+                if (item === "") return <div key={j} className="h-2" />
+
+                // Numbered header (e.g. "1. Cultural Arbitrage...")
+                if (/^\d+\.\s/.test(item)) {
+                  return (
+                    <p key={j} className="text-sm font-semibold leading-relaxed text-foreground">
+                      {item}
+                    </p>
+                  )
+                }
+
+                // Regular sub-bullet with bold label before colon
+                const colonIdx = item.indexOf(":")
+                return (
+                  <div
+                    key={j}
+                    className="flex items-start gap-3 pl-5 text-sm leading-relaxed text-muted-foreground"
+                  >
+                    <span
+                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                      style={{
+                        background: "linear-gradient(135deg, #FF3366, #CC33FF)",
+                      }}
+                    />
+                    {colonIdx > -1 ? (
+                      <span>
+                        <span className="font-semibold text-foreground">
+                          {item.slice(0, colonIdx + 1)}
+                        </span>
+                        {item.slice(colonIdx + 1)}
+                      </span>
+                    ) : (
+                      item
+                    )}
+                  </div>
+                )
+              })}
+            </div>
           ) : (
             <p className="text-sm leading-relaxed text-muted-foreground">
               {content as string}
