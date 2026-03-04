@@ -1,16 +1,17 @@
 "use client"
 
+import type { CSSProperties } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import React, { useRef, useState, useEffect, useCallback } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { projects, type Project } from "@/lib/projects"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
 
-const RAINBOW_BORDER_STYLE: React.CSSProperties = {
+const RAINBOW_BORDER_STYLE: CSSProperties = {
   padding: "1px",
   background: RAINBOW,
   WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
