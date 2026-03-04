@@ -3,7 +3,7 @@
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRef, useState, useEffect, useCallback } from "react"
+import { useRef, useEffect, useCallback } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { projects, type Project } from "@/lib/projects"
@@ -152,41 +152,26 @@ function PillRow({
 
 /* ── Dock Icon (desktop) ── */
 function DockIcon({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
-  const [hovered, setHovered] = useState(false)
   return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="relative flex flex-col items-center"
-      style={{ zIndex: hovered ? 10 : 1 }}
+    <Link
+      href={`/work/${p.slug}`}
+      className="group relative flex flex-col items-center"
     >
-      {/* Tooltip */}
-      <div
-        className="pointer-events-none absolute -top-11 left-1/2 z-20 whitespace-nowrap rounded-lg bg-foreground/90 px-3 py-1.5 text-xs font-medium text-background shadow-lg"
-        style={{
-          opacity: hovered ? 1 : 0,
-          transform: `translateX(-50%) translateY(${hovered ? "0px" : "4px"})`,
-          transition: "opacity 0.15s, transform 0.15s",
-        }}
+      {/* Tooltip — shown via CSS group-hover, no JS state */}
+      <span
+        className="pointer-events-none absolute -top-11 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground/90 px-3 py-1.5 text-xs font-medium text-background shadow-lg opacity-0 translate-y-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-y-0"
       >
         {p.title}
         <span className="absolute -bottom-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 bg-foreground/90" />
-      </div>
+      </span>
 
-      <Link href={`/work/${p.slug}`}>
-        <div
-          className="relative overflow-hidden rounded-2xl"
-          style={{
-            width: 72,
-            height: 72,
-            transform: hovered ? "scale(1.25)" : "scale(1)",
-            transformOrigin: "bottom center",
-            transition: "transform 0.18s cubic-bezier(0.34,1.56,0.64,1)",
-          }}
-        >
-          <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="72px" />
-        </div>
-      </Link>
+      {/* Icon */}
+      <div
+        className="relative overflow-hidden rounded-2xl transition-transform duration-150 ease-out group-hover:scale-125"
+        style={{ width: 72, height: 72, transformOrigin: "bottom center" }}
+      >
+        <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="72px" />
+      </div>
 
       {isCurrent && (
         <div
@@ -194,7 +179,7 @@ function DockIcon({ project: p, isCurrent }: { project: Project; isCurrent: bool
           style={{ background: RAINBOW, animation: "dockPulse 2s ease-in-out infinite" }}
         />
       )}
-    </div>
+    </Link>
   )
 }
 
