@@ -1,5 +1,6 @@
 "use client"
 
+// Force cache bust - v2
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -9,35 +10,50 @@ import { projects, type Project } from "@/lib/projects"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
 
-/* ── Simple content section ── */
-function ContentSection({ label, children }: { label: string; children: React.ReactNode }) {
+/* ── Pill Row with IntersectionObserver for scroll activation ── */
+function PillRow({
+  label,
+  children,
+  index,
+}: {
+  label: string
+  children: React.ReactNode
+  index: number
+}) {
+  const rowId = `pill-row-${index}`
+
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
+    <div
+      id={rowId}
+      className="pill-row flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
+    >
+      {/* Left pill */}
       <div className="w-40 flex-shrink-0">
-        <span className="inline-flex w-full items-center justify-center rounded-full border border-border bg-background px-5 py-3 text-sm font-medium text-foreground">
+        <span className="pill-label inline-flex w-full items-center justify-center rounded-full border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-all duration-300">
           {label}
         </span>
       </div>
-      <div className="flex-1 rounded-2xl border border-border bg-white px-6 py-4">
+      {/* Right content */}
+      <div className="pill-content flex-1 rounded-2xl border border-border bg-white px-6 py-4 transition-all duration-300">
         {children}
       </div>
     </div>
   )
 }
 
-/* ── Text section ── */
-function TextSection({ label, text }: { label: string; text: string }) {
+/* ── Text row ── */
+function TextRow({ label, text, index }: { label: string; text: string; index: number }) {
   return (
-    <ContentSection label={label}>
+    <PillRow label={label} index={index}>
       <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
-    </ContentSection>
+    </PillRow>
   )
 }
 
-/* ── List section ── */
-function ListSection({ label, items }: { label: string; items: string[] }) {
+/* ── List row ── */
+function ListRow({ label, items, index }: { label: string; items: string[]; index: number }) {
   return (
-    <ContentSection label={label}>
+    <PillRow label={label} index={index}>
       <div className="flex flex-col gap-2.5">
         {items.map((item, j) => {
           if (item === "") return <div key={j} className="h-2" />
@@ -67,36 +83,62 @@ function ListSection({ label, items }: { label: string; items: string[] }) {
           )
         })}
       </div>
-    </ContentSection>
+    </PillRow>
   )
 }
 
-/* ── Project Card (simple, no animations) ── */
+/* ── Project Card (no images, text only) ── */
 function ProjectCard({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
   return (
     <Link
       href={`/work/${p.slug}`}
-      className="group relative flex flex-col items-center gap-2 rounded-2xl border bg-white p-4 transition-colors duration-150 hover:bg-secondary/50"
-      style={isCurrent ? {
-        borderColor: "transparent",
-        backgroundImage: `linear-gradient(white, white), ${RAINBOW}`,
-        backgroundOrigin: "border-box",
-        backgroundClip: "padding-box, border-box",
-      } : undefined}
+      className={
+        "group relative flex items-center justify-center rounded-xl border p-3 text-center transition-colors duration-150 hover:bg-secondary/50 " +
+        (isCurrent ? "border-transparent" : "border-border bg-white")
+      }
+      style={
+        isCurrent
+          ? {
+              backgroundImage: `linear-gradient(white, white), ${RAINBOW}`,
+              backgroundOrigin: "border-box",
+              backgroundClip: "padding-box, border-box",
+            }
+          : undefined
+      }
     >
-      <div className="relative h-16 w-16 overflow-hidden rounded-xl">
-        <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="64px" />
-      </div>
-      <p className="max-w-[100px] truncate text-center text-xs font-medium text-muted-foreground group-hover:text-foreground">
+      <span className="line-clamp-2 text-xs font-medium leading-tight text-muted-foreground group-hover:text-foreground">
         {p.title}
-      </p>
-      {isCurrent && (
-        <span
-          className="absolute -top-1 -right-1 h-3 w-3 rounded-full"
-          style={{ background: RAINBOW }}
-        />
-      )}
+      </span>
     </Link>
+  )
+}
+
+/* ── Scroll Observer Script ── */
+function ScrollObserverScript() {
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+(function() {
+  if (typeof IntersectionObserver === 'undefined') return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var row = entry.target;
+      if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+        row.classList.add('pill-active');
+      } else {
+        row.classList.remove('pill-active');
+      }
+    });
+  }, { threshold: [0, 0.4, 1], rootMargin: '-20% 0px -20% 0px' });
+
+  document.querySelectorAll('.pill-row').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+`,
+      }}
+    />
   )
 }
 
@@ -145,12 +187,12 @@ export function ProjectPageContent({ project }: { project: Project }) {
       {/* Content */}
       <section className="relative px-6 py-12 md:py-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-5">
-          <TextSection label="Challenge" text={project.challenge} />
-          <TextSection label="Objective" text={project.objective} />
-          <TextSection label="Role" text={project.role} />
-          <ListSection label="Actions" items={project.actions} />
-          <ListSection label="Impact" items={project.impact} />
-          <TextSection label="Takeaway" text={project.takeaway} />
+          <TextRow label="Challenge" text={project.challenge} index={0} />
+          <TextRow label="Objective" text={project.objective} index={1} />
+          <TextRow label="Role" text={project.role} index={2} />
+          <ListRow label="Actions" items={project.actions} index={3} />
+          <ListRow label="Impact" items={project.impact} index={4} />
+          <TextRow label="Takeaway" text={project.takeaway} index={5} />
 
           <div className="flex justify-end pt-4">
             <Image
@@ -165,14 +207,14 @@ export function ProjectPageContent({ project }: { project: Project }) {
         </div>
       </section>
 
-      {/* Other Projects — simple card grid */}
+      {/* Other Projects */}
       <section className="px-6 py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center">
             <p className="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
               {"DON'T STOP NOW!"}
             </p>
-            <div className="grid w-full max-w-2xl grid-cols-4 gap-3 md:grid-cols-8">
+            <div className="grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-4">
               {projects.map((p) => (
                 <ProjectCard key={p.slug} project={p} isCurrent={p.slug === project.slug} />
               ))}
@@ -182,6 +224,9 @@ export function ProjectPageContent({ project }: { project: Project }) {
       </section>
 
       <Footer />
+
+      {/* Inline script for scroll-based pill activation — no React hooks */}
+      <ScrollObserverScript />
     </main>
   )
 }

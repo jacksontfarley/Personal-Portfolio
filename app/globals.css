@@ -152,6 +152,21 @@
   pointer-events: none;
 }
 
+/* Scroll-activated pill row styles */
+.pill-row.pill-active .pill-label {
+  background: linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+.pill-row.pill-active .pill-content {
+  border-color: transparent !important;
+  box-shadow: inset 0 0 0 1.5px transparent;
+  background-image: linear-gradient(white, white), linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
 ::selection {
   background: rgba(0, 153, 255, 0.2);
 }
