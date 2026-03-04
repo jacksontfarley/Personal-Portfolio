@@ -3,12 +3,20 @@
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRef, useState, useEffect, useCallback } from "react"
+import React, { useRef, useState, useEffect, useCallback } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { projects, type Project } from "@/lib/projects"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
+
+const RAINBOW_BORDER_STYLE: React.CSSProperties = {
+  padding: "1px",
+  background: RAINBOW,
+  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+  WebkitMaskComposite: "xor",
+  maskComposite: "exclude",
+}
 
 /* ── Scroll-based active row ── */
 function useActiveRow(rowCount: number) {
@@ -68,10 +76,6 @@ function PillRow({
     <div
       ref={rowRef}
       className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
-      style={{
-        opacity: 0,
-        animation: `fadeSlideIn 0.5s ${index * 0.06}s ease forwards`,
-      }}
     >
       {/* Label pill */}
       <div className="w-40 flex-shrink-0">
@@ -174,45 +178,9 @@ function DockIcon({ project: p, isCurrent }: { project: Project; isCurrent: bool
       </div>
 
       {isCurrent && (
-        <div
-          className="mt-2 h-1.5 w-1.5 rounded-full"
-          style={{ background: RAINBOW, animation: "dockPulse 2s ease-in-out infinite" }}
-        />
+        <span className="h-1.5 w-1.5 rounded-full" style={{ background: RAINBOW }} />
       )}
     </Link>
-  )
-}
-
-/* ── Dock Icon (mobile grid) ── */
-function GridDockIcon({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
-  return (
-    <Link href={`/work/${p.slug}`} className="flex flex-col items-center gap-1.5">
-      <div className="relative h-[60px] w-[60px] overflow-hidden rounded-2xl">
-        <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="60px" />
-      </div>
-      {isCurrent && (
-        <div
-          className="h-1.5 w-1.5 rounded-full"
-          style={{ background: RAINBOW, animation: "dockPulse 2s ease-in-out infinite" }}
-        />
-      )}
-    </Link>
-  )
-}
-
-/* ── Rainbow border helper ── */
-function RainbowBorder() {
-  return (
-    <span
-      className="pointer-events-none absolute inset-0 rounded-2xl"
-      style={{
-        padding: "1px",
-        background: RAINBOW,
-        WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-        WebkitMaskComposite: "xor",
-        maskComposite: "exclude",
-      }}
-    />
   )
 }
 
@@ -220,26 +188,26 @@ function RainbowBorder() {
 function ProjectDock({ currentSlug }: { currentSlug: string }) {
   return (
     <>
-      {/* Desktop (md+) */}
+      {/* Desktop (md+): horizontal row */}
       <div
-        className="relative hidden w-full max-w-3xl items-end justify-center gap-6 rounded-2xl px-8 pb-5 pt-8 shadow-lg backdrop-blur-sm md:flex"
-        style={{ background: "rgba(255,255,255,0.6)" }}
+        className="relative hidden w-full max-w-3xl items-end justify-around rounded-2xl px-8 pb-5 pt-8 shadow-md md:flex"
+        style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)" }}
       >
-        <RainbowBorder />
+        <span className="pointer-events-none absolute inset-0 rounded-2xl" style={RAINBOW_BORDER_STYLE} />
         {projects.map((p) => (
           <DockIcon key={p.slug} project={p} isCurrent={p.slug === currentSlug} />
         ))}
       </div>
 
-      {/* Mobile (<md) — 4-col grid */}
+      {/* Mobile (<md): 4-col grid */}
       <div
-        className="relative w-full max-w-xs rounded-2xl px-5 py-5 shadow-lg backdrop-blur-sm md:hidden"
-        style={{ background: "rgba(255,255,255,0.6)" }}
+        className="relative w-full max-w-sm rounded-2xl px-5 py-5 shadow-md md:hidden"
+        style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)" }}
       >
-        <RainbowBorder />
-        <div className="grid grid-cols-4 justify-items-center gap-3">
+        <span className="pointer-events-none absolute inset-0 rounded-2xl" style={RAINBOW_BORDER_STYLE} />
+        <div className="grid grid-cols-4 justify-items-center gap-4">
           {projects.map((p) => (
-            <GridDockIcon key={p.slug} project={p} isCurrent={p.slug === currentSlug} />
+            <DockIcon key={p.slug} project={p} isCurrent={p.slug === currentSlug} />
           ))}
         </div>
       </div>
@@ -256,7 +224,6 @@ const PILL_ROWS = [
   { label: "Takeaway", key: "takeaway", type: "text" as const },
 ]
 
-const DONT_STOP_CHARS = "DON'T STOP NOW!".split("")
 
 export function ProjectPageContent({ project }: { project: Project }) {
   const { setRef, activeIndex } = useActiveRow(PILL_ROWS.length)
@@ -267,7 +234,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
 
       {/* Hero */}
       <section className="px-6 pb-8 pt-32 md:pb-12 md:pt-40">
-        <div className="mx-auto max-w-6xl" style={{ animation: "fadeSlideIn 0.6s ease forwards" }}>
+        <div className="mx-auto max-w-6xl">
           <Link
             href="/#work"
             className="group mb-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -300,7 +267,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
       </section>
 
       {/* Hero image */}
-      <section className="px-6" style={{ opacity: 0, animation: "fadeSlideIn 0.8s 0.2s ease forwards" }}>
+      <section className="px-6">
         <div className="mx-auto max-w-6xl">
           <div className="relative aspect-[16/5] overflow-hidden rounded-xl bg-secondary">
             <Image src={project.image} alt={project.title} fill className="object-cover" priority />
@@ -327,7 +294,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
             />
           ))}
 
-          <div className="flex justify-end pt-4" style={{ opacity: 0, animation: "fadeSlideIn 0.5s 0.4s ease forwards" }}>
+          <div className="flex justify-end pt-4">
             <Image
               src="/Smiley.PNG"
               alt=""
@@ -344,16 +311,8 @@ export function ProjectPageContent({ project }: { project: Project }) {
       <section className="px-6 py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center">
-            {/* Swimming text */}
-            <p className="mb-8 flex gap-[2px] text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
-              {DONT_STOP_CHARS.map((char, i) => (
-                <span
-                  key={i}
-                  style={{ display: "inline-block", animation: `wave 1.4s ${i * 0.08}s ease-in-out infinite` }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
+            <p className="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
+              {"DON'T STOP NOW!"}
             </p>
             <ProjectDock currentSlug={project.slug} />
           </div>
