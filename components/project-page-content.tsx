@@ -272,7 +272,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
                 Coming Soon
               </h2>
               <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
-                This project is currently being curated. Check back soon for the full case study.
+                This project is currently being curated. Check back soon.
               </p>
               <div
                 className="mt-4 h-[2px] w-32 rounded-full"
