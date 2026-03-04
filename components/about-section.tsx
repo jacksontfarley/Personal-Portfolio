@@ -112,7 +112,7 @@ export function AboutSection() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.4 }}
-            className="hidden md:col-span-3 md:flex md:items-start md:justify-end md:-mt-16"
+            className="flex items-center justify-center md:col-span-3 md:items-start md:justify-end md:-mt-16"
           >
             <motion.div
               animate={{ rotate: 360 }}
@@ -121,7 +121,7 @@ export function AboutSection() {
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="w-40 lg:w-48"
+              className="w-28 sm:w-36 md:w-40 lg:w-48"
             >
               <Image
                 src="/NAME2.png"
