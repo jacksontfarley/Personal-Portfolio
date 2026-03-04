@@ -1,7 +1,5 @@
 "use client"
 
-import type { CSSProperties } from "react"
-import { useRef, useState, useEffect, useCallback } from "react"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -11,224 +9,98 @@ import { projects, type Project } from "@/lib/projects"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
 
-const RAINBOW_BORDER_STYLE: CSSProperties = {
-  padding: "1px",
-  background: RAINBOW,
-  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-  WebkitMaskComposite: "xor",
-  maskComposite: "exclude",
-}
-
-/* ── Scroll-based active row ── */
-function useActiveRow(rowCount: number) {
-  const rowRefs = useRef<(HTMLDivElement | null)[]>([])
-  const [activeIndex, setActiveIndex] = useState<number>(-1)
-
-  const setRef = useCallback(
-    (index: number) => (el: HTMLDivElement | null) => {
-      rowRefs.current[index] = el
-    },
-    []
-  )
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const center = window.innerHeight / 2
-      let closest = -1
-      let closestDist = Infinity
-      for (let i = 0; i < rowCount; i++) {
-        const el = rowRefs.current[i]
-        if (!el) continue
-        const rect = el.getBoundingClientRect()
-        const elCenter = rect.top + rect.height / 2
-        const dist = Math.abs(elCenter - center)
-        if (dist < closestDist) {
-          closestDist = dist
-          closest = i
-        }
-      }
-      setActiveIndex(closestDist < window.innerHeight * 0.4 ? closest : -1)
-    }
-    handleScroll()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [rowCount])
-
-  return { setRef, activeIndex }
-}
-
-/* ── Pill Row ── */
-function PillRow({
-  label,
-  content,
-  type,
-  index,
-  isActive,
-  rowRef,
-}: {
-  label: string
-  content: string | string[]
-  type: "text" | "list"
-  index: number
-  isActive: boolean
-  rowRef: (el: HTMLDivElement | null) => void
-}) {
+/* ── Simple content section ── */
+function ContentSection({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div
-      ref={rowRef}
-      className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3"
-    >
-      {/* Label pill */}
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
       <div className="w-40 flex-shrink-0">
-        <div
-          className="relative inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-medium transition-all duration-500"
-          style={{
-            background: isActive ? RAINBOW : "var(--background)",
-            color: isActive ? "#fff" : "var(--foreground)",
-          }}
-        >
-          {!isActive && (
-            <span
-              className="pointer-events-none absolute inset-0 rounded-full"
-              style={{
-                padding: "1px",
-                background: RAINBOW,
-                WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                WebkitMaskComposite: "xor",
-                maskComposite: "exclude",
-              }}
-            />
-          )}
+        <span className="inline-flex w-full items-center justify-center rounded-full border border-border bg-background px-5 py-3 text-sm font-medium text-foreground">
           {label}
-        </div>
+        </span>
       </div>
-
-      {/* Content pill */}
-      <div className="flex-1">
-        <div
-          className="rounded-2xl bg-white px-6 py-4 transition-all duration-500"
-          style={{
-            border: isActive ? "1.5px solid transparent" : "1px solid #e2e8f0",
-            backgroundImage: isActive
-              ? `linear-gradient(white, white), ${RAINBOW}`
-              : "none",
-            backgroundOrigin: isActive ? "border-box" : undefined,
-            backgroundClip: isActive ? "padding-box, border-box" : undefined,
-          }}
-        >
-          {type === "list" && Array.isArray(content) ? (
-            <div className="flex flex-col gap-2.5">
-              {(content as string[]).map((item, j) => {
-                if (item === "") return <div key={j} className="h-2" />
-                if (/^\d+\.\s/.test(item)) {
-                  return (
-                    <p key={j} className="text-sm font-semibold leading-relaxed text-foreground">
-                      {item}
-                    </p>
-                  )
-                }
-                const colonIdx = item.indexOf(":")
-                return (
-                  <div key={j} className="flex items-start gap-3 pl-5 text-sm leading-relaxed text-muted-foreground">
-                    <span
-                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
-                      style={{ background: "linear-gradient(135deg, #FF3366, #CC33FF)" }}
-                    />
-                    {colonIdx > -1 ? (
-                      <span>
-                        <span className="font-semibold text-foreground">{item.slice(0, colonIdx + 1)}</span>
-                        {item.slice(colonIdx + 1)}
-                      </span>
-                    ) : (
-                      item
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          ) : (
-            <p className="text-sm leading-relaxed text-muted-foreground">{content as string}</p>
-          )}
-        </div>
+      <div className="flex-1 rounded-2xl border border-border bg-white px-6 py-4">
+        {children}
       </div>
     </div>
   )
 }
 
-/* ── Dock Icon (desktop) ── */
-function DockIcon({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
+/* ── Text section ── */
+function TextSection({ label, text }: { label: string; text: string }) {
+  return (
+    <ContentSection label={label}>
+      <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
+    </ContentSection>
+  )
+}
+
+/* ── List section ── */
+function ListSection({ label, items }: { label: string; items: string[] }) {
+  return (
+    <ContentSection label={label}>
+      <div className="flex flex-col gap-2.5">
+        {items.map((item, j) => {
+          if (item === "") return <div key={j} className="h-2" />
+          if (/^\d+\.\s/.test(item)) {
+            return (
+              <p key={j} className="text-sm font-semibold leading-relaxed text-foreground">
+                {item}
+              </p>
+            )
+          }
+          const colonIdx = item.indexOf(":")
+          return (
+            <div key={j} className="flex items-start gap-3 pl-5 text-sm leading-relaxed text-muted-foreground">
+              <span
+                className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                style={{ background: "linear-gradient(135deg, #FF3366, #CC33FF)" }}
+              />
+              {colonIdx > -1 ? (
+                <span>
+                  <span className="font-semibold text-foreground">{item.slice(0, colonIdx + 1)}</span>
+                  {item.slice(colonIdx + 1)}
+                </span>
+              ) : (
+                item
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </ContentSection>
+  )
+}
+
+/* ── Project Card (simple, no animations) ── */
+function ProjectCard({ project: p, isCurrent }: { project: Project; isCurrent: boolean }) {
   return (
     <Link
       href={`/work/${p.slug}`}
-      className="group relative flex flex-col items-center"
+      className="group relative flex flex-col items-center gap-2 rounded-2xl border bg-white p-4 transition-colors duration-150 hover:bg-secondary/50"
+      style={isCurrent ? {
+        borderColor: "transparent",
+        backgroundImage: `linear-gradient(white, white), ${RAINBOW}`,
+        backgroundOrigin: "border-box",
+        backgroundClip: "padding-box, border-box",
+      } : undefined}
     >
-      {/* Tooltip — shown via CSS group-hover, no JS state */}
-      <span
-        className="pointer-events-none absolute -top-11 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-foreground/90 px-3 py-1.5 text-xs font-medium text-background shadow-lg opacity-0 translate-y-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-y-0"
-      >
-        {p.title}
-        <span className="absolute -bottom-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 bg-foreground/90" />
-      </span>
-
-      {/* Icon */}
-      <div
-        className="relative overflow-hidden rounded-2xl transition-transform duration-150 ease-out group-hover:scale-125"
-        style={{ width: 72, height: 72, transformOrigin: "bottom center" }}
-      >
-        <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="72px" />
+      <div className="relative h-16 w-16 overflow-hidden rounded-xl">
+        <Image src={p.dockIcon} alt={p.title} fill className="object-cover" sizes="64px" />
       </div>
-
+      <p className="max-w-[100px] truncate text-center text-xs font-medium text-muted-foreground group-hover:text-foreground">
+        {p.title}
+      </p>
       {isCurrent && (
-        <span className="h-1.5 w-1.5 rounded-full" style={{ background: RAINBOW }} />
+        <span
+          className="absolute -top-1 -right-1 h-3 w-3 rounded-full"
+          style={{ background: RAINBOW }}
+        />
       )}
     </Link>
   )
 }
 
-/* ── Project Dock ── */
-function ProjectDock({ currentSlug }: { currentSlug: string }) {
-  return (
-    <>
-      {/* Desktop (md+): horizontal row */}
-      <div
-        className="relative hidden w-full max-w-3xl items-end justify-around rounded-2xl px-8 pb-5 pt-8 shadow-md md:flex"
-        style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)" }}
-      >
-        <span className="pointer-events-none absolute inset-0 rounded-2xl" style={RAINBOW_BORDER_STYLE} />
-        {projects.map((p) => (
-          <DockIcon key={p.slug} project={p} isCurrent={p.slug === currentSlug} />
-        ))}
-      </div>
-
-      {/* Mobile (<md): 4-col grid */}
-      <div
-        className="relative w-full max-w-sm rounded-2xl px-5 py-5 shadow-md md:hidden"
-        style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)" }}
-      >
-        <span className="pointer-events-none absolute inset-0 rounded-2xl" style={RAINBOW_BORDER_STYLE} />
-        <div className="grid grid-cols-4 justify-items-center gap-4">
-          {projects.map((p) => (
-            <DockIcon key={p.slug} project={p} isCurrent={p.slug === currentSlug} />
-          ))}
-        </div>
-      </div>
-    </>
-  )
-}
-
-const PILL_ROWS = [
-  { label: "Challenge", key: "challenge", type: "text" as const },
-  { label: "Objective", key: "objective", type: "text" as const },
-  { label: "Role", key: "role", type: "text" as const },
-  { label: "Actions", key: "actions", type: "list" as const },
-  { label: "Impact", key: "impact", type: "list" as const },
-  { label: "Takeaway", key: "takeaway", type: "text" as const },
-]
-
-
 export function ProjectPageContent({ project }: { project: Project }) {
-  const { setRef, activeIndex } = useActiveRow(PILL_ROWS.length)
-
   return (
     <main>
       <Navigation />
@@ -249,17 +121,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
           </h1>
           <div className="mt-4 flex flex-wrap gap-2">
             {[project.category, project.year].map((tag) => (
-              <span key={tag} className="relative rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground">
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-full"
-                  style={{
-                    padding: "1px",
-                    background: RAINBOW,
-                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
-                  }}
-                />
+              <span key={tag} className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground">
                 {tag}
               </span>
             ))}
@@ -281,19 +143,14 @@ export function ProjectPageContent({ project }: { project: Project }) {
       </section>
 
       {/* Content */}
-      <section className="px-6 py-12 md:py-16">
+      <section className="relative px-6 py-12 md:py-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-5">
-          {PILL_ROWS.map((row, i) => (
-            <PillRow
-              key={row.label}
-              label={row.label}
-              content={project[row.key as keyof Project] as string | string[]}
-              type={row.type}
-              index={i}
-              isActive={activeIndex === i}
-              rowRef={setRef(i)}
-            />
-          ))}
+          <TextSection label="Challenge" text={project.challenge} />
+          <TextSection label="Objective" text={project.objective} />
+          <TextSection label="Role" text={project.role} />
+          <ListSection label="Actions" items={project.actions} />
+          <ListSection label="Impact" items={project.impact} />
+          <TextSection label="Takeaway" text={project.takeaway} />
 
           <div className="flex justify-end pt-4">
             <Image
@@ -308,14 +165,18 @@ export function ProjectPageContent({ project }: { project: Project }) {
         </div>
       </section>
 
-      {/* Dock */}
+      {/* Other Projects — simple card grid */}
       <section className="px-6 py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center">
             <p className="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
               {"DON'T STOP NOW!"}
             </p>
-            <ProjectDock currentSlug={project.slug} />
+            <div className="grid w-full max-w-2xl grid-cols-4 gap-3 md:grid-cols-8">
+              {projects.map((p) => (
+                <ProjectCard key={p.slug} project={p} isCurrent={p.slug === project.slug} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
