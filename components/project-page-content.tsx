@@ -184,6 +184,7 @@ const PILL_ROWS = [
 export function ProjectPageContent({ project }: { project: Project }) {
   const currentIndex = projects.findIndex((p) => p.slug === project.slug)
   const nextProject = projects[(currentIndex + 1) % projects.length]
+  const isComingSoon = project.slug === "photography-portfolio"
   const { setRef, activeIndex } = useActiveRow(PILL_ROWS.length)
 
   return (
@@ -246,73 +247,105 @@ export function ProjectPageContent({ project }: { project: Project }) {
                 </span>
               </div>
             </motion.div>
-
-            {/* No tags section */}
           </div>
         </div>
       </section>
 
-      {/* Image */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="px-6"
-      >
-        <div className="mx-auto max-w-6xl">
-          <div className="relative aspect-[16/5] overflow-hidden rounded-xl bg-secondary">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover"
-              priority
-            />
-            {/* Rainbow bottom line */}
-            <div
-              className="absolute bottom-0 left-0 right-0 h-[2px]"
-              style={{
-                background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-              }}
-            />
+      {isComingSoon ? (
+        /* ── Coming Soon ── */
+        <section className="px-6 py-24 md:py-40">
+          <div className="mx-auto flex max-w-6xl flex-col items-center justify-center text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col items-center gap-6"
+            >
+              <h2
+                className="text-balance font-serif text-5xl font-normal leading-[1.1] tracking-tight sm:text-6xl md:text-8xl"
+                style={{
+                  background: RAINBOW,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Coming Soon
+              </h2>
+              <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
+                This project is currently being curated. Check back soon for the full case study.
+              </p>
+              <div
+                className="mt-4 h-[2px] w-32 rounded-full"
+                style={{ background: RAINBOW }}
+              />
+            </motion.div>
           </div>
-        </div>
-      </motion.section>
-
-      {/* Content — Pill Row Layout */}
-      <section className="px-6 py-12 md:py-16">
-        <div className="mx-auto flex max-w-6xl flex-col gap-5">
-          {PILL_ROWS.map((row, i) => (
-            <PillRow
-              key={row.label}
-              label={row.label}
-              content={project[row.key as keyof Project] as string | string[]}
-              type={row.type}
-              index={i}
-              isActive={activeIndex === i}
-              rowRef={setRef(i)}
-            />
-          ))}
-
-          {/* Smiley stamp */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex justify-end pt-4"
+        </section>
+      ) : (
+        <>
+          {/* Image */}
+          <motion.section
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="px-6"
           >
-            <Image
-              src="/Smiley.PNG"
-              alt=""
-              width={48}
-              height={48}
-              className="rotate-[15deg] opacity-75"
-              style={{ width: 48, height: 48 }}
-            />
-          </motion.div>
-        </div>
-      </section>
+            <div className="mx-auto max-w-6xl">
+              <div className="relative aspect-[16/5] overflow-hidden rounded-xl bg-secondary">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* Rainbow bottom line */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-[2px]"
+                  style={{
+                    background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                  }}
+                />
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Content — Pill Row Layout */}
+          <section className="px-6 py-12 md:py-16">
+            <div className="mx-auto flex max-w-6xl flex-col gap-5">
+              {PILL_ROWS.map((row, i) => (
+                <PillRow
+                  key={row.label}
+                  label={row.label}
+                  content={project[row.key as keyof Project] as string | string[]}
+                  type={row.type}
+                  index={i}
+                  isActive={activeIndex === i}
+                  rowRef={setRef(i)}
+                />
+              ))}
+
+              {/* Smiley stamp */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex justify-end pt-4"
+              >
+                <Image
+                  src="/Smiley.PNG"
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="rotate-[15deg] opacity-75"
+                  style={{ width: 48, height: 48 }}
+                />
+              </motion.div>
+            </div>
+          </section>
+        </>
+      )}
 
       {/* Next Project */}
       <section className="border-t border-border px-6 py-20 md:py-32">
