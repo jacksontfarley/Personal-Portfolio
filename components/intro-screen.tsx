@@ -118,7 +118,8 @@ export function IntroScreen() {
               className="flex flex-col items-center gap-4"
             >
               <p className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
-                Hello, I&apos;m{" "}
+                <span className="block md:inline">Hello, I&apos;m</span>
+                <br className="hidden md:block" />
                 <span
                   style={{
                     backgroundImage: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF, #FF3366)",
@@ -128,6 +129,7 @@ export function IntroScreen() {
                     backgroundClip: "text",
                     animation: "rainbow-crawl 10s linear infinite",
                   }}
+                  className="block"
                 >
                   Jackson Farley
                 </span>
