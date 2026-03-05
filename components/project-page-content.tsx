@@ -348,8 +348,8 @@ export function ProjectPageContent({ project }: { project: Project }) {
       )}
 
       {/* Horizontal Project Navigator */}
-      <section className="border-t border-border py-12 md:py-16">
-        <div className="mb-10 flex justify-center px-6">
+      <section className="border-t border-border py-8 md:py-10">
+        <div className="mb-6 flex justify-center px-6">
           <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
             {"SCROLL FOR MORE".split("").map((char, i) => (
               <motion.span
