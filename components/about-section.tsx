@@ -9,7 +9,7 @@ export function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="about" className="relative px-6 py-32 md:py-40" ref={ref}>
+    <section id="about" className="relative px-6 py-20 md:py-24" ref={ref}>
       <div className="mx-auto max-w-6xl">
         {/* Section label */}
         <motion.div

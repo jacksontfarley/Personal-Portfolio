@@ -251,7 +251,7 @@ export function SkillsSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
-    <section className="px-6 py-32 md:py-40">
+    <section className="px-6 py-20 md:py-24">
       {/* Skills — Interactive Reveal */}
       <SkillsReveal isInView={isInView} innerRef={ref} />
 

@@ -68,7 +68,7 @@ export function HeroSection() {
   return (
     <section
       style={{ position: "relative" }}
-      className="flex min-h-[70vh] flex-col justify-center px-6 py-32"
+      className="flex min-h-[70vh] flex-col justify-center px-6 py-20 md:py-24"
     >
       <GhostHeadshot />
 
