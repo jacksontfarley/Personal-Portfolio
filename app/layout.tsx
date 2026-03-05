@@ -15,8 +15,17 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Jackson Farley",
-  description:
-    "Jackson Farley is a marketing strategist crafting compelling brand narratives and driving growth through data-driven campaigns.",
+  openGraph: {
+    title: "Jackson Farley",
+    images: [
+      {
+        url: "/10.png",
+        width: 1200,
+        height: 630,
+        alt: "Jackson Farley",
+      },
+    ],
+  },
   robots: {
     index: false,
     follow: false,
