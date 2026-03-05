@@ -449,7 +449,7 @@ export function SkillsSection() {
             </p>
             <div className="flex items-center gap-4">
               <ResumePill href="/Jackson-Farley-2026.pdf" label="1-Pager" />
-              <ResumePill href="/resume-long-form.pdf" label="Long-Form" />
+              <ResumePill href="/Jackson-Farley-2026-Long-Form.pdf" label="Long-Form" />
             </div>
           </motion.div>
         </div>
