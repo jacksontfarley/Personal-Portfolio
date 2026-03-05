@@ -144,7 +144,7 @@ function MarqueeRow({
 
   return (
     <div
-      className="overflow-visible py-8"
+      className="overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -166,7 +166,7 @@ export function ProjectsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="overflow-visible py-20 md:py-24" ref={ref}>
+    <section className="py-20 md:py-24" ref={ref}>
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-16">
           <div id="work" className="scroll-mt-24 grid gap-6 md:grid-cols-12">
@@ -203,7 +203,7 @@ export function ProjectsSection() {
       </div>
 
       {/* Full-bleed marquee rows */}
-      <div className="mt-16 flex flex-col gap-6 overflow-visible">
+      <div className="mt-16 flex flex-col gap-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
