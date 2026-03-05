@@ -119,6 +119,7 @@ export function IntroScreen() {
             >
               <p className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
                 <span className="block md:inline">Hello, I&apos;m</span>
+                {" "}
                 <span
                   style={{
                     backgroundImage: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF, #FF3366)",
@@ -128,7 +129,7 @@ export function IntroScreen() {
                     backgroundClip: "text",
                     animation: "rainbow-crawl 10s linear infinite",
                   }}
-                  className="ml-2 inline-block md:inline"
+                  className="inline-block md:inline"
                 >
                   Jackson&nbsp;Farley
                 </span>
