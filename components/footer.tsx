@@ -15,7 +15,7 @@ export function Footer() {
         transition={{ duration: 0.8 }}
         className="mx-auto max-w-6xl"
       >
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-1 sm:flex-row sm:gap-4">
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} Jackson Farley. All rights reserved.
           </p>
