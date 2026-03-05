@@ -420,7 +420,7 @@ function SkillsReveal({
   return (
     <div
       id="skills"
-      className="mx-auto mt-24 max-w-6xl scroll-mt-24 md:mt-32"
+      className="mx-auto mt-32 max-w-6xl scroll-mt-24 md:mt-40"
       ref={innerRef}
     >
       {/* SKILLS label — far left */}
