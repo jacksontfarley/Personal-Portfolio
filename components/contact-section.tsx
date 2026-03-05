@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
+import Image from "next/image"
 import { useRef, useState } from "react"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
@@ -47,7 +48,7 @@ export function ContactSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="contact" className="px-6 py-8 md:py-10" ref={ref}>
+    <section id="contact" className="px-6 py-10 md:py-12" ref={ref}>
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -84,6 +85,22 @@ export function ContactSection() {
               />
             ))}
           </div>
+
+          {/* Smiley */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <Image
+              src="/Smiley.PNG"
+              alt=""
+              width={48}
+              height={48}
+              className="rotate-[15deg] opacity-75"
+              style={{ width: 48, height: 48 }}
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>
