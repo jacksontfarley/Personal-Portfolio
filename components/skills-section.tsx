@@ -420,7 +420,7 @@ function SkillsReveal({
   return (
     <div
       id="skills"
-      className="mx-auto mt-32 max-w-6xl scroll-mt-24 md:mt-40"
+      className="mx-auto mt-36 max-w-6xl scroll-mt-24 md:mt-44"
       ref={innerRef}
     >
       {/* SKILLS label — far left */}
@@ -623,7 +623,7 @@ export function SkillsSection() {
   }, [])
 
   return (
-    <section className="px-6 pb-4 pt-24 md:pb-6 md:pt-32">
+    <section className="px-6 pb-6 pt-24 md:pb-8 md:pt-32">
       {/* Experience — Bento Grid */}
       <div id="experience" className="mx-auto max-w-6xl scroll-mt-24" ref={expRef}>
         <div className="flex flex-col gap-12">

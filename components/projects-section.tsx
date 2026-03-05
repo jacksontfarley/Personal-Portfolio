@@ -198,8 +198,6 @@ export function ProjectsSection() {
               className="md:col-span-8"
             >
               <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
-                A curated selection of campaigns and brand projects that
-                delivered measurable impact.
               </p>
             </motion.div>
           </div>
