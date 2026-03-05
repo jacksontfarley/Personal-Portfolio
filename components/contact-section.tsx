@@ -1,10 +1,67 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import { useRef, useState } from "react"
+import { useRef, useState, useCallback } from "react"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
+const CONFETTI_COLORS = ["#FF3366", "#FF6B35", "#FFCC00", "#00D4AA", "#0099FF", "#CC33FF"]
+
+function InteractiveSmiley() {
+  const [isHovered, setIsHovered] = useState(false)
+  const [confettiPieces, setConfettiPieces] = useState<
+    { id: number; x: number; y: number; color: string; rotation: number; scale: number }[]
+  >([])
+
+  const spawnConfetti = useCallback(() => {
+    const pieces = Array.from({ length: 18 }, (_, i) => ({
+      id: Date.now() + i,
+      x: (Math.random() - 0.5) * 120,
+      y: -(Math.random() * 80 + 30),
+      color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+      rotation: Math.random() * 360,
+      scale: Math.random() * 0.6 + 0.4,
+    }))
+    setConfettiPieces(pieces)
+    setTimeout(() => setConfettiPieces([]), 1000)
+  }, [])
+
+  return (
+    <div
+      className="relative inline-flex cursor-pointer items-center justify-center"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={spawnConfetti}
+    >
+      <AnimatePresence>
+        {confettiPieces.map((piece) => (
+          <motion.div
+            key={piece.id}
+            initial={{ x: 0, y: 0, opacity: 1, scale: 0, rotate: 0 }}
+            animate={{ x: piece.x, y: piece.y, opacity: 0, scale: piece.scale, rotate: piece.rotation }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="pointer-events-none absolute rounded-full"
+            style={{ width: 6, height: 6, backgroundColor: piece.color }}
+          />
+        ))}
+      </AnimatePresence>
+      <motion.div
+        animate={{ rotate: isHovered ? 360 : 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <Image
+          src="/Smiley.PNG"
+          alt=""
+          width={80}
+          height={80}
+          className="h-auto w-auto"
+          style={{ maxHeight: "1.2em", width: "auto" }}
+        />
+      </motion.div>
+    </div>
+  )
+}
 
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/jackson-farley/", external: true },
@@ -92,14 +149,7 @@ export function ContactSection() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Image
-              src="/Smiley.PNG"
-              alt=""
-              width={80}
-              height={80}
-              className="h-auto w-auto"
-              style={{ maxHeight: "1.2em", width: "auto" }}
-            />
+            <InteractiveSmiley />
           </motion.div>
         </motion.div>
       </div>

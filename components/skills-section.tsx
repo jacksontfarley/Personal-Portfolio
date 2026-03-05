@@ -623,7 +623,7 @@ export function SkillsSection() {
   }, [])
 
   return (
-    <section className="px-6 pb-12 pt-24 md:pb-16 md:pt-32">
+    <section className="px-6 pb-16 pt-24 md:pb-24 md:pt-32">
       {/* Experience — Bento Grid */}
       <div id="experience" className="mx-auto max-w-6xl scroll-mt-24" ref={expRef}>
         <div className="flex flex-col gap-12">
