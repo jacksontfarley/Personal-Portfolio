@@ -253,7 +253,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
 
       {isComingSoon ? (
         /* ── Coming Soon ── */
-        <section className="px-6 py-20 md:py-24">
+        <section className="px-6 py-24 md:py-40">
           <div className="mx-auto flex max-w-6xl flex-col items-center justify-center text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -311,7 +311,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
           </motion.section>
 
           {/* Content — Pill Row Layout */}
-          <section className="px-6 py-20 md:py-24">
+          <section className="px-6 py-12 md:py-16">
             <div className="mx-auto flex max-w-6xl flex-col gap-5">
               {PILL_ROWS.map((row, i) => (
                 <PillRow
@@ -348,7 +348,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
       )}
 
       {/* Horizontal Project Navigator */}
-      <section className="flex flex-col items-center justify-center py-20 md:py-24">
+      <section className="flex flex-col items-center justify-center py-10 md:py-12">
         <div className="mb-8 flex justify-center px-6">
           <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
             {"SCROLL FOR MORE".split("").map((char, i) => (
