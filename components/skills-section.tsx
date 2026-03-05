@@ -357,6 +357,55 @@ function ResumePill({ href, label }: { href: string; label: string }) {
   )
 }
 
+/* ─── Skill Pill with Rainbow Hover ─── */
+function SkillPill({
+  item,
+  index,
+  isActive,
+}: {
+  item: string
+  index: number
+  isActive: boolean
+}) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <motion.span
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative cursor-default rounded-full px-3 py-1.5 text-xs transition-colors duration-300"
+      style={{
+        background: hovered ? RAINBOW : "var(--background)",
+        color: hovered ? "#fff" : "var(--muted-foreground)",
+      }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{
+        opacity: isActive ? 1 : 0,
+        scale: isActive ? 1 : 0.9,
+      }}
+      transition={{
+        duration: 0.25,
+        delay: isActive ? index * 0.04 : 0,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      {!hovered && (
+        <span
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            padding: "1px",
+            background: RAINBOW,
+            WebkitMask:
+              "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+          }}
+        />
+      )}
+      {item}
+    </motion.span>
+  )
+}
+
 /* ─── Minimalist Skills Reveal ─── */
 function SkillsReveal({
   isInView,
@@ -452,22 +501,12 @@ function SkillsReveal({
                 }}
               >
                 {skill.items.map((item, j) => (
-                  <motion.span
+                  <SkillPill
                     key={item}
-                    className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{
-                      opacity: isActive ? 1 : 0,
-                      scale: isActive ? 1 : 0.9,
-                    }}
-                    transition={{
-                      duration: 0.25,
-                      delay: isActive ? j * 0.04 : 0,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                  >
-                    {item}
-                  </motion.span>
+                    item={item}
+                    index={j}
+                    isActive={isActive}
+                  />
                 ))}
               </motion.div>
             </motion.div>
@@ -535,19 +574,12 @@ function SkillsReveal({
                   >
                     <div className="flex flex-wrap gap-2 px-6 pb-6 pt-4">
                       {skill.items.map((item, j) => (
-                        <motion.span
+                        <SkillPill
                           key={item}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{
-                            duration: 0.25,
-                            delay: j * 0.05,
-                            ease: [0.22, 1, 0.36, 1],
-                          }}
-                          className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground"
-                        >
-                          {item}
-                        </motion.span>
+                          item={item}
+                          index={j}
+                          isActive={true}
+                        />
                       ))}
                     </div>
                   </motion.div>
@@ -591,7 +623,7 @@ export function SkillsSection() {
   }, [])
 
   return (
-    <section className="px-6 py-24 md:py-32">
+    <section className="px-6 pb-12 pt-24 md:pb-16 md:pt-32">
       {/* Experience — Bento Grid */}
       <div id="experience" className="mx-auto max-w-6xl scroll-mt-24" ref={expRef}>
         <div className="flex flex-col gap-12">
