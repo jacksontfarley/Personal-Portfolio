@@ -59,7 +59,7 @@ export function Navigation() {
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-background/80 backdrop-blur-xl border-b border-border"
+            ? "bg-background/70 backdrop-blur-2xl border-b border-border/40 shadow-lg shadow-background/20"
             : "bg-transparent"
         }`}
         style={{ pointerEvents: visible ? "auto" : "none" }}
@@ -89,7 +89,7 @@ export function Navigation() {
             />
           </Link>
 
-          <div className="hidden items-center gap-10 md:flex">
+          <div className="hidden items-center gap-8 md:flex">
             <a
               href={isProjectPage ? "/#about" : "#about"}
               className="relative text-sm tracking-wide text-muted-foreground transition-colors duration-300 hover:text-foreground group"
