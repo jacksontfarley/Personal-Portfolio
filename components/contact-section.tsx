@@ -95,10 +95,10 @@ export function ContactSection() {
             <Image
               src="/Smiley.PNG"
               alt=""
-              width={48}
-              height={48}
-              className="rotate-[15deg] opacity-75"
-              style={{ width: 48, height: 48 }}
+              width={80}
+              height={80}
+              className="h-auto w-auto"
+              style={{ maxHeight: "1.2em", width: "auto" }}
             />
           </motion.div>
         </motion.div>
