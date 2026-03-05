@@ -664,7 +664,5 @@ export function SkillsSection() {
       {/* Skills — Interactive Reveal */}
       <SkillsReveal isInView={isInView} innerRef={ref} />
     </section>
-
-    {/* Spacing reduction before projects */}
   )
 }
