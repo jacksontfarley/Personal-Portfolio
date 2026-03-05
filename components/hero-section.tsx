@@ -89,7 +89,7 @@ export function HeroSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl max-w-[85%] sm:max-w-[70%] md:max-w-[45%]"
+            className="font-serif text-5xl font-normal leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl md:max-w-[55%]"
           >
             I solve business challenges with{" "}
             <span
