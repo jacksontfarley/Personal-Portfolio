@@ -348,7 +348,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
       )}
 
       {/* Horizontal Project Navigator */}
-      <section className="border-t border-border flex flex-col items-center justify-center py-16 md:py-24">
+      <section className="flex flex-col items-center justify-center py-10 md:py-12">
         <div className="mb-8 flex justify-center px-6">
           <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
             {"SCROLL FOR MORE".split("").map((char, i) => (
