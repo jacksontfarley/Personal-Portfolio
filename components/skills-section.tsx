@@ -448,7 +448,7 @@ export function SkillsSection() {
               Grab a copy of my resume as a souvenir!
             </p>
             <div className="flex items-center gap-4">
-              <ResumePill href="/resume-1-pager.pdf" label="1-Pager" />
+              <ResumePill href="/Jackson-Farley-2026.pdf" label="1-Pager" />
               <ResumePill href="/resume-long-form.pdf" label="Long-Form" />
             </div>
           </motion.div>
