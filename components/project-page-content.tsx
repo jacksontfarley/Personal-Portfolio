@@ -348,8 +348,8 @@ export function ProjectPageContent({ project }: { project: Project }) {
       )}
 
       {/* Horizontal Project Navigator */}
-      <section className="border-t border-border py-8 md:py-10">
-        <div className="mb-6 flex justify-center px-6">
+      <section className="border-t border-border flex flex-col items-center justify-center py-16 md:py-24">
+        <div className="mb-8 flex justify-center px-6">
           <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
             {"SCROLL FOR MORE".split("").map((char, i) => (
               <motion.span
@@ -367,7 +367,8 @@ export function ProjectPageContent({ project }: { project: Project }) {
             ))}
           </div>
         </div>
-        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="w-full">
+          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {projects.map((p) => {
             const isCurrent = p.slug === project.slug
             return (
@@ -404,6 +405,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
               </Link>
             )
           })}
+          </div>
         </div>
       </section>
 
