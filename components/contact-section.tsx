@@ -56,7 +56,7 @@ export function ContactSection() {
           className="flex flex-col items-center gap-8"
         >
           {/* Floating heading */}
-          <span className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
+          <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
             {"DON'T BE A STRANGER".split("").map((char, i) => (
               <motion.span
                 key={i}
@@ -71,7 +71,7 @@ export function ContactSection() {
                 {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
-          </span>
+          </div>
 
           {/* Pill links */}
           <div className="flex flex-wrap items-center justify-center gap-4">

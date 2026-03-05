@@ -440,7 +440,7 @@ export function SkillsSection() {
             transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center gap-6 pt-8"
           >
-            <span className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
               {"GRAB A SOUVENIR".split("").map((char, i) => (
                 <motion.span
                   key={i}
@@ -455,7 +455,7 @@ export function SkillsSection() {
                   {char === " " ? "\u00A0" : char}
                 </motion.span>
               ))}
-            </span>
+            </div>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <ResumePill href="/Jackson-Farley-2026.pdf" label="Resume" />
               <ResumePill href="/Jackson-Farley-2026-Long-Form.pdf" label="Resume, But Longer" />
