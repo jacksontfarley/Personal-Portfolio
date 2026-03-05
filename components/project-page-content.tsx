@@ -347,32 +347,50 @@ export function ProjectPageContent({ project }: { project: Project }) {
         </>
       )}
 
-      {/* Next Project */}
-      <section className="border-t border-border px-6 py-20 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              Next Project
-            </p>
-            <Link
-              href={`/work/${nextProject.slug}`}
-              className="group flex items-center justify-between"
-            >
-              <h2 className="font-serif text-3xl font-normal tracking-tight text-foreground transition-colors duration-300 group-hover:text-muted-foreground sm:text-4xl md:text-5xl">
-                {nextProject.title}
-              </h2>
-              <ArrowUpRight className="h-6 w-6 text-muted-foreground transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-foreground md:h-8 md:w-8" />
-            </Link>
-            <div
-              className="mt-4 h-[2px] w-full rounded-full opacity-30"
-              style={{ background: "linear-gradient(90deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }}
-            />
-          </motion.div>
+      {/* Horizontal Project Navigator */}
+      <section className="border-t border-border py-12 md:py-16">
+        <div className="mb-6 px-6">
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
+            More Work
+          </p>
+        </div>
+        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {projects.map((p) => {
+            const isCurrent = p.slug === project.slug
+            return (
+              <Link
+                key={p.slug}
+                href={`/work/${p.slug}`}
+                className="group relative flex w-[280px] flex-none snap-start flex-col justify-between overflow-hidden rounded-2xl border border-border bg-background p-6 transition-opacity duration-300"
+                style={{ opacity: isCurrent ? 1 : 0.6 }}
+                onMouseEnter={(e) => { if (!isCurrent) (e.currentTarget as HTMLElement).style.opacity = "1" }}
+                onMouseLeave={(e) => { if (!isCurrent) (e.currentTarget as HTMLElement).style.opacity = "0.6" }}
+              >
+                {/* Title + category */}
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-balance font-serif text-xl font-normal leading-snug tracking-tight text-foreground">
+                    {p.title}
+                  </h3>
+                  <p className="text-xs font-medium text-muted-foreground">
+                    {p.category}
+                  </p>
+                </div>
+
+                {/* Year */}
+                <p className="mt-6 text-xs tracking-wide text-muted-foreground">
+                  {p.year}
+                </p>
+
+                {/* Rainbow accent line — active only */}
+                {isCurrent && (
+                  <div
+                    className="absolute bottom-0 left-0 right-0 h-[3px]"
+                    style={{ background: RAINBOW }}
+                  />
+                )}
+              </Link>
+            )
+          })}
         </div>
       </section>
 
