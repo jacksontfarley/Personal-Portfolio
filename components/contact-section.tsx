@@ -12,9 +12,6 @@ function InteractiveSmiley() {
   const [confettiPieces, setConfettiPieces] = useState<
     { id: number; x: number; y: number; color: string; rotation: number; scale: number }[]
   >([])
-  const smileyRef = useRef<HTMLDivElement>(null)
-  const isScrolledIntoView = useInView(smileyRef, { once: false, margin: "-20%" })
-  const shouldSpin = isHovered || isScrolledIntoView
 
   const spawnConfetti = useCallback(() => {
     const pieces = Array.from({ length: 18 }, (_, i) => ({
@@ -31,7 +28,6 @@ function InteractiveSmiley() {
 
   return (
     <div
-      ref={smileyRef}
       className="relative inline-flex cursor-pointer items-center justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -51,7 +47,7 @@ function InteractiveSmiley() {
         ))}
       </AnimatePresence>
       <motion.div
-        animate={{ rotate: shouldSpin ? 360 : 0 }}
+        animate={{ rotate: isHovered ? 360 : 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <Image

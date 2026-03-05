@@ -58,17 +58,17 @@ export function Navigation() {
         animate={{ y: visible ? 0 : -20, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "border-b border-white/10 shadow-xl"
-            : "bg-transparent"
+          scrolled ? "border-b border-white/10" : "bg-transparent"
         }`}
-        style={scrolled ? {
-          backgroundColor: "rgba(255,255,255,0.75)",
-          backdropFilter: "blur(24px) saturate(180%)",
-          WebkitBackdropFilter: "blur(24px) saturate(180%)",
-          boxShadow: "0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 24px -4px rgba(0,0,0,0.06)",
-        } : undefined}
-        style={{ pointerEvents: visible ? "auto" : "none" }}
+        style={{
+          pointerEvents: visible ? "auto" : "none",
+          ...(scrolled ? {
+            backgroundColor: "rgba(255,255,255,0.82)",
+            backdropFilter: "blur(20px) saturate(160%)",
+            WebkitBackdropFilter: "blur(20px) saturate(160%)",
+            boxShadow: "0 1px 0 0 rgba(255,255,255,0.7) inset, 0 8px 32px -8px rgba(0,0,0,0.08)",
+          } : {}),
+        }}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <Link href="/" className="flex items-center gap-2">

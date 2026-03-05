@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion"
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useRef, useState, useCallback } from "react"
 import Image from "next/image"
 
@@ -8,25 +8,9 @@ const CONFETTI_COLORS = ["#FF3366", "#FF6B35", "#FFCC00", "#00D4AA", "#0099FF", 
 
 function InteractiveSmiley() {
   const [isHovered, setIsHovered] = useState(false)
-  const [spinCount, setSpinCount] = useState(0)
   const [confettiPieces, setConfettiPieces] = useState<
     { id: number; x: number; y: number; color: string; rotation: number; scale: number }[]
   >([])
-  const smileyRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(smileyRef, { once: false, margin: "-20%" })
-
-  // Trigger spin on scroll into view (mobile) or hover (desktop)
-  const shouldSpin = isHovered || isInView
-
-  // Track previous inView to detect new entries
-  const prevInView = useRef(false)
-  if (isInView && !prevInView.current) {
-    prevInView.current = true
-    // increment so animate re-triggers a full 360 each time
-  }
-  if (!isInView) {
-    prevInView.current = false
-  }
 
   const spawnConfetti = useCallback(() => {
     const pieces = Array.from({ length: 18 }, (_, i) => ({
@@ -43,7 +27,6 @@ function InteractiveSmiley() {
 
   return (
     <div
-      ref={smileyRef}
       className="relative inline-flex cursor-pointer items-center justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -70,9 +53,9 @@ function InteractiveSmiley() {
         ))}
       </AnimatePresence>
 
-      {/* Smiley — spins on hover (desktop) or scroll into view (mobile) */}
+      {/* Smiley — spins on hover */}
       <motion.div
-        animate={{ rotate: shouldSpin ? 360 : 0 }}
+        animate={{ rotate: isHovered ? 360 : 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <Image
