@@ -144,7 +144,7 @@ function MarqueeRow({
 
   return (
     <div
-      className="overflow-hidden"
+      className="overflow-x-clip overflow-y-visible py-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -207,7 +207,7 @@ export function ProjectsSection() {
       </div>
 
       {/* Full-bleed marquee rows */}
-      <div className="mt-16 flex flex-col gap-6">
+      <div className="mt-16 flex flex-col gap-2 overflow-visible">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
