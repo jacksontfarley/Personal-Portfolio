@@ -58,15 +58,15 @@ export function Navigation() {
         animate={{ y: visible ? 0 : -20, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "border-b border-white/10" : "bg-transparent"
+          scrolled ? "border-b border-white/20" : "bg-transparent"
         }`}
         style={{
           pointerEvents: visible ? "auto" : "none",
           ...(scrolled ? {
-            backgroundColor: "rgba(255,255,255,0.82)",
-            backdropFilter: "blur(20px) saturate(160%)",
-            WebkitBackdropFilter: "blur(20px) saturate(160%)",
-            boxShadow: "0 1px 0 0 rgba(255,255,255,0.7) inset, 0 8px 32px -8px rgba(0,0,0,0.08)",
+            backgroundColor: "rgba(255,255,255,0.55)",
+            backdropFilter: "blur(28px) saturate(200%) brightness(1.08)",
+            WebkitBackdropFilter: "blur(28px) saturate(200%) brightness(1.08)",
+            boxShadow: "0 1px 0 0 rgba(255,255,255,0.9) inset, 0 0 0 0.5px rgba(255,255,255,0.4), 0 8px 32px -8px rgba(0,0,0,0.06)",
           } : {}),
         }}
       >
