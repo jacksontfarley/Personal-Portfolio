@@ -5,10 +5,8 @@ import { useRef } from "react"
 import { ArrowUpRight } from "lucide-react"
 
 const socials = [
-  { label: "LinkedIn", href: "#" },
-  { label: "X / Twitter", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "Email", href: "mailto:hello@example.com" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/jackson-farley/" },
+  { label: "Email", href: "mailto:hello@jacksonfarley.me" },
 ]
 
 export function ContactSection() {
@@ -32,29 +30,6 @@ export function ContactSection() {
           </motion.div>
 
           <div className="flex flex-col gap-10 md:col-span-8">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.8,
-                delay: 0.15,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="text-pretty font-serif text-3xl leading-snug text-foreground md:text-4xl"
-            >
-              Have a project in mind?{" "}
-              <span
-                style={{
-                  backgroundImage: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Let&apos;s talk.
-              </span>
-            </motion.h2>
-
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
