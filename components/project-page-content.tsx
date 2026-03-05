@@ -407,6 +407,17 @@ export function ProjectPageContent({ project }: { project: Project }) {
           })}
           </div>
         </div>
+
+        {/* Back home link */}
+        <div className="mt-6 flex justify-center px-6">
+          <Link
+            href="/#work"
+            className="group inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.25em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="h-3 w-3 transition-transform duration-300 group-hover:-translate-x-1" />
+            Back Home
+          </Link>
+        </div>
       </section>
 
       <Footer />
