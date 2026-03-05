@@ -166,7 +166,7 @@ export function ProjectsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="py-32 md:py-40" ref={ref}>
+    <section className="py-20 md:py-24" ref={ref}>
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-16">
           <div id="work" className="scroll-mt-24 grid gap-6 md:grid-cols-12">
@@ -197,10 +197,6 @@ export function ProjectsSection() {
               }}
               className="md:col-span-8"
             >
-              <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
-                A curated selection of campaigns and brand projects that
-                delivered measurable impact.
-              </p>
             </motion.div>
           </div>
         </div>

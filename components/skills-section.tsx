@@ -374,6 +374,26 @@ function SkillsReveal({
       className="mx-auto mt-32 max-w-6xl scroll-mt-24 md:mt-40"
       ref={innerRef}
     >
+      {/* Left label + rainbow line (desktop only) */}
+      <div className="mb-12 hidden md:grid md:grid-cols-12 md:gap-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="md:col-span-4"
+        >
+          <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+            Skills
+          </p>
+          <div
+            className="mt-3 h-[2px] w-8 rounded-full"
+            style={{
+              background:
+                "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+            }}
+          />
+        </motion.div>
+      </div>
       {/* Desktop — hover reveal */}
       <div className="hidden md:flex md:items-start md:justify-center md:gap-16 lg:gap-24">
         {skills.map((skill, i) => {
@@ -615,7 +635,7 @@ export function SkillsSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={expInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col items-center gap-6 pt-8"
+            className="flex flex-col items-center gap-8 pt-8"
           >
             <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
               {"GRAB A SOUVENIR".split("").map((char, i) => (
@@ -644,5 +664,7 @@ export function SkillsSection() {
       {/* Skills — Interactive Reveal */}
       <SkillsReveal isInView={isInView} innerRef={ref} />
     </section>
+
+    {/* Spacing reduction before projects */}
   )
 }
