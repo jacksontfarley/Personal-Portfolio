@@ -8,7 +8,7 @@ export function Footer() {
   const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <footer className="px-6 pb-8 pt-8 md:pt-8" ref={ref}>
+    <footer className="px-6 pb-8 pt-14 sm:pt-8" ref={ref}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
