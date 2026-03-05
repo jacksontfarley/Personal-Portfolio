@@ -17,9 +17,11 @@ export const metadata: Metadata = {
   title: "Jackson Farley",
   openGraph: {
     title: "Jackson Farley",
+    url: "https://jacksonfarley.me",
+    type: "website",
     images: [
       {
-        url: "/10.png",
+        url: "https://jacksonfarley.me/jackson-final-preview-v3.jpg",
         width: 1200,
         height: 630,
         alt: "Jackson Farley",
