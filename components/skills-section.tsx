@@ -248,50 +248,130 @@ function SkillsReveal({
 export function SkillsSection() {
   const ref = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
+  const expRef = useRef<HTMLDivElement | null>(null)
+  const expIsInView = useInView(expRef, { once: true, margin: "-80px" })
 
   return (
-    <section className="px-6 py-20 md:py-24">
-      {/* Skills — Interactive Reveal */}
-      <SkillsReveal isInView={isInView} innerRef={ref} />
+    <>
+      <section className="px-6 py-20 md:py-24">
+        {/* Skills — Interactive Reveal */}
+        <SkillsReveal isInView={isInView} innerRef={ref} />
 
-      {/* Resume CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="flex flex-col items-center gap-8 pt-8"
-      >
-        <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          {"GRAB A SOUVENIR".split("").map((char, i) => (
-            <motion.span
-              key={i}
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                duration: 1.4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.08,
-              }}
+        {/* Resume CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col items-center gap-8 pt-8"
+        >
+          <div className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            {"GRAB A SOUVENIR".split("").map((char, i) => (
+              <motion.span
+                key={i}
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  duration: 1.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.08,
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="/Jackson-Farley-2026.pdf"
+              className="rounded-full border border-border px-4 py-2 text-sm text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
             >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
-          ))}
+              Resume
+            </a>
+            <a
+              href="/Jackson-Farley-2026-Long-Form.pdf"
+              className="rounded-full border border-border px-4 py-2 text-sm text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            >
+              Resume, But Longer
+            </a>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Experience Section */}
+      <section className="px-6 py-20 md:py-24" ref={expRef}>
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-12 md:grid-cols-12">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={expIsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="md:col-span-4"
+            >
+              <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+                Experience
+              </p>
+              <div
+                className="mt-3 h-[2px] w-8 rounded-full"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+                }}
+              />
+            </motion.div>
+
+            <div className="md:col-span-8">
+              <div className="flex flex-col gap-8">
+                {[
+                  {
+                    title: "Senior Brand Manager",
+                    company: "Aveeno",
+                    period: "2023 - Present",
+                    description: "Leading brand strategy and creative development",
+                  },
+                  {
+                    title: "Brand Manager",
+                    company: "Tylenol",
+                    period: "2021 - 2023",
+                    description: "Managed omnichannel campaigns and brand positioning",
+                  },
+                  {
+                    title: "Marketing Specialist",
+                    company: "Cyclebar",
+                    period: "2019 - 2021",
+                    description: "Developed experiential marketing strategies",
+                  },
+                ].map((job, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={expIsInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.1 + i * 0.1,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h3 className="font-serif text-lg font-semibold text-foreground">
+                          {job.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">{job.company}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                          {job.description}
+                        </p>
+                      </div>
+                      <span className="whitespace-nowrap text-xs text-muted-foreground">
+                        {job.period}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="/Jackson-Farley-2026.pdf"
-            className="rounded-full border border-border px-4 py-2 text-sm text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
-          >
-            Resume
-          </a>
-          <a
-            href="/Jackson-Farley-2026-Long-Form.pdf"
-            className="rounded-full border border-border px-4 py-2 text-sm text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
-          >
-            Resume, But Longer
-          </a>
-        </div>
-      </motion.div>
-    </section>
+      </section>
+    </>
   )
 }
