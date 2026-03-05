@@ -8,11 +8,14 @@ const CONFETTI_COLORS = ["#FF3366", "#FF6B35", "#FFCC00", "#00D4AA", "#0099FF", 
 
 function InteractiveSmiley() {
   const [isHovered, setIsHovered] = useState(false)
+  const [clickSpin, setClickSpin] = useState(0)
+  const [isRainbow, setIsRainbow] = useState(false)
   const [confettiPieces, setConfettiPieces] = useState<
     { id: number; x: number; y: number; color: string; rotation: number; scale: number }[]
   >([])
 
-  const spawnConfetti = useCallback(() => {
+  const handleClick = useCallback(() => {
+    // Confetti burst
     const pieces = Array.from({ length: 18 }, (_, i) => ({
       id: Date.now() + i,
       x: (Math.random() - 0.5) * 120,
@@ -23,6 +26,13 @@ function InteractiveSmiley() {
     }))
     setConfettiPieces(pieces)
     setTimeout(() => setConfettiPieces([]), 1000)
+
+    // High-velocity click spin (accumulates 360 each click)
+    setClickSpin((prev) => prev + 360)
+
+    // Rainbow flash
+    setIsRainbow(true)
+    setTimeout(() => setIsRainbow(false), 600)
   }, [])
 
   return (
@@ -30,7 +40,7 @@ function InteractiveSmiley() {
       className="relative inline-flex cursor-pointer items-center justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={spawnConfetti}
+      onClick={handleClick}
     >
       {/* Confetti burst */}
       <AnimatePresence>
@@ -53,18 +63,29 @@ function InteractiveSmiley() {
         ))}
       </AnimatePresence>
 
-      {/* Smiley — spins on hover */}
+      {/* Smiley — gentle hover spin + clicky spring spin on tap */}
       <motion.div
-        animate={{ rotate: isHovered ? 360 : 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        animate={{ rotate: isHovered ? clickSpin + 360 : clickSpin }}
+        transition={
+          clickSpin > 0 && !isHovered
+            ? { type: "spring", stiffness: 300, damping: 15 }
+            : { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+        }
+        style={{ transformOrigin: "center center" }}
       >
         <Image
           src="/Smiley.PNG"
           alt="Smiley"
           width={80}
           height={80}
-          className="h-auto w-auto"
-          style={{ maxHeight: "1.2em", width: "auto" }}
+          className="h-auto w-auto transition-all duration-300"
+          style={{
+            maxHeight: "1.2em",
+            width: "auto",
+            filter: isRainbow
+              ? "hue-rotate(90deg) saturate(2) brightness(1.1)"
+              : "none",
+          }}
         />
       </motion.div>
     </div>
