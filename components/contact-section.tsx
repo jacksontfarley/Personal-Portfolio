@@ -44,6 +44,8 @@ export function ContactSection() {
                 <a
                   key={social.label}
                   href={social.href}
+                  target={social.label === "LinkedIn" ? "_blank" : undefined}
+                  rel={social.label === "LinkedIn" ? "noopener noreferrer" : undefined}
                   className="group relative flex items-center justify-between border-b border-border py-4 transition-colors duration-300 hover:border-transparent"
                 >
                   <span className="absolute bottom-0 left-0 right-0 h-[1px] opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ background: "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)" }} />
