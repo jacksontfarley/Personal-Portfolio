@@ -2,7 +2,6 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef, useState } from "react"
-import { ResumePill } from "./resume-pill"
 
 interface SkillCategory {
   category: string
@@ -279,8 +278,18 @@ export function SkillsSection() {
           ))}
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <ResumePill href="/Jackson-Farley-2026.pdf" label="Resume" />
-          <ResumePill href="/Jackson-Farley-2026-Long-Form.pdf" label="Resume, But Longer" />
+          <a
+            href="/Jackson-Farley-2026.pdf"
+            className="rounded-full border border-border px-4 py-2 text-sm text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+          >
+            Resume
+          </a>
+          <a
+            href="/Jackson-Farley-2026-Long-Form.pdf"
+            className="rounded-full border border-border px-4 py-2 text-sm text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+          >
+            Resume, But Longer
+          </a>
         </div>
       </motion.div>
     </section>
