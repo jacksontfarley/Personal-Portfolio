@@ -7,7 +7,6 @@ import Image from "next/image"
 export function IntroScreen() {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
-    target: ref,
     offset: ["start start", "end start"],
   })
 
