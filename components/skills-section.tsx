@@ -437,19 +437,28 @@ export function SkillsSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={expInView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.8,
-              delay: 0.4,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="flex flex-col items-center gap-6 pt-8 sm:flex-row sm:justify-center"
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center gap-6 pt-8"
           >
-            <p className="text-pretty text-center font-serif text-2xl leading-relaxed text-foreground md:text-3xl">
-              Grab a copy of my resume as a souvenir!
-            </p>
-            <div className="flex items-center gap-4">
-              <ResumePill href="/Jackson-Farley-2026.pdf" label="1-Pager" />
-              <ResumePill href="/Jackson-Farley-2026-Long-Form.pdf" label="Long-Form" />
+            <span className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              {"GRAB A SOUVENIR".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{
+                    duration: 1.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.08,
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <ResumePill href="/Jackson-Farley-2026.pdf" label="Resume" />
+              <ResumePill href="/Jackson-Farley-2026-Long-Form.pdf" label="Resume, But Longer" />
             </div>
           </motion.div>
         </div>

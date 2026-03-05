@@ -349,10 +349,23 @@ export function ProjectPageContent({ project }: { project: Project }) {
 
       {/* Horizontal Project Navigator */}
       <section className="border-t border-border py-12 md:py-16">
-        <div className="mb-6 px-6">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
-            More Work
-          </p>
+        <div className="mb-10 flex justify-center px-6">
+          <span className="flex gap-[2px] text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            {"SCROLL FOR MORE".split("").map((char, i) => (
+              <motion.span
+                key={i}
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  duration: 1.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.08,
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </span>
         </div>
         <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {projects.map((p) => {
