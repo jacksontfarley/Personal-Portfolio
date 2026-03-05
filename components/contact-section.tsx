@@ -47,7 +47,7 @@ export function ContactSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="contact" className="px-6 py-12 md:py-16" ref={ref}>
+    <section id="contact" className="px-6 py-8 md:py-10" ref={ref}>
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
