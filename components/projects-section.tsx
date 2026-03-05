@@ -166,7 +166,7 @@ export function ProjectsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="py-32 md:py-40" ref={ref}>
+    <section className="py-24 md:py-32" ref={ref}>
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-16">
           <div id="work" className="scroll-mt-24 grid gap-6 md:grid-cols-12">
