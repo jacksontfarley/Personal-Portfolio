@@ -11,28 +11,49 @@ export function AboutSection() {
   return (
     <section id="about" className="relative px-6 py-24 md:py-32" ref={ref}>
       <div className="mx-auto max-w-6xl">
-        {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-16"
-        >
-          <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-            About
-          </p>
-          <div
-            className="mt-3 h-[2px] w-8 rounded-full"
-            style={{
-              background:
-                "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
-            }}
-          />
-        </motion.div>
+        {/* Section label + rotating logo in same row */}
+        <div className="mb-16 flex items-start justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+              About
+            </p>
+            <div
+              className="mt-3 h-[2px] w-8 rounded-full"
+              style={{
+                background:
+                  "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)",
+              }}
+            />
+          </motion.div>
 
-        {/* Text content + rotating logo */}
+          {/* Rotating name logo — top right */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="w-20 sm:w-24 md:w-32 lg:w-36"
+            >
+              <Image
+                src="/NAME2.png"
+                alt="Jackson Farley circular logo"
+                width={200}
+                height={200}
+                className="h-auto w-full"
+              />
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Text content */}
         <div className="relative grid items-start gap-8 md:grid-cols-12 md:gap-16">
-          {/* Text content */}
           <div className="flex flex-col gap-6 md:col-span-9">
 
             <motion.p
@@ -109,31 +130,7 @@ export function AboutSection() {
             </motion.p>
           </div>
 
-          {/* Rotating name logo — below text on mobile (right-aligned), right column on desktop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="flex items-center justify-end md:col-span-3 md:items-start md:justify-end md:-mt-16"
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="w-24 sm:w-28 md:w-40 lg:w-48"
-            >
-              <Image
-                src="/NAME2.png"
-                alt="Jackson Farley circular logo"
-                width={200}
-                height={200}
-                className="h-auto w-full"
-              />
-            </motion.div>
-          </motion.div>
+
         </div>
       </div>
     </section>
