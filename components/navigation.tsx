@@ -59,9 +59,15 @@ export function Navigation() {
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-background/60 backdrop-blur-2xl border-b border-border/30 shadow-lg shadow-background/10"
+            ? "border-b border-white/10 shadow-xl"
             : "bg-transparent"
         }`}
+        style={scrolled ? {
+          backgroundColor: "rgba(255,255,255,0.75)",
+          backdropFilter: "blur(24px) saturate(180%)",
+          WebkitBackdropFilter: "blur(24px) saturate(180%)",
+          boxShadow: "0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 24px -4px rgba(0,0,0,0.06)",
+        } : undefined}
         style={{ pointerEvents: visible ? "auto" : "none" }}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
