@@ -694,7 +694,7 @@ export function SkillsSection() {
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <ResumePill href="https://blobs.vusercontent.net/blob/Jackson%20Farley%202026%20Short%20Form-01u4ahw6wJgNAnd9SjcSte0MMPpMok.pdf" label="Resume" />
-              <ResumePill href="https://blobs.vusercontent.net/blob/Jackson%20Farley%202026%20Long%20Form-5FVWInghJsFY2fxvPBISgy8QSXvbPn.pdf" label="Resume, But Longer" />
+              <ResumePill href="https://blobs.vusercontent.net/blob/Jackson%20Farley%202026%20Long%20Form-pNnCmKayLIKHP0lHDmlWo1QlrsRrSz.pdf" label="Resume, But Longer" />
             </div>
           </motion.div>
         </div>
