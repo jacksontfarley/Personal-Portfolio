@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
     if (tab === "portraits" && filter !== "all") {
   folderExpression = `folder:portfolio/portraits/${filter}`
 } else if (tab === "portraits" && filter === "all") {
-  folderExpression = `folder:portfolio/portraits`
+  folderExpression = `folder:portfolio/portraits/fitness OR folder:portfolio/portraits/corporate OR folder:portfolio/portraits/personal`
 } else {
   folderExpression = `folder:portfolio/${tab}/*`
 }
