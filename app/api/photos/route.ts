@@ -40,6 +40,8 @@ export async function GET(req: NextRequest) {
     let folderExpression: string
     if (tab === "portraits" && filter !== "all") {
   folderExpression = `folder:portfolio/portraits/${filter}`
+} else if (tab === "portraits" && filter === "all") {
+  folderExpression = `folder:portfolio/portraits`
 } else {
   folderExpression = `folder:portfolio/${tab}/*`
 }
