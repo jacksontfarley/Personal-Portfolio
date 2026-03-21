@@ -16,20 +16,6 @@ export interface CloudinaryPhoto {
   tags: string[]
 }
 
-// Maps folder paths to gallery categories/sub-filters
-// Folder structure expected in Cloudinary:
-//   portraits/fitness, portraits/corporate, portraits/personal
-//   travel
-//   brand
-const FOLDER_MAP: Record<string, { tab: string; filter?: string }> = {
-  "portraits/fitness":   { tab: "portraits", filter: "fitness" },
-  "portraits/corporate": { tab: "portraits", filter: "corporate" },
-  "portraits/personal":  { tab: "portraits", filter: "personal" },
-  portraits:             { tab: "portraits" },
-  travel:                { tab: "travel" },
-  brand:                 { tab: "brand" },
-}
-
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const tab = searchParams.get("tab") ?? "portraits"
@@ -39,7 +25,6 @@ export async function GET(req: NextRequest) {
     let photos: CloudinaryPhoto[] = []
 
     if (tab === "portraits" && filter === "all") {
-      // Fetch all three portrait subfolders separately and combine
       const [fitness, corporate, personal] = await Promise.all([
         cloudinary.search.expression("folder:portfolio/portraits/fitness").sort_by("created_at", "desc").max_results(100).execute(),
         cloudinary.search.expression("folder:portfolio/portraits/corporate").sort_by("created_at", "desc").max_results(100).execute(),
