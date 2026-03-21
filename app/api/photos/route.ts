@@ -36,40 +36,45 @@ export async function GET(req: NextRequest) {
   const filter = searchParams.get("filter") ?? "all"
 
   try {
-    // Build folder expression based on tab + filter
-    let folderExpression: string
-    if (tab === "portraits" && filter !== "all") {
-  folderExpression = `folder:portfolio/portraits/${filter}`
-} else if (tab === "portraits" && filter === "all") {
-  folderExpression = `folder:portfolio/portraits/fitness OR folder:portfolio/portraits/corporate OR folder:portfolio/portraits/personal`
-} else {
-  folderExpression = `folder:portfolio/${tab}/*`
-}
+    let photos: CloudinaryPhoto[] = []
 
-    const result = await cloudinary.search
-      .expression(folderExpression)
-      .with_field("tags")
-      .sort_by("created_at", "desc")
-      .max_results(100)
-      .execute()
-
-    const photos: CloudinaryPhoto[] = (result.resources ?? []).map(
-      (r: {
-        public_id: string
-        secure_url: string
-        width: number
-        height: number
-        folder: string
-        tags?: string[]
-      }) => ({
+    if (tab === "portraits" && filter === "all") {
+      // Fetch all three portrait subfolders separately and combine
+      const [fitness, corporate, personal] = await Promise.all([
+        cloudinary.search.expression("folder:portfolio/portraits/fitness").sort_by("created_at", "desc").max_results(100).execute(),
+        cloudinary.search.expression("folder:portfolio/portraits/corporate").sort_by("created_at", "desc").max_results(100).execute(),
+        cloudinary.search.expression("folder:portfolio/portraits/personal").sort_by("created_at", "desc").max_results(100).execute(),
+      ])
+      const all = [...(fitness.resources ?? []), ...(corporate.resources ?? []), ...(personal.resources ?? [])]
+      photos = all.map((r: any) => ({
         public_id: r.public_id,
         secure_url: r.secure_url,
         width: r.width,
         height: r.height,
         folder: r.folder,
         tags: r.tags ?? [],
-      })
-    )
+      }))
+    } else {
+      const folderExpression = tab === "portraits"
+        ? `folder:portfolio/portraits/${filter}`
+        : `folder:portfolio/${tab}/*`
+
+      const result = await cloudinary.search
+        .expression(folderExpression)
+        .with_field("tags")
+        .sort_by("created_at", "desc")
+        .max_results(100)
+        .execute()
+
+      photos = (result.resources ?? []).map((r: any) => ({
+        public_id: r.public_id,
+        secure_url: r.secure_url,
+        width: r.width,
+        height: r.height,
+        folder: r.folder,
+        tags: r.tags ?? [],
+      }))
+    }
 
     return NextResponse.json({ photos })
   } catch (error) {
