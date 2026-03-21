@@ -3,6 +3,8 @@ import { projects } from "@/lib/projects"
 import { ProjectPageContent } from "@/components/project-page-content"
 import type { Metadata } from "next"
 
+export const dynamic = "force-dynamic"
+
 export function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
