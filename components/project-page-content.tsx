@@ -185,7 +185,7 @@ const PILL_ROWS = [
 export function ProjectPageContent({ project }: { project: Project }) {
   const currentIndex = projects.findIndex((p) => p.slug === project.slug)
   const nextProject = projects[(currentIndex + 1) % projects.length]
-  const isComingSoon = project.slug === "photography-portfolio"
+  const isPhotographyPortfolio = project.slug === "photography-portfolio"
   const { setRef, activeIndex } = useActiveRow(PILL_ROWS.length)
 
   return (
@@ -252,7 +252,7 @@ export function ProjectPageContent({ project }: { project: Project }) {
         </div>
       </section>
 
-      {isComingSoon ? (
+      {isPhotographyPortfolio ? (
         /* ── Photography Gallery ── */
         <PhotographyGallery />
       ) : (
