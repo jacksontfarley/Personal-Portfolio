@@ -145,7 +145,8 @@ export function PhotographyGallery() {
       const res = await fetch(`/api/photos?${params}`, { signal: abortRef.current.signal })
       if (!res.ok) throw new Error("fetch failed")
       const data = await res.json()
-      setPhotos(data.photos ?? [])
+      const arr = data.photos ?? []
+setPhotos([...arr].sort(() => Math.random() - 0.5))
     } catch (err: unknown) {
       if (err instanceof Error && err.name !== "AbortError") setPhotos([])
     } finally {
