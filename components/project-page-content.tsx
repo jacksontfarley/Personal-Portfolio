@@ -8,6 +8,7 @@ import { useRef, useState, useEffect, useCallback } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { projects, type Project } from "@/lib/projects"
+import { PhotographyGallery } from "@/components/photography-gallery"
 
 const RAINBOW = "linear-gradient(135deg, #FF3366, #FF6B35, #FFCC00, #00D4AA, #0099FF, #CC33FF)"
 
@@ -252,35 +253,8 @@ export function ProjectPageContent({ project }: { project: Project }) {
       </section>
 
       {isComingSoon ? (
-        /* ── Coming Soon ── */
-        <section className="px-6 py-24 md:py-40">
-          <div className="mx-auto flex max-w-6xl flex-col items-center justify-center text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-center gap-6"
-            >
-              <h2
-                className="text-balance font-serif text-5xl font-normal leading-[1.1] tracking-tight sm:text-6xl md:text-8xl"
-                style={{
-                  background: RAINBOW,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Coming Soon
-              </h2>
-              <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
-                This project is currently being curated. Check back soon.
-              </p>
-              <div
-                className="mt-4 h-[2px] w-32 rounded-full"
-                style={{ background: RAINBOW }}
-              />
-            </motion.div>
-          </div>
-        </section>
+        /* ── Photography Gallery ── */
+        <PhotographyGallery />
       ) : (
         <>
           {/* Image */}
