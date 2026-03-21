@@ -39,10 +39,10 @@ export async function GET(req: NextRequest) {
     // Build folder expression based on tab + filter
     let folderExpression: string
     if (tab === "portraits" && filter !== "all") {
-      folderExpression = `folder:portraits/${filter}`
-    } else {
-      folderExpression = `folder:${tab}/*`
-    }
+  folderExpression = `folder:portfolio/portraits/${filter}`
+} else {
+  folderExpression = `folder:portfolio/${tab}/*`
+}
 
     const result = await cloudinary.search
       .expression(folderExpression)
