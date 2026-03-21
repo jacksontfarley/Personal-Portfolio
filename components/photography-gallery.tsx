@@ -263,7 +263,7 @@ export function PhotographyGallery() {
   const [activeTab, setActiveTab]       = useState<TabId>("portraits")
   const [portraitFilter, setPortraitFilter] = useState<PortraitFilterId>("all")
   const [photos, setPhotos]             = useState<CloudinaryPhoto[]>([])
-  const [loading, setLoading]           = useState(true)
+  const [loading, setLoading]           = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const abortRef = useRef<AbortController | null>(null)
 
@@ -290,8 +290,11 @@ export function PhotographyGallery() {
   }, [])
 
   useEffect(() => {
+  const timer = setTimeout(() => {
     fetchPhotos(activeTab, activeTab === "portraits" ? portraitFilter : "all")
-  }, [activeTab, portraitFilter, fetchPhotos])
+  }, 100)
+  return () => clearTimeout(timer)
+}, [activeTab, portraitFilter, fetchPhotos])
 
   const handleTabChange = (tab: TabId) => {
     setActiveTab(tab)
