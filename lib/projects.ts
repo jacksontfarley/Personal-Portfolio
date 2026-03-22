@@ -79,11 +79,12 @@ export const projects: Project[] = [
       "Built a creative testing framework that improved CTR by 3x",
       "Implemented attribution modeling to connect spend to downstream revenue",
     ],
-    objective: "Deliver polished, national-media-ready creative across TV and social, aligned to the packaging restage, within a tight production window.",
+    objective: "Deliver polished, national-media-ready creative across TV and social within a tight production window.",
     role: "Project Lead. I handled the creative strategy and execution through final asset delivery. My role spanned scripting, creative direction, and high-velocity project management, acting as the primary bridge between brand and production.",
     challenge: "Aveeno’s Body portfolio had just completed a packaging restage, and needed creative with the new packaging to support an upcoming national paid media campaign. These new assets needed to be built on a compressed timeline and would support the brand’s top platform, Daily Moisturizing.",
     actions: [
       "Rapid Asset Architecture: Developed and delivered 14 new video assets and a complete suite of programmatic banners in just 60 days—a process that typically takes 6+ months.",
+      "High-Efficiency Production: Engineered the production timeline by completing scripts early, securing MLR approval in advance, and aligning stakeholders before shoot day — compressing two national TV commercials into a single 10-hour shoot.",
       "Creative Directing & Scripting: Created concepts with a dual lens — drawing on the brand's heritage equity and real consumer insight to shape narratives that connected with the target audience.",
       "Rationale & Alignment: Built and presented the creative rationale for leadership, grounding every decision in consumer insight, brand claims, and strategic logic to maintain confidence and momentum throughout creative development.",
     ],
