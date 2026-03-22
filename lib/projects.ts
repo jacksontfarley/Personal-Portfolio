@@ -79,8 +79,8 @@ export const projects: Project[] = [
       "Built a creative testing framework that improved CTR by 3x",
       "Implemented attribution modeling to connect spend to downstream revenue",
     ],
-    objective: "Restore the brand's most critical sales engine by producing a full suite of restage-aligned national media assets within a compressed 2-month timeline to launch in Q1 2026.",
-    role: "Lead Strategist and Creative Director. I spearheaded the creative rescue mission, managing the transition from strategic pivot to final asset delivery. My role spanned scripting, creative direction, and high-velocity project management, acting as the primary bridge between business necessity and creative execution.",
+    objective: "Deliver polished, national-media-ready creative across TV and social, aligned to the packaging restage, within a tight production window.",
+    role: "Project Lead. I led the execution and creative strategy, managing through final asset delivery. My role spanned scripting, creative direction, and high-velocity project management, acting as the primary bridge between brand and production.",
     challenge: "Aveeno’s Body portfolio had just completed a packaging restage, and needed creative with the new packaging to support an upcoming national paid media campaign. These new assets needed to be built on a compressed timeline and would support the brand’s top platform, Daily Moisturizing.",
     actions: [
       "Rapid Asset Architecture: Developed and delivered 14 new video assets and a complete suite of programmatic banners in just 60 days—a process that typically takes 6+ months.",
