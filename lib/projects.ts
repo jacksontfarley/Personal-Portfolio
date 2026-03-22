@@ -84,14 +84,12 @@ export const projects: Project[] = [
     challenge: "Aveeno’s Body portfolio had just completed a packaging restage, and needed creative with the new packaging to support an upcoming national paid media campaign. These new assets needed to be built on a compressed timeline and would support the brand’s top platform, Daily Moisturizing.",
     actions: [
       "Rapid Asset Architecture: Developed and delivered 14 new video assets and a complete suite of programmatic banners in just 60 days—a process that typically takes 6+ months.",
-      "High-Efficiency Production: Orchestrated a high-intensity production schedule, including the filming of two national TV commercials in a single 24-hour shoot.",
       "Creative Directing & Scripting: Created concepts with a dual lens — drawing on the brand's heritage equity and real consumer insight to shape narratives that connected with the target audience.",
-      "Strategic Pivot Management: Navigated the internal transition of the national media plan, coordinating feedback from cross-functional partners and building media plan by channel.",
+      "Rationale & Alignment: Built and presented the creative rationale for leadership, grounding every decision in consumer insight, brand claims, and strategic logic to maintain confidence and momentum throughout creative development.",
     ],
     impact: [
       "Quality and Performance: Developed highest-testing creative spot in Aveeno Body's recent creative suite, despite the accelerated timeline.",
       "Zero-to-Launch Speed: Successfully restored national media support for the brand's top-selling SKU in under 8 weeks.",
-      "Business Protection: Immediately addressed the deceleration of DM sales by re-establishing a high-performance visual presence in the market.",
       "Programmatic Scale: Delivered a full library of digital and programmatic assets to ensure a cohesive, omnichannel brand experience for the Q1 2026 relaunch.",
     ],
     takeaway: "The biggest lesson was that urgency doesn't have to compromise quality. When you move with precision and keep decision-making tight, a compressed timeline becomes an advantage rather than a liability",
