@@ -206,15 +206,15 @@ export const projects: Project[] = [
     image: "/images/wwex2.png",
     year: "2019-2020",
     longDescription:
-      "Worldwide Express was in a state of hyper-growth, scaling toward a headcount of 1,500, but the brand's new identity existed primarily as a foundational theory. While the core visual identity had been established, it had never been executed across the company's vital communication channels. As the third marketing hire, the challenge was to take that identity and develop it into a functional ecosystem — standardizing the storytelling for 750+ sales executives and pioneering the company's first-ever social, internal, and sales-enablement content strategies.",
+      "Worldwide Express was in a state of hyper-growth, scaling toward a headcount of 1,500, and the brand's new identity was in its early stages. While the core visual identity and brand values had been established, it had  not been fully executed across the company's vital communication channels. The challenge was to take that identity and develop it into a functional ecosystem — standardizing the storytelling for 750+ sales executives and building the company's social, internal, and sales-enablement content strategies from the ground up.",
     highlights: [
       "Designed 40+ high-impact sales resources in Adobe Creative Suite for 750+ sales executives",
       "Built a community of 40,000+ followers with platform-specific content strategies",
       "Spearheaded \"Employer of Choice\" initiatives leading to multiple Best Places to Work accolades",
       "Led end-to-end design and installation of large-scale brand murals at Corporate HQ",
     ],
-    objective: "Architect a unified brand ecosystem that standardized storytelling across the national sales organization, established a dominant digital footprint, and built a \"Best Places to Work\" internal culture to drive both lead generation and employee retention.",
-    role: "I served as the lead for Content Development and Brand Execution. My focus was on modernizing the sales toolkit by creating resources that leaned into new, innovative ways to communicate our value proposition to potential customers. I was responsible for translating the brand's foundational voice into tangible, platform-fit content for digital channels and internal communications, ensuring the company's \"new way of talking\" was felt at every level of the organization.",
+    objective: "Build a functional brand ecosystem that standardized storytelling across the national sales organization, established a consistent digital presence, and supported a culture strong enough to drive both lead generation and employee retention.",
+    role: "Content Development and Brand Execution. My focus was on modernizing the sales toolkit, translating the brand's foundational voice into platform-fit content across digital and internal channels, and ensuring the company's identity was felt at every level of the organization.",
     challenge: "Worldwide Express was in a state of hyper-growth, scaling toward a headcount of 1,500, but the brand's new identity existed primarily as a foundational theory. While the core visual identity had been established, it had never been executed across the company's vital communication channels. The challenge was to take that identity and develop it into a functional ecosystem — standardizing the storytelling for 750+ sales executives and pioneering the company's first-ever social, internal, and sales-enablement content strategies.",
     actions: [
       "Modernizing Sales Enablement: Designed 40+ high-impact sales resources in Adobe Creative Suite that gave the 750+ person sales force a modern, visually compelling way to communicate the company's value proposition to high-value prospects.",
@@ -223,7 +223,7 @@ export const projects: Project[] = [
       "Experimental & Physical Branding: Directly influenced the corporate environment by designing and installing large-scale brand murals at the Corporate HQ. Also served as the end-to-end lead for the company's Pride Parade activation, managing all vendor relationships and theme design.",
     ],
     impact: [
-      "Identity & Share of Voice: Transformed the brand from a digital unknown into an industry-leading voice. By building a cohesive identity and posting platform-specific, innovative content, established a dominant SOV that drove both lead generation and recruitment.",
+      "Identity & Share of Voice: Transformed the brand into an industry-leading voice. By building a cohesive identity and posting platform-specific, innovative content, established a dominant SOV that drove both lead generation and recruitment.",
       "Cultural Communication: Successfully built an internal culture by design. By using a consistent tone and visual language in employee communications, strengthened the employer brand and secured multiple Best Places to Work accolades.",
       "Sales Standardization: Equipped a national sales force of 750+ leaders with a professionalized, consistent toolkit that elevated the brand's perceived value and modernized the way the company pitched its logistics solutions.",
     ],
