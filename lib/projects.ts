@@ -89,12 +89,12 @@ export const projects: Project[] = [
       "Strategic Pivot Management: Navigated the internal transition of the national media plan, coordinating feedback from cross-functional partners and building media plan by channel.",
     ],
     impact: [
-      "Record-Breaking Quality: Developed the highest-testing creative spot in Aveeno's brand history, outperforming all legacy assets despite the accelerated timeline.",
+      "Quality and Performance: Developed highest-testing creative spot in Aveeno Body's recent creative suite, despite the accelerated timeline.",
       "Zero-to-Launch Speed: Successfully restored national media support for the brand's top-selling SKU in under 8 weeks.",
       "Business Protection: Immediately addressed the deceleration of DM sales by re-establishing a high-performance visual presence in the market.",
       "Programmatic Scale: Delivered a full library of digital and programmatic assets to ensure a cohesive, omnichannel brand experience for the Q1 2026 relaunch.",
     ],
-    takeaway: "Data-driven pivots are only effective if they can be executed at the speed of the market. This project proved that creative excellence doesn't have to be sacrificed for speed; by taking a hands-on approach to scripting and creative direction, I was able to turn a strategic miscalculation into a record-breaking brand moment that protected our core business.",
+    takeaway: "The biggest lesson was that urgency doesn't have to compromise quality. When you move with precision and keep decision-making tight, a compressed timeline becomes an advantage rather than a liability",
   },
   {
     title: "Topgolf Consumer Retention",
