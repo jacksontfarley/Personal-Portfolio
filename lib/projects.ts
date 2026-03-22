@@ -239,7 +239,7 @@ export const projects: Project[] = [
     image: "/images/CB.png",
     year: "2021-2023",
     longDescription:
-      "The role of a Lead Instructor often defaults to basic scheduling and staff management, but at a top-tier national studio, the demands are much higher. The challenge was to balance a high-intensity personal performance — maintaining one of the highest fill rates in the region — with the creative and operational needs of the studio. I took on the responsibility of serving as the primary strategic liaison and creative director, doing the \"extra\" work of talent development and digital branding that many lead roles overlook.",
+      "The role of a Lead Instructor often defaults to basic scheduling and staff management, but at a top-tier national studio, the demands are much higher. The challenge was to balance a high-intensity personal performance — maintaining high class utilization, delivering exceptional experiences, and building a local community — with the creative and operational needs of the studio. I took on the responsibility of serving as the primary strategic liaison and creative director, doing the \"extra\" work of talent development and digital branding that many lead roles overlook.",
     highlights: [
       "Maintained 90%+ class utilization rate as a primary studio revenue driver",
       "Designed a comprehensive performance rubric to professionalize talent development",
