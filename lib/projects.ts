@@ -80,13 +80,13 @@ export const projects: Project[] = [
       "Implemented attribution modeling to connect spend to downstream revenue",
     ],
     objective: "Deliver polished, national-media-ready creative across TV and social, aligned to the packaging restage, within a tight production window.",
-    role: "Project Lead. I led the execution and creative strategy, managing through final asset delivery. My role spanned scripting, creative direction, and high-velocity project management, acting as the primary bridge between brand and production.",
+    role: "Project Lead. I handled the creative strategy and execution through final asset delivery. My role spanned scripting, creative direction, and high-velocity project management, acting as the primary bridge between brand and production.",
     challenge: "Aveeno’s Body portfolio had just completed a packaging restage, and needed creative with the new packaging to support an upcoming national paid media campaign. These new assets needed to be built on a compressed timeline and would support the brand’s top platform, Daily Moisturizing.",
     actions: [
       "Rapid Asset Architecture: Developed and delivered 14 new video assets and a complete suite of programmatic banners in just 60 days—a process that typically takes 6+ months.",
       "High-Efficiency Production: Orchestrated a high-intensity production schedule, including the filming of two national TV commercials in a single 24-hour shoot.",
-      "Creative Directing & Scripting: Authored scripts that balanced the brand's legacy equity with its \"new restage\" aesthetic, ensuring the new packaging was the hero of the narrative.",
-      "Strategic Pivot Management: Navigated the internal transition of the national media plan, ensuring alignment between media buying, retail inventory, and creative output.",
+      "Creative Directing & Scripting: Created concepts with a dual lens — drawing on the brand's heritage equity and real consumer insight to shape narratives that connected with the target audience.",
+      "Strategic Pivot Management: Navigated the internal transition of the national media plan, coordinating feedback from cross-functional partners and building media plan by channel.",
     ],
     impact: [
       "Record-Breaking Quality: Developed the highest-testing creative spot in Aveeno's brand history, outperforming all legacy assets despite the accelerated timeline.",
