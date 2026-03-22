@@ -35,11 +35,11 @@ export const projects: Project[] = [
       "Built a content engine generating 50+ assets per month across platforms",
     ],
     objective: "Re-engage the 40% of lapsed buyers who previously stocked up and reset the purchase cycle immediately ahead of the critical Back-to-School and Cold, Cough, Flu, and Sinus (CCFS) season.",
-    role: "Lead Strategist and Associate Brand Manager. I spearheaded the end-to-end execution, from identifying the \"inventory glut\" insight to vetting and onboarding new promotional vendors. A key part of my role was navigating the high-stakes Internal Medical, Legal, and Regulatory (MLR) approval process to ensure our efficacy and safety claims were both impactful and compliant.",
+    role: "Project Lead. I spearheaded the end-to-end execution, including internal IAT planning, asset development, RFP and onboarding of new promotional vendors, and social/influencer amplification. A key part of my role was navigating the high-stakes Internal Medical, Legal, and Regulatory (MLR) approval process to ensure our efficacy and safety claims were both impactful and compliant.",
     challenge: "Following record-breaking illness levels during the \"tripledemic,\" pediatric pain shoppers entered a massive stock-up phase. This created a significant business bottleneck: data showed purchase cycles were lengthening as parents sat on high volumes of product. We weren't just fighting competitors; we were fighting the inventory already sitting in consumer's homes that—while physically present—was largely past its prime.",
     actions: [
       "1. Cultural Arbitrage & Trend Mapping",
-      "#CleanTok Integration: Capitalized on the massive organization trend (48B+ views) to contextualize medicine safety. By identifying that only 6% of content was paid, I positioned Tylenol/Motrin in a high-reach, low-competition whitespace.",
+      "#CleanTok Integration: Capitalized on the massive organization trend (48B+ views) to contextualize medicine safety. By identifying that only 6% of content was paid, we positioned Tylenol/Motrin in a high-reach, low-competition whitespace.",
       "Influencer Ecosystem: Strategically cast and managed 11 influencers to create \"edutainment\" content that translated sterile medical safety into a satisfying, viral aesthetic.",
       "",
       "2. Digital Ecosystem & Retention Architecture",
@@ -60,7 +60,7 @@ export const projects: Project[] = [
       "Awareness at Scale: Generated 777M news impressions and 230 online coverage pieces (3.8x benchmark).",
       "Audience Engagement: 11 influencers delivered 1.5M impressions with a 7% engagement rate (surpassing the 4.5% benchmark).",
     ],
-    takeaway: "True category leadership requires moving beyond 'Buy Now' messaging. By leaning into consumer education and safety, we turned a regulatory necessity into a high-intent sales trigger. When you solve a safety problem for a parent, you don't just get a sale; you regain a loyalist.",
+    takeaway: "True category leadership requires moving beyond 'Buy Now' messaging. By leaning into consumer education and safety, we turned a regulatory necessity into a high-intent sales trigger. When you solve a safety problem for a parent, you don't just get a sale; you regain a loyalist. And even more importantly, we got to educate parents on medicine safety for the #1s in their life. ",
   },
   {
     title: "Aveeno® Daily Moisturizing Videos",
