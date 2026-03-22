@@ -271,7 +271,7 @@ export const projects: Project[] = [
       "Authored a repeatable go-to-market playbook that standardized launch processes and reduced time-to-market by 40% across the portfolio.",
     tags: ["GTM Strategy", "Process Design", "Frameworks"],
     image: "/images/JF pics.png",
-    year: "2006-2026",
+    year: "2021-2026",
     longDescription:
       "After leading multiple product launches with varying degrees of structure, I identified the need for a standardized, repeatable go-to-market framework. I built a comprehensive GTM playbook that codified best practices across consumer research, positioning, creative development, channel strategy, and measurement. The playbook became the organization's default launch methodology, reducing time-to-market while improving consistency and cross-functional alignment.",
     highlights: [
