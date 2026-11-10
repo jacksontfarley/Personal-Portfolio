@@ -55,7 +55,7 @@ const companies: Company[] = [
     period: "2026 -- Present", // CHANGED: adjust to your actual start date
     brandLogos: [
       "/images/logos/infuse.png",
-      "/images/logos/ultra.svg",
+      "/images/logos/ultra.png",
     ],
     description:
       "Managing the INFUSE and ULTRA contact lens brands in US Vision Care, building eye care professional (ECP) focused strategy. Leading AI initiatives, demand forecasting, portfolio selling tools, and new product launch commercialization.",
