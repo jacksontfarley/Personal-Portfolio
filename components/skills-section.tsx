@@ -53,6 +53,10 @@ const companies: Company[] = [
     logo: "/images/logos/bausch-lomb.png",
     role: "Brand Manager",
     period: "2026 -- Present", // CHANGED: adjust to your actual start date
+    brandLogos: [
+      "/images/logos/infuse.png",
+      "/images/logos/ultra.svg",
+    ],
     description:
       "Managing the INFUSE and ULTRA contact lens brands in US Vision Care, building eye care professional (ECP) focused strategy. Leading AI initiatives, demand forecasting, portfolio selling tools, and new product launch commercialization.",
   },
@@ -60,7 +64,7 @@ const companies: Company[] = [
     name: "Kenvue",
     logo: "/images/logos/Kenvue-scaled.webp",
     role: "Associate Brand Manager",
-    period: "2024 -- Present",
+    period: "2024 -- 2026",
     brandLogos: [
       "/images/logos/tylenol.png",
       "/images/logos/Motrin.svg",
