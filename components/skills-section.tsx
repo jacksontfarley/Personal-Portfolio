@@ -58,7 +58,7 @@ const companies: Company[] = [
       "/images/logos/ultra.png",
     ],
     description:
-      "Managing the INFUSE and ULTRA contact lens brands in US Vision Care, building eye care professional (ECP) focused strategy. Leading AI initiatives, demand forecasting, portfolio selling tools, and new product launch commercialization.",
+      "Managing the INFUSE and ULTRA contact lens brands for US Vision Care, building eye care professional (ECP) focused strategy across portfolio. Leading AI initiatives, demand forecasting, campaign development, and new product launch commercialization.",
   },
   {
     name: "Kenvue",
