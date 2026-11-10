@@ -49,6 +49,14 @@ interface Company {
 
 const companies: Company[] = [
   {
+    name: "Bausch + Lomb",
+    logo: "/images/logos/bausch-lomb.png",
+    role: "Brand Manager",
+    period: "2026 -- Present", // CHANGED: adjust to your actual start date
+    description:
+      "Managing the INFUSE and ULTRA contact lens brands in US Vision Care, building eye care professional (ECP) focused strategy. Leading AI initiatives, demand forecasting, portfolio selling tools, and new product launch commercialization.",
+  },
+  {
     name: "Kenvue",
     logo: "/images/logos/Kenvue-scaled.webp",
     role: "Associate Brand Manager",
@@ -59,7 +67,7 @@ const companies: Company[] = [
       "/images/logos/aveeno.svg.png",
     ],
     description:
-      "Leading brand work for iconic consumer health brands, including paid media strategy, asset development, NPI launch plans, and omnichannel campaign execution. Forecasted for $350MM P&L and experience running $50MM+ media plans.",
+      "Led brand work for iconic consumer health brands, including paid media strategy, asset development, NPI launch plans, and omnichannel campaign execution. Forecasted for $350MM P&L and experience running $50MM+ media plans.",
   },
   {
     name: "SMU",
@@ -645,7 +653,7 @@ export function SkillsSection() {
           </motion.div>
 
           {/* Logo-only grid */}
-          <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-7">
+          <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8">
             {companies.map((company, i) => (
               <LogoCard
                 key={company.name}
