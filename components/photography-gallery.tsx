@@ -33,6 +33,9 @@ function cloudinaryLightboxUrl(secureUrl: string): string {
   )
 }
 
+// CHANGED: shared helper to block right-click / long-press menus
+const blockContextMenu = (e: React.SyntheticEvent) => e.preventDefault()
+
 function Pill({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
     <button
@@ -85,15 +88,20 @@ function MasonryGrid({ photos, onPhotoClick }: { photos: CloudinaryPhoto[]; onPh
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative cursor-pointer overflow-hidden rounded-xl bg-secondary"
-      style={{ aspectRatio: photo.width / photo.height }}
+      className="group relative cursor-pointer select-none overflow-hidden rounded-xl bg-secondary"
+      style={{
+        aspectRatio: photo.width / photo.height,
+        WebkitTouchCallout: "none", // CHANGED: blocks iOS long-press save menu
+      }}
       onClick={() => onPhotoClick(index)}
+      onContextMenu={blockContextMenu} // CHANGED
     >
       <Image
         src={photo.secure_url}
         alt=""
         fill
-        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        draggable={false} // CHANGED
+        className="pointer-events-none select-none object-cover transition-transform duration-500 group-hover:scale-105" // CHANGED: added pointer-events-none select-none
         sizes="(max-width: 768px) 50vw, 33vw"
       />
       <div
@@ -152,6 +160,7 @@ function Lightbox({
       transition={{ duration: 0.2 }}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
       onClick={onClose}
+      onContextMenu={blockContextMenu} // CHANGED: covers the whole overlay
     >
       {/* Rainbow top line */}
       <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: RAINBOW }} />
@@ -183,14 +192,17 @@ function Lightbox({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className="relative max-h-[85vh] max-w-[90vw]"
+        className="relative max-h-[85vh] max-w-[90vw] select-none" // CHANGED: added select-none
+        style={{ WebkitTouchCallout: "none" }} // CHANGED
         onClick={(e) => e.stopPropagation()}
+        onContextMenu={blockContextMenu} // CHANGED
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={lightboxUrl}
           alt=""
-          className="max-h-[85vh] max-w-[90vw] rounded-xl object-contain"
+          draggable={false} // CHANGED
+          className="pointer-events-none max-h-[85vh] max-w-[90vw] select-none rounded-xl object-contain" // CHANGED: added pointer-events-none select-none
           style={{ display: "block" }}
         />
         <div
