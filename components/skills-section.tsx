@@ -76,7 +76,7 @@ const companies: Company[] = [
   {
     name: "SMU",
     logo: "/images/logos/SMU-Mustangs-Emblem.png",
-    role: "MBA Candidate",
+    role: "Master of Business Administration",
     period: "2022 -- 2024",
     description:
       "Earned MBA in marketing with several honors, including Class Marshal (Top 2); held numerous leadership roles and TA positions.",
@@ -116,7 +116,7 @@ const companies: Company[] = [
   {
     name: "Mizzou",
     logo: "/images/logos/missouri-tigers-logo-png-transparent.png",
-    role: "B.S. Education",
+    role: "Bachelor of Science, Education",
     period: "2012 -- 2016",
     description:
       "Studied elementary education, graduating cum laude; earned Undergraduate Student Leader of the Year award through the College of Education; involved in Greek Life and other campus organizations.",
